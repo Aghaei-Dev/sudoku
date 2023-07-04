@@ -7,25 +7,27 @@ import {
   Numbers,
   FourButton,
   Navbar,
+  Mistakes,
+  NewGModal,
 } from '../components'
 import { MainWrapper } from '../assets/styles'
 import { useGlobalContext } from '../context'
 const Easy = () => {
-  const { width } = useGlobalContext()
+  const { width, loading, newGModal } = useGlobalContext()
+
   return (
     <MainWrapper>
+      {newGModal && <NewGModal />}
       <div className='top-row'>
         {width >= 980 ? <Navbar difficulty /> : <Difficulty mode='easy' />}
-        <p>mistakes: 1/3</p>
+        <Mistakes miss={1} />
         <Timer />
       </div>
-      <div className='table'>
-        <Table N={9} K={81} />
+      <div className={`table ${loading && 'loading'}`}>
+        <Table N={9} K={40} />
       </div>
-
-      <div className='right'>
+      <div className={`right ${loading && 'loading'}`}>
         <FourButton />
-
         <Numbers />
       </div>
     </MainWrapper>

@@ -3,6 +3,9 @@ import React, { useState, useContext, useEffect } from 'react'
 const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
+  const [loading, setLoading] = useState(false)
+  const [newGModal, setNewGModal] = useState(true)
+
   const [width, setWidth] = useState(window.innerWidth)
   const [height, setHeight] = useState(window.innerHeight)
   const resize = () => {
@@ -45,22 +48,35 @@ const AppProvider = ({ children }) => {
     setIsNoteON(!isNoteON)
   }
 
+  //selected coloring
+  const [selectedNumber, setSelectedNumber] = useState('')
+  const [selectedNumberIndex, setSelectedNumberIndex] = useState('')
+  const [selectedSquare, setSelectedSquare] = useState('')
+
   return (
     <AppContext.Provider
       value={{
+        loading,
+        newGModal,
         width,
         isActive,
         isModalOpen,
         isNoteON,
+        toggleNote,
         openModal,
         closeModal,
         setIsActive,
-        toggleNote,
         isAlert,
         setIsAlert,
         canWeNav,
         canWeNavTrue,
         canWeNavFalse,
+        selectedNumber,
+        setSelectedNumber,
+        selectedSquare,
+        setSelectedSquare,
+        selectedNumberIndex,
+        setSelectedNumberIndex,
       }}>
       {children}
     </AppContext.Provider>

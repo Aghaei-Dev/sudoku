@@ -18,5 +18,5 @@ const Wrapper = styled('h3')(() => ({
   padding: '2rem 1.5rem ',
   display: 'flex',
   alignItems: 'center',
-  color: 'var(--ten-shade-of-gray-7)',
+  color: 'var(--gray-700)',
 }))

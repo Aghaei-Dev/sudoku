@@ -1,15 +1,17 @@
 export class Sudoku {
   // Constructor
+  answer = []
   constructor(N, K) {
     this.N = N
     this.K = K
 
-    // Compute square root of N
+    // برای اینکه جدول چند در چند باشد
+    //محاسبه ریشه n
+
     const SRNd = Math.sqrt(N)
     this.SRN = Math.floor(SRNd)
 
-    // Initialize all entries as false to indicate
-    // that there are no edges initially
+    //در ابتدا تمام خانه ها با صفر(خالی) پر میشود
     this.mat = Array.from(
       {
         length: N,
@@ -22,13 +24,23 @@ export class Sudoku {
           () => 0
         )
     )
+    this.answer = Array.from(
+      {
+        length: N,
+      },
+      () =>
+        Array.from(
+          {
+            length: N,
+          },
+          () => 0
+        )
+    )
   }
-
-  // Sudoku Generator
+  // سازنده سودوکو
   fillValues() {
     // Fill the diagonal of SRN x SRN matrices
     this.fillDiagonal()
-
     // Fill remaining blocks
     this.fillRemaining(0, this.SRN)
 
@@ -67,6 +79,7 @@ export class Sudoku {
             break
           }
         }
+        this.answer[row + i][col + j] = num
         this.mat[row + i][col + j] = num
       }
     }
@@ -129,10 +142,12 @@ export class Sudoku {
     for (let num = 1; num <= this.N; num++) {
       if (this.checkIfSafe(i, j, num)) {
         this.mat[i][j] = num
+        this.answer[i][j] = num
         if (this.fillRemaining(i, j + 1)) {
           return true
         }
         this.mat[i][j] = 0
+        this.answer[i][j] = 0
       }
     }
 
@@ -143,17 +158,26 @@ export class Sudoku {
   // Print sudoku
   printSudoku() {
     const array = []
+
     for (let i = 0; i < this.N; i++) {
       array.push(this.mat[i])
+    }
+    return array
+  }
+  printAnswer() {
+    const array = []
+
+    for (let i = 0; i < this.N; i++) {
+      array.push(this.answer[i])
     }
     return array
   }
 
   // Remove the K no. of digits to
   // complete game
+
   removeKDigits() {
     let count = this.K
-
     while (count !== 0) {
       // extract coordinates i and j
       let i = Math.floor(Math.random() * this.N)
@@ -167,6 +191,7 @@ export class Sudoku {
     return
   }
 }
+
 //k
 //easy -- 43
 //medium -- 61
