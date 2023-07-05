@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
-const Cell = ({ number, index }) => {
+const Cell = ({ number, index, square }) => {
   const {
     selectedNumber,
     setSelectedNumber,
@@ -10,19 +10,18 @@ const Cell = ({ number, index }) => {
     setSelectedNumberIndex,
   } = useGlobalContext()
   //what must colored
+
   return (
     <CellWrapper
       onClick={() => {
         setSelectedNumber(number)
         setSelectedNumberIndex(index)
-        console.log(
-          `square is :${selectedSquare} cell is :${selectedNumberIndex}`
-        )
+        console.log(`square :${selectedSquare}   cell :${selectedNumberIndex}`)
       }}
       style={{
         background:
-          number === selectedNumber &&
-          selectedNumber !== 0 &&
+          ((number === selectedNumber && selectedNumber !== 0) ||
+            (selectedNumberIndex === index && selectedSquare === square)) &&
           'var(--blue-200)',
       }}>
       {number === 0 ? '' : number}

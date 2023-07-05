@@ -11,7 +11,8 @@ import {
 } from '../../assets/icons'
 
 import { useGlobalContext } from '../../context'
-import Badge from '../Badge'
+import { Badge } from '..'
+
 const FourButton = () => {
   const { isNoteON, toggleNote } = useGlobalContext()
 
@@ -30,7 +31,9 @@ const FourButton = () => {
         <p>erase</p>
       </div>
       <div className='item'>
-        <IconBtn isNoteON={isNoteON} onClick={toggleNote}>
+        <IconBtn
+          style={{ borderColor: isNoteON && 'var(--blue-500)' }}
+          onClick={toggleNote}>
           <Badge content={isNoteON ? 'on' : 'off'} />
           <ModeEditIcon sx={{ fontSize: '2rem' }} />
         </IconBtn>
@@ -49,11 +52,11 @@ const FourButton = () => {
 
 export default FourButton
 
-const IconBtn = styled(IconButton)(({ isNoteON }) => ({
+const IconBtn = styled(IconButton)(() => ({
   padding: '1rem',
   color: 'var(--blue-500)',
   background: 'var(--gray-100)',
-  border: `2px solid ${isNoteON ? 'var(--blue-500)' : 'white'}`,
+  border: '2px solid white',
   position: 'relative',
   '@media (width<= 350px)': {
     padding: '0.5rem',

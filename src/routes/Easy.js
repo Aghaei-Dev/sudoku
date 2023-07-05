@@ -10,6 +10,7 @@ import {
   Mistakes,
   NewGModal,
 } from '../components'
+
 import { MainWrapper } from '../assets/styles'
 import { useGlobalContext } from '../context'
 const Easy = () => {
@@ -24,7 +25,7 @@ const Easy = () => {
         <Timer />
       </div>
       <div className={`table ${loading && 'loading'}`}>
-        <Table N={9} K={40} />
+        <Table />
       </div>
       <div className={`right ${loading && 'loading'}`}>
         <FourButton />

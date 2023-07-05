@@ -6,6 +6,7 @@ const Main = () => {
   return (
     <Wrapper>
       <h1>how to play sudoku ?</h1>
+      {/* one */}
       <TextTitle title='Sudoku Rule № 1: Use Numbers 1-9' />
       <p>
         Sudoku is played on a grid of 9 x 9 spaces. Within the rows and columns
@@ -86,16 +87,17 @@ const Wrapper = styled('div')(() => ({
   margin: 'auto',
   textTransform: 'none',
   maxWidth: '680px',
-  textAlign: 'center',
   padding: '.5rem',
   color: 'var(--gray-700)',
   height: 'calc(100vh - 53.5px)',
   overflow: 'auto',
+  textAlign: 'center',
+
   h1: {
     padding: '1.5rem 1.5rem 0',
   },
   p: {
-    textAlign: 'start',
+    textAlign: 'justify',
     lineHeight: '1.8rem',
     color: 'var(--gray-500)',
   },

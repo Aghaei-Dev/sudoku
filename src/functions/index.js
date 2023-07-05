@@ -1,17 +1,16 @@
 export class Sudoku {
   // Constructor
-  answer = []
+
   constructor(N, K) {
     this.N = N
     this.K = K
 
     // برای اینکه جدول چند در چند باشد
-    //محاسبه ریشه n
+    // محاسبه ریشه ان و رند کردن ان ب کف/اعشار نداشته باشیم
 
-    const SRNd = Math.sqrt(N)
-    this.SRN = Math.floor(SRNd)
+    this.SRN = Math.floor(Math.sqrt(N))
 
-    //در ابتدا تمام خانه ها با صفر(خالی) پر میشود
+    //در ابتدا تمام خانه های جواب و سوال با صفر(خالی) پر میشود
     this.mat = Array.from(
       {
         length: N,
@@ -36,6 +35,18 @@ export class Sudoku {
           () => 0
         )
     )
+    this.empty = Array.from(
+      {
+        length: N,
+      },
+      () =>
+        Array.from(
+          {
+            length: N,
+          },
+          () => 0
+        )
+    )
   }
   // سازنده سودوکو
   fillValues() {
@@ -44,10 +55,10 @@ export class Sudoku {
     // Fill remaining blocks
     this.fillRemaining(0, this.SRN)
 
-    // Remove Randomly K digits to make game
+    //در ابتدا همه ی خانه ها پر میشوند سپس با این فانک کا رفم پاک میشوند
     this.removeKDigits()
   }
-
+  //قطر
   // Fill the diagonal SRN number of SRN x SRN matrices
   fillDiagonal() {
     for (let i = 0; i < this.N; i += this.SRN) {
@@ -155,7 +166,7 @@ export class Sudoku {
     return false
   }
 
-  // Print sudoku
+  //پرینت سودوکو به همراه حذفیات
   printSudoku() {
     const array = []
 
@@ -164,6 +175,9 @@ export class Sudoku {
     }
     return array
   }
+
+  //پرینت سودوکو به بدون حذفیات
+  //به صورت کامل برای مقایسه با جواب کاربر
   printAnswer() {
     const array = []
 
@@ -173,13 +187,11 @@ export class Sudoku {
     return array
   }
 
-  // Remove the K no. of digits to
-  // complete game
-
+  //پاک کردن کا عدد از جدول برای شروع بازی
   removeKDigits() {
     let count = this.K
     while (count !== 0) {
-      // extract coordinates i and j
+      //استخراج ای و جی به صورت تصادفی
       let i = Math.floor(Math.random() * this.N)
       let j = Math.floor(Math.random() * this.N)
       if (this.mat[i][j] !== 0) {
@@ -198,3 +210,12 @@ export class Sudoku {
 //hard -- 66
 // expert -- 68
 // evil -- 68
+
+export const saveLocal = (key) => {
+  let isKeyExist = localStorage.getItem(`${key}`)
+  if (isKeyExist) {
+    return JSON.parse(localStorage.getItem(`${key}`))
+  } else {
+    return ''
+  }
+}

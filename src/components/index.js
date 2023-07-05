@@ -1,5 +1,5 @@
-import TextTitle from './TextTitle'
-import Badge from './Badge'
+import TextTitle from './Assistance/TextTitle'
+import Badge from './Assistance/Badge'
 
 import Difficulty from './TopRow/Difficulty'
 import Timer from './TopRow/Timer'
@@ -14,13 +14,13 @@ import Square from './Table/Square'
 import Cell from './Table/Cell'
 
 import Loading from './Modals/Loading'
-import ModalOverlay from './Modals/ModalOverlay'
+import StopModal from './Modals/StopModal'
 import NewGModal from './Modals/NewGModal'
 
 export {
   Difficulty,
   FourButton,
-  ModalOverlay,
+  StopModal,
   Numbers,
   Table,
   Timer,

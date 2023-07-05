@@ -1,7 +1,8 @@
 import React from 'react'
+import { styled } from '@mui/material/styles'
+
 import { useNavigate } from 'react-router-dom'
 import { gameMode } from '../../assets/constants'
-import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
 const Difficulty = ({ mode }) => {
   const { setIsAlert, canWeNav, width } = useGlobalContext()

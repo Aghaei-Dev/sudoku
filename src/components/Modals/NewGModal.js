@@ -1,6 +1,6 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
-import { Button, Checkbox, FormControlLabel } from '@mui/material'
+import { Button, Checkbox } from '@mui/material'
 
 const NewGModal = () => {
   return (
@@ -16,10 +16,11 @@ const NewGModal = () => {
             cancel
           </Button>
         </div>
-        <FormControlLabel
-          control={<Checkbox checked />}
-          label="don't ask me again"
-        />
+
+        <p>
+          <Checkbox size='small' name='my-input' />
+          don't ask me again
+        </p>
       </div>
     </Wrapper>
   )

@@ -1,12 +1,22 @@
 import React from 'react'
 import { numbers } from '../../assets/constants'
 import { styled } from '@mui/material/styles'
+import { useGlobalContext } from '../../context'
 
 const Numbers = () => {
+  const { writeNumberInTable } = useGlobalContext()
   return (
     <Wrapper>
       {numbers.map((item, index) => {
-        return <div key={index}>{item}</div>
+        return (
+          <div
+            key={index}
+            onClick={() => {
+              writeNumberInTable(item)
+            }}>
+            {item}
+          </div>
+        )
       })}
     </Wrapper>
   )

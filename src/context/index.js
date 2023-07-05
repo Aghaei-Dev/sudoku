@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react'
+import { Sudoku, saveLocal } from '../functions'
 
 const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(false)
-  const [newGModal, setNewGModal] = useState(true)
+  const [newGModal, setNewGModal] = useState(false)
 
   const [width, setWidth] = useState(window.innerWidth)
   const [height, setHeight] = useState(window.innerHeight)
@@ -47,11 +48,43 @@ const AppProvider = ({ children }) => {
   const toggleNote = () => {
     setIsNoteON(!isNoteON)
   }
+  //
+  const [unSolved, setUnSolved] = useState(saveLocal('unSolved'))
+  const [Solved, setSolved] = useState(saveLocal('Solved'))
 
+  const tableGenerator = () => {
+    setLoading(true)
+    const sudoku = new Sudoku(9, 0)
+    sudoku.fillValues()
+    setUnSolved(sudoku.printSudoku())
+    // setSolved(sudoku.printAnswer())
+    // console.log(sudoku.empty)
+    if (sudoku.printSudoku().length > 0) {
+      setLoading(false)
+    }
+  }
+  useEffect(() => {
+    tableGenerator()
+  }, [])
+  useEffect(() => {
+    localStorage.setItem('unSolved', JSON.stringify(unSolved))
+    localStorage.setItem('Solved', JSON.stringify(Solved))
+  }, [unSolved, Solved])
   //selected coloring
   const [selectedNumber, setSelectedNumber] = useState('')
   const [selectedNumberIndex, setSelectedNumberIndex] = useState('')
   const [selectedSquare, setSelectedSquare] = useState('')
+  const [user, setUser] = useState(unSolved)
+  const writeNumberInTable = (number) => {
+    if (
+      selectedNumberIndex &&
+      selectedSquare &&
+      unSolved[selectedSquare][selectedNumberIndex] === 0
+    ) {
+      setUser([...user, (user[selectedSquare][selectedNumberIndex] = number)])
+      console.log(user[selectedSquare][selectedNumberIndex])
+    }
+  }
 
   return (
     <AppContext.Provider
@@ -77,6 +110,9 @@ const AppProvider = ({ children }) => {
         setSelectedSquare,
         selectedNumberIndex,
         setSelectedNumberIndex,
+        writeNumberInTable,
+        unSolved,
+        user,
       }}>
       {children}
     </AppContext.Provider>

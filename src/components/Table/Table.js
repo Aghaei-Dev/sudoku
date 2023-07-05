@@ -1,37 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import { styled } from '@mui/material/styles'
 
-import ModalOverlay from '../ModalOverlay'
+import { StopModal } from '../'
 import { useGlobalContext } from '../../context'
 
 import { Square, Cell } from '../../components'
-import { Sudoku } from '../../functions'
-const Table = ({ N, K }) => {
-  const { isModalOpen, isAlert, width } = useGlobalContext()
-
-  const [square, setSquare] = useState([])
-
-  useEffect(() => {
-    const sudoku = new Sudoku(N, K)
-    sudoku.fillValues()
-
-    setSquare(sudoku.printSudoku())
-    // console.log(sudoku.printAnswer())
-  }, [K, N])
-
+const Table = () => {
+  const { isModalOpen, isAlert, width, unSolved, loading } = useGlobalContext()
+  if (loading) {
+    return <h1>loading ...</h1>
+  }
   return (
     <TableWrapper width={width}>
-      {square.map((item, index) => {
+      {unSolved.map((item, i) => {
         return (
-          <Square key={index} index={index} number={index}>
-            {square[index].map((item, index) => {
-              return <Cell number={item} key={index} index={index} />
+          <Square key={i} index={i} number={i}>
+            {unSolved[i].map((item, index) => {
+              return <Cell number={item} key={index} index={index} square={i} />
             })}
           </Square>
         )
       })}
-      {isModalOpen && <ModalOverlay />}
-      {isAlert && <ModalOverlay alert />}
+      {isModalOpen && <StopModal />}
+      {isAlert && <StopModal alert />}
     </TableWrapper>
   )
 }
