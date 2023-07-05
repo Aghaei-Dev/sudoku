@@ -8,20 +8,27 @@ import {
   FourButton,
   Navbar,
   Mistakes,
-  NewGModal,
+  NewGame,
+  GameOver,
+  DifficultyModal,
 } from '../components'
 
 import { MainWrapper } from '../assets/styles'
 import { useGlobalContext } from '../context'
 const Easy = () => {
-  const { width, loading, newGModal } = useGlobalContext()
+  const { width, loading, mistakes } = useGlobalContext()
 
   return (
     <MainWrapper>
-      {newGModal && <NewGModal />}
+      {mistakes === 3 && <GameOver />}
+
+      {/* when routing show this */}
+      {/* {true && <NewGame />} */}
+      {true && <DifficultyModal />}
+
       <div className='top-row'>
         {width >= 980 ? <Navbar difficulty /> : <Difficulty mode='easy' />}
-        <Mistakes miss={1} />
+        <Mistakes miss={mistakes} />
         <Timer />
       </div>
       <div className={`table ${loading && 'loading'}`}>

@@ -5,7 +5,6 @@ const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(false)
-  const [newGModal, setNewGModal] = useState(false)
 
   const [width, setWidth] = useState(window.innerWidth)
   const [height, setHeight] = useState(window.innerHeight)
@@ -31,18 +30,6 @@ const AppProvider = ({ children }) => {
     setIsActive(true)
   }
 
-  const [canWeNav, setCanWeNav] = useState(false)
-  const [isAlert, setIsAlert] = useState(false)
-
-  const canWeNavTrue = () => {
-    setIsAlert(false)
-    setCanWeNav(true)
-  }
-  const canWeNavFalse = () => {
-    setIsAlert(false)
-    setCanWeNav(false)
-  }
-
   const [isNoteON, setIsNoteON] = useState(false)
 
   const toggleNote = () => {
@@ -52,45 +39,82 @@ const AppProvider = ({ children }) => {
   const [unSolved, setUnSolved] = useState(saveLocal('unSolved'))
   const [Solved, setSolved] = useState(saveLocal('Solved'))
 
-  const tableGenerator = () => {
+  const tableGenerator = (K) => {
     setLoading(true)
-    const sudoku = new Sudoku(9, 0)
+    const sudoku = new Sudoku(9, K)
     sudoku.fillValues()
     setUnSolved(sudoku.printSudoku())
-    // setSolved(sudoku.printAnswer())
+    setSolved(sudoku.printAnswer())
     // console.log(sudoku.empty)
     if (sudoku.printSudoku().length > 0) {
       setLoading(false)
     }
   }
   useEffect(() => {
-    tableGenerator()
+    tableGenerator(40)
   }, [])
+  //selected coloring
+  console.log(isNoteON)
+  const [selectedNumber, setSelectedNumber] = useState('')
+  const [selectedNumberIndex, setSelectedNumberIndex] = useState('')
+  const [selectedSquare, setSelectedSquare] = useState('')
+  const [mistakes, setMistakes] = useState(0)
+  const writeNumberInTable = (number) => {
+    if (selectedNumber === 0) {
+      for (let i = 0; i < unSolved.length; i++) {
+        if (i === selectedSquare) {
+          const newArray = unSolved[i]
+          for (let j = 0; j < newArray.length; j++) {
+            if (j === selectedNumberIndex) {
+              if (whatMustBe() === number) {
+                newArray[j] = number
+              } else {
+                setMistakes(mistakes + 1)
+              }
+            }
+          }
+          unSolved[i] = newArray
+        }
+      }
+      setUnSolved(unSolved)
+    }
+  }
+  const whatMustBe = () => {
+    for (let i = 0; i < Solved.length; i++) {
+      if (i === selectedSquare) {
+        const newArray = Solved[i]
+        for (let j = 0; j < newArray.length; j++) {
+          if (j === selectedNumberIndex) {
+            return newArray[j]
+          }
+        }
+      }
+    }
+  }
+  console.log(whatMustBe())
+
   useEffect(() => {
     localStorage.setItem('unSolved', JSON.stringify(unSolved))
     localStorage.setItem('Solved', JSON.stringify(Solved))
   }, [unSolved, Solved])
-  //selected coloring
-  const [selectedNumber, setSelectedNumber] = useState('')
-  const [selectedNumberIndex, setSelectedNumberIndex] = useState('')
-  const [selectedSquare, setSelectedSquare] = useState('')
-  const [user, setUser] = useState(unSolved)
-  const writeNumberInTable = (number) => {
-    if (
-      selectedNumberIndex &&
-      selectedSquare &&
-      unSolved[selectedSquare][selectedNumberIndex] === 0
-    ) {
-      setUser([...user, (user[selectedSquare][selectedNumberIndex] = number)])
-      console.log(user[selectedSquare][selectedNumberIndex])
-    }
+
+  const [endModal, setEndModal] = useState(false)
+  const secondeChanceHandler = () => {
+    setEndModal(false)
+    setMistakes(2)
+  }
+  const newGameHandler = () => {
+    setEndModal(false)
+    setMistakes(0)
+    tableGenerator(1)
+    //new modal and get this k and routing
   }
 
   return (
     <AppContext.Provider
       value={{
         loading,
-        newGModal,
+        endModal,
         width,
         isActive,
         isModalOpen,
@@ -99,11 +123,6 @@ const AppProvider = ({ children }) => {
         openModal,
         closeModal,
         setIsActive,
-        isAlert,
-        setIsAlert,
-        canWeNav,
-        canWeNavTrue,
-        canWeNavFalse,
         selectedNumber,
         setSelectedNumber,
         selectedSquare,
@@ -112,7 +131,11 @@ const AppProvider = ({ children }) => {
         setSelectedNumberIndex,
         writeNumberInTable,
         unSolved,
-        user,
+        mistakes,
+        setMistakes,
+        setEndModal,
+        secondeChanceHandler,
+        newGameHandler,
       }}>
       {children}
     </AppContext.Provider>

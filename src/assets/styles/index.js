@@ -37,3 +37,43 @@ export const MainWrapper = styled('div')(() => ({
     // background: 'red',
   },
 }))
+
+export const ModalWrapper = styled('div')(() => ({
+  textAlign: 'center',
+  width: '100%',
+  height: '100%',
+  top: '0',
+  left: '0',
+  position: 'absolute',
+  zIndex: '100',
+  background: 'rgba(0,0,0,.7)',
+  display: 'grid',
+  placeItems: 'center',
+  '> div': {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    gap: '.6rem',
+    width: '308px',
+    padding: '1.75rem',
+    background: 'white',
+    borderRadius: 'var(--radius)',
+    h2: {
+      fontSize: '1.2rem',
+      color: 'var(--gray-700)',
+    },
+    p: {
+      fontSize: '.8rem',
+      color: 'var(--gray-300)',
+      fontWeight: '600',
+    },
+    '.container': {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      gap: '1rem',
+      width: '100%',
+    },
+  },
+}))

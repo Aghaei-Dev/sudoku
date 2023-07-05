@@ -15,7 +15,9 @@ import Cell from './Table/Cell'
 
 import Loading from './Modals/Loading'
 import StopModal from './Modals/StopModal'
-import NewGModal from './Modals/NewGModal'
+import NewGame from './Modals/NewGame'
+import GameOver from './Modals/GameOver'
+import DifficultyModal from './Modals/DifficultyModal'
 
 export {
   Difficulty,
@@ -29,7 +31,9 @@ export {
   Navbar,
   TextTitle,
   Mistakes,
-  NewGModal,
+  NewGame,
+  GameOver,
   Badge,
   Loading,
+  DifficultyModal,
 }

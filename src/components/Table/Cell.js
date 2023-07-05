@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
 const Cell = ({ number, index, square }) => {

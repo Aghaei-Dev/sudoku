@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { styled } from '@mui/material/styles'
 
 import { StopModal } from '../'
@@ -6,7 +6,7 @@ import { useGlobalContext } from '../../context'
 
 import { Square, Cell } from '../../components'
 const Table = () => {
-  const { isModalOpen, isAlert, width, unSolved, loading } = useGlobalContext()
+  const { isModalOpen, width, unSolved, loading } = useGlobalContext()
   if (loading) {
     return <h1>loading ...</h1>
   }
@@ -22,7 +22,6 @@ const Table = () => {
         )
       })}
       {isModalOpen && <StopModal />}
-      {isAlert && <StopModal alert />}
     </TableWrapper>
   )
 }

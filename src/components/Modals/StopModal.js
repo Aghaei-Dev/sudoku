@@ -1,38 +1,15 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
 
-import { IconButton, Alert } from '@mui/material'
+import { IconButton } from '@mui/material'
 
-import {
-  PlayArrowIcon,
-  CloseOutlinedIcon,
-  DoneOutlinedIcon,
-} from '../../assets/icons'
+import { PlayArrowIcon } from '../../assets/icons'
 
 import { useGlobalContext } from '../../context'
 
-const StopModal = ({ alert }) => {
-  const { closeModal, isAlert, canWeNavTrue, canWeNavFalse } =
-    useGlobalContext()
-  if (alert && isAlert) {
-    return (
-      <CenterAlert
-        severity='error'
-        color='error'
-        action={
-          <>
-            <IconButton color='inherit' size='small' onClick={canWeNavTrue}>
-              <DoneOutlinedIcon fontSize='inherit' />
-            </IconButton>
-            <IconButton color='inherit' size='small' onClick={canWeNavFalse}>
-              <CloseOutlinedIcon fontSize='inherit' />
-            </IconButton>
-          </>
-        }>
-        are you sure?
-      </CenterAlert>
-    )
-  }
+const StopModal = () => {
+  const { closeModal } = useGlobalContext()
+
   return (
     <Overlay onClick={closeModal}>
       <IconButton>
@@ -43,15 +20,6 @@ const StopModal = ({ alert }) => {
 }
 
 export default StopModal
-
-const CenterAlert = styled(Alert)(() => ({
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%,-50%)',
-  zIndex: '100',
-  width: '90%',
-}))
 
 const Overlay = styled('div')(() => ({
   width: ' 100%',
