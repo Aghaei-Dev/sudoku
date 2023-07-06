@@ -8,13 +8,13 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path='' element={<Main />} />
-        <Route path='Easy' element={<Easy />} />
-        <Route path='Medium' element={<Medium />} />
-        <Route path='Hard' element={<Hard />} />
-        <Route path='Expert' element={<Expert />} />
-        <Route path='Evil' element={<Evil />} />
-        <Route path='*' element={<ErrorPage />} />
+        <Route path='/' element={<Main />} />
+        <Route path='/Easy' element={<Easy />} />
+        <Route path='/Medium' element={<Medium />} />
+        <Route path='/Hard' element={<Hard />} />
+        <Route path='/Expert' element={<Expert />} />
+        <Route path='/Evil' element={<Evil />} />
+        <Route path='/*' element={<ErrorPage />} />
       </Routes>
     </Router>
   )
