@@ -36,6 +36,7 @@ const AppProvider = ({ children }) => {
     setIsNoteON(!isNoteON)
   }
   //
+
   const [unSolved, setUnSolved] = useState(saveLocal('unSolved'))
   const [Solved, setSolved] = useState(saveLocal('Solved'))
 
@@ -43,23 +44,28 @@ const AppProvider = ({ children }) => {
     setLoading(true)
     const sudoku = new Sudoku(9, K)
     sudoku.fillValues()
-    setUnSolved(sudoku.printSudoku())
-    setSolved(sudoku.printAnswer())
-    // console.log(sudoku.empty)
-    if (sudoku.printSudoku().length > 0) {
+
+    setUnSolved(sudoku.rowMaker())
+    setSolved(sudoku.rowMakerAnswer())
+    if (sudoku.rowMaker().length > 0) {
       setLoading(false)
     }
   }
+
   useEffect(() => {
-    tableGenerator(40)
-  }, [])
+    localStorage.setItem('unSolved', JSON.stringify(unSolved))
+    localStorage.setItem('Solved', JSON.stringify(Solved))
+  }, [unSolved, Solved])
+
   //selected coloring
-  console.log(isNoteON)
   const [selectedNumber, setSelectedNumber] = useState('')
   const [selectedNumberIndex, setSelectedNumberIndex] = useState('')
   const [selectedSquare, setSelectedSquare] = useState('')
   const [mistakes, setMistakes] = useState(0)
+  const [fault, setFault] = useState(false)
+
   const writeNumberInTable = (number) => {
+    setFault(false)
     if (selectedNumber === 0) {
       for (let i = 0; i < unSolved.length; i++) {
         if (i === selectedSquare) {
@@ -68,7 +74,10 @@ const AppProvider = ({ children }) => {
             if (j === selectedNumberIndex) {
               if (whatMustBe() === number) {
                 newArray[j] = number
+                setFault(false)
               } else {
+                newArray[j] = number
+                setFault(true)
                 setMistakes(mistakes + 1)
               }
             }
@@ -79,6 +88,7 @@ const AppProvider = ({ children }) => {
       setUnSolved(unSolved)
     }
   }
+
   const whatMustBe = () => {
     for (let i = 0; i < Solved.length; i++) {
       if (i === selectedSquare) {
@@ -91,12 +101,6 @@ const AppProvider = ({ children }) => {
       }
     }
   }
-  console.log(whatMustBe())
-
-  useEffect(() => {
-    localStorage.setItem('unSolved', JSON.stringify(unSolved))
-    localStorage.setItem('Solved', JSON.stringify(Solved))
-  }, [unSolved, Solved])
 
   const [endModal, setEndModal] = useState(false)
   const secondeChanceHandler = () => {
@@ -106,7 +110,7 @@ const AppProvider = ({ children }) => {
   const newGameHandler = () => {
     setEndModal(false)
     setMistakes(0)
-    tableGenerator(1)
+
     //new modal and get this k and routing
   }
 
@@ -130,12 +134,15 @@ const AppProvider = ({ children }) => {
         selectedNumberIndex,
         setSelectedNumberIndex,
         writeNumberInTable,
-        unSolved,
         mistakes,
         setMistakes,
         setEndModal,
         secondeChanceHandler,
         newGameHandler,
+        unSolved,
+        fault,
+        setFault,
+        tableGenerator,
       }}>
       {children}
     </AppContext.Provider>

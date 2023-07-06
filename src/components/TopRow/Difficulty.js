@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { gameMode } from '../../assets/constants'
 import { useGlobalContext } from '../../context'
 const Difficulty = ({ mode }) => {
-  const { setIsAlert, canWeNav, width } = useGlobalContext()
+  const { width } = useGlobalContext()
 
   let navigate = useNavigate()
 
@@ -15,11 +15,7 @@ const Difficulty = ({ mode }) => {
       <select
         defaultValue={mode}
         onChange={(e) => {
-          if (canWeNav) {
-            navigate(`/${e.target.value}`)
-          } else {
-            setIsAlert(true)
-          }
+          navigate(`/${e.target.value}`)
         }}>
         {gameMode.map((item) => {
           return (
@@ -34,9 +30,6 @@ const Difficulty = ({ mode }) => {
 }
 
 export default Difficulty
-
-//set alert and if user clicked on yes im sure
-//then change the route
 
 const Wrapper = styled('div')(() => ({
   span: {

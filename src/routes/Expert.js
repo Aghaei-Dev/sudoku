@@ -1,8 +1,7 @@
 import React from 'react'
-import { Table, Difficulty, Timer } from '../components'
-
+import { ORG } from '../components'
 const Expert = () => {
-  return <div>Expert</div>
+  return <ORG K={68} mode='expert' />
 }
 
 export default Expert

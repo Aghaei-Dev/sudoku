@@ -53,11 +53,16 @@ const FourButton = () => {
 export default FourButton
 
 const IconBtn = styled(IconButton)(() => ({
+  cursor: 'pointer',
   padding: '1rem',
   color: 'var(--blue-500)',
   background: 'var(--gray-100)',
   border: '2px solid white',
   position: 'relative',
+  '*': {
+    cursor: 'pointer',
+  },
+
   '@media (width<= 350px)': {
     padding: '0.5rem',
   },

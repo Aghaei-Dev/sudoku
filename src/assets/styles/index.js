@@ -16,9 +16,7 @@ export const MainWrapper = styled('div')(() => ({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  '.loading': {
-    opacity: '.4',
-  },
+
   // '.table': { background: 'blue' },
   '.right': {
     // background: 'red',
@@ -49,6 +47,7 @@ export const ModalWrapper = styled('div')(() => ({
   background: 'rgba(0,0,0,.7)',
   display: 'grid',
   placeItems: 'center',
+  gap: '1rem',
   '> div': {
     display: 'flex',
     justifyContent: 'center',

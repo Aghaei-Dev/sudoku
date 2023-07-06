@@ -19,6 +19,8 @@ import NewGame from './Modals/NewGame'
 import GameOver from './Modals/GameOver'
 import DifficultyModal from './Modals/DifficultyModal'
 
+import ORG from './ORG'
+
 export {
   Difficulty,
   FourButton,
@@ -36,4 +38,5 @@ export {
   Badge,
   Loading,
   DifficultyModal,
+  ORG,
 }

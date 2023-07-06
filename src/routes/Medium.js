@@ -1,7 +1,7 @@
 import React from 'react'
-
+import { ORG } from '../components'
 const Medium = () => {
-  return <div>Medium</div>
+  return <ORG K={61} mode='medium' />
 }
 
 export default Medium

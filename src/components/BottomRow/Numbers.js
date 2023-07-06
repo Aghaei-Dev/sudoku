@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { numbers } from '../../assets/constants'
 import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
 
 const Numbers = () => {
   const { writeNumberInTable } = useGlobalContext()
+
+  const key = (e) => {
+    if (numbers.find((item) => item === Number(e.key))) {
+      console.log(Number(e.key))
+    }
+  }
+  React.useEffect(() => {
+    window.addEventListener('keydown', key)
+    return () => {
+      window.removeEventListener('keydown', key)
+    }
+  }, [])
   return (
     <Wrapper>
       {numbers.map((item, index) => {

@@ -8,6 +8,6 @@ const Mistakes = ({ miss }) => {
 export default Mistakes
 
 const Mistake = styled('p')(() => ({
-  fontWeight: '700',
+  fontWeight: '600',
   color: 'var(--gray-600)',
 }))

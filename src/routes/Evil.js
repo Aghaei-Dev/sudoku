@@ -1,7 +1,7 @@
 import React from 'react'
-
+import { ORG } from '../components'
 const Evil = () => {
-  return <div>Evil</div>
+  return <ORG K={72} mode='evil' />
 }
 
 export default Evil

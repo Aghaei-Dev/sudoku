@@ -54,7 +54,6 @@ export class Sudoku {
     this.fillDiagonal()
     // Fill remaining blocks
     this.fillRemaining(0, this.SRN)
-
     //در ابتدا همه ی خانه ها پر میشوند سپس با این فانک کا رفم پاک میشوند
     this.removeKDigits()
   }
@@ -100,7 +99,8 @@ export class Sudoku {
   randomGenerator(num) {
     return Math.floor(Math.random() * num + 1)
   }
-
+  //i square
+  //j index
   // Check if safe to put in cell
   checkIfSafe(i, j, num) {
     return (
@@ -120,7 +120,7 @@ export class Sudoku {
     return true
   }
 
-  // check in the row for existence
+  // check in the col for existence
   unUsedInCol(j, num) {
     for (let i = 0; i < this.N; i++) {
       if (this.mat[i][j] === num) {
@@ -166,27 +166,6 @@ export class Sudoku {
     return false
   }
 
-  //پرینت سودوکو به همراه حذفیات
-  printSudoku() {
-    const array = []
-
-    for (let i = 0; i < this.N; i++) {
-      array.push(this.mat[i])
-    }
-    return array
-  }
-
-  //پرینت سودوکو به بدون حذفیات
-  //به صورت کامل برای مقایسه با جواب کاربر
-  printAnswer() {
-    const array = []
-
-    for (let i = 0; i < this.N; i++) {
-      array.push(this.answer[i])
-    }
-    return array
-  }
-
   //پاک کردن کا عدد از جدول برای شروع بازی
   removeKDigits() {
     let count = this.K
@@ -202,14 +181,58 @@ export class Sudoku {
 
     return
   }
-}
+  colMaker() {
+    let array = []
+    for (let a = 0; a < 3; a++) {
+      for (let b = 0; b < 3; b++) {
+        for (let i = a; i < this.N; i += 3) {
+          for (let j = b; j < this.N; j += 3) {
+            array = [...array, this.mat[i][j]]
+          }
+        }
+      }
+    }
+    return this.splitArray(array, 9)
+  }
+  rowMaker() {
+    let array = []
 
-//k
-//easy -- 43
-//medium -- 61
-//hard -- 66
-// expert -- 68
-// evil -- 68
+    for (let b = 0; b < 9; b += 3) {
+      for (let a = 0; a < 9; a += 3) {
+        for (let i = b; i < b + 3; i++) {
+          for (let j = a; j < a + 3; j++) {
+            array = [...array, this.mat[i][j]]
+          }
+        }
+      }
+    }
+
+    return this.splitArray(array, 9)
+  }
+  rowMakerAnswer() {
+    let array = []
+    for (let b = 0; b < 9; b += 3) {
+      for (let a = 0; a < 9; a += 3) {
+        for (let i = b; i < b + 3; i++) {
+          for (let j = a; j < a + 3; j++) {
+            array = [...array, this.answer[i][j]]
+          }
+        }
+      }
+    }
+    return this.splitArray(array, 9)
+  }
+  splitArray(arr, chunkSize) {
+    let result = []
+
+    for (let i = 0; i < arr.length; i += chunkSize) {
+      let chunk = arr.slice(i, i + chunkSize)
+      result.push(chunk)
+    }
+
+    return result
+  }
+}
 
 export const saveLocal = (key) => {
   let isKeyExist = localStorage.getItem(`${key}`)

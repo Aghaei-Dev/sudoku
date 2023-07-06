@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { styled } from '@mui/material/styles'
 
 import { StopModal } from '../'
 import { useGlobalContext } from '../../context'
-
 import { Square, Cell } from '../../components'
-const Table = () => {
-  const { isModalOpen, width, unSolved, loading } = useGlobalContext()
-  if (loading) {
-    return <h1>loading ...</h1>
-  }
+
+const Table = ({ K }) => {
+  const { isModalOpen, width, unSolved, tableGenerator } = useGlobalContext()
+
+  useEffect(() => {
+    tableGenerator(K)
+  }, [])
+
   return (
     <TableWrapper width={width}>
       {unSolved.map((item, i) => {
