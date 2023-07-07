@@ -3,18 +3,22 @@ import { styled } from '@mui/material/styles'
 
 import { StopModal } from '../'
 import { useGlobalContext } from '../../context'
-import { Square, Cell } from '../../components'
+import { Square, Cell, Loading } from '../../components'
 
 const Table = ({ K }) => {
-  const { isModalOpen, width, unSolved, tableGenerator } = useGlobalContext()
+  const { isModalOpen, width, unSolved, tableGenerator, loading } =
+    useGlobalContext()
 
   useEffect(() => {
     tableGenerator(K)
   }, [])
 
+  if (loading) {
+    return <Loading />
+  }
   return (
     <TableWrapper width={width}>
-      {/* {unSolved.map((item, i) => {
+      {unSolved.map((item, i) => {
         return (
           <Square key={i} index={i} number={i}>
             {unSolved[i].map((item, index) => {
@@ -22,7 +26,7 @@ const Table = ({ K }) => {
             })}
           </Square>
         )
-      })} */}
+      })}
       {isModalOpen && <StopModal />}
     </TableWrapper>
   )
