@@ -16,16 +16,16 @@ import {
 
 import { MainWrapper } from '../assets/styles'
 import { useGlobalContext } from '../context'
-const ORG = ({K,mode}) => {
-  const { width, loading, mistakes } = useGlobalContext()
+const ORG = ({ K, mode }) => {
+  const { width, loading, mistakes, difficultyModal } = useGlobalContext()
 
   return (
     <MainWrapper>
       {mistakes === 3 && <GameOver />}
       {loading && <Loading />}
-      {/* when routing show this */}
+      {difficultyModal && <DifficultyModal />}
+
       {/* {true && <NewGame />} */}
-      {/* {true && <DifficultyModal />} */}
 
       <div className='top-row'>
         {width >= 980 ? <Navbar difficulty /> : <Difficulty mode={mode} />}

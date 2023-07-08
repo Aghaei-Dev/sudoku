@@ -9,6 +9,7 @@ import Mistakes from './TopRow/Mistakes'
 import Numbers from './BottomRow/Numbers'
 import FourButton from './BottomRow/FourButton'
 
+import Maker from './Table/Maker'
 import Table from './Table/Table'
 import Square from './Table/Square'
 import Cell from './Table/Cell'
@@ -30,6 +31,7 @@ export {
   Timer,
   Square,
   Cell,
+  Maker,
   Navbar,
   TextTitle,
   Mistakes,

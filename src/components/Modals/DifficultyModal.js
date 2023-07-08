@@ -4,8 +4,11 @@ import { ModalWrapper } from '../../assets/styles/index'
 import { ReplayIcon, GridOnOutlinedIcon } from '../../assets/icons'
 import { gameMode } from '../../assets/constants'
 import { Link, useHref } from 'react-router-dom'
+import { useGlobalContext } from '../../context'
 const DifficultyModal = () => {
   const href = useHref()
+  const { closeDifficultyModal, closeDifficultyModalRouting } =
+    useGlobalContext()
 
   return (
     <Wrapper>
@@ -17,7 +20,7 @@ const DifficultyModal = () => {
           {gameMode.map((item) => {
             const { id, gameMode } = item
             return (
-              <Btn key={id}>
+              <Btn key={id} onClick={closeDifficultyModalRouting}>
                 <Link to={`/${gameMode}`}>
                   <GridOnOutlinedIcon />
                   {gameMode}
@@ -33,7 +36,9 @@ const DifficultyModal = () => {
           </Btn>
         </div>
       </div>
-      <Btn sx={{ alignSelf: 'start' }}>cancel</Btn>
+      <Btn sx={{ alignSelf: 'start' }} onClick={closeDifficultyModal}>
+        cancel
+      </Btn>
     </Wrapper>
   )
 }
@@ -47,6 +52,9 @@ const Btn = styled('div')(() => ({
   borderBottom: '1px solid var(--bg-border-light)',
   color: 'var(--blue-500)',
   fontWeight: '600',
+  '*': {
+    cursor: 'pointer',
+  },
   ':first-child': {
     borderTopLeftRadius: 'var( --radius)',
     borderTopRightRadius: 'var( --radius)',
@@ -62,7 +70,6 @@ const Btn = styled('div')(() => ({
   a: {
     textTransform: 'capitalize',
     padding: '.7rem',
-    cursor: 'pointer',
     display: 'flex',
     justifyContent: 'start',
     alignItems: 'center',
@@ -72,6 +79,7 @@ const Btn = styled('div')(() => ({
 }))
 
 const Wrapper = styled(ModalWrapper)(() => ({
+  background: 'transparent',
   '.container': {
     flexDirection: 'column',
     gap: '0rem!important',

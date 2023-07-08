@@ -4,8 +4,6 @@ import { Sudoku, saveLocal } from '../functions'
 const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
-  const [loading, setLoading] = useState(false)
-
   const [width, setWidth] = useState(window.innerWidth)
   const [height, setHeight] = useState(window.innerHeight)
   const resize = () => {
@@ -19,17 +17,6 @@ const AppProvider = ({ children }) => {
     }
   }, [width, height])
 
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isActive, setIsActive] = useState(true)
-  const openModal = () => {
-    setIsModalOpen(true)
-    setIsActive(false)
-  }
-  const closeModal = () => {
-    setIsModalOpen(false)
-    setIsActive(true)
-  }
-
   const [isNoteON, setIsNoteON] = useState(false)
 
   const toggleNote = () => {
@@ -39,27 +26,32 @@ const AppProvider = ({ children }) => {
 
   const [unSolved, setUnSolved] = useState(saveLocal('unSolved'))
   const [Solved, setSolved] = useState(saveLocal('Solved'))
+  const [empty, setEmpty] = useState([])
 
   const tableGenerator = (K) => {
-    setLoading(true)
     const sudoku = new Sudoku(9, K)
     sudoku.fillValues()
-
     setUnSolved(sudoku.rowMaker())
     setSolved(sudoku.rowMakerAnswer())
-    return sudoku.rowMaker()
+    setEmpty(sudoku.empty)
   }
   useEffect(() => {
     localStorage.setItem('unSolved', JSON.stringify(unSolved))
     localStorage.setItem('Solved', JSON.stringify(Solved))
   }, [unSolved, Solved])
 
+  const initializer = () => {
+    setSelectedNumber('')
+    setSelectedNumberIndex('')
+    setSelectedSquare('')
+    setFault(false)
+  }
   //selected coloring
   const [selectedNumber, setSelectedNumber] = useState('')
   const [selectedNumberIndex, setSelectedNumberIndex] = useState('')
   const [selectedSquare, setSelectedSquare] = useState('')
-  const [mistakes, setMistakes] = useState(0)
   const [fault, setFault] = useState(false)
+  const [mistakes, setMistakes] = useState(0)
 
   const writeNumberInTable = (number) => {
     setFault(false)
@@ -99,6 +91,22 @@ const AppProvider = ({ children }) => {
     }
   }
 
+  // ========= modals =========
+
+  // =====stop=====
+  const [stopModal, setStopModal] = useState(false)
+  const [isActive, setIsActive] = useState(true)
+  const openModal = () => {
+    setStopModal(true)
+    setIsActive(false)
+    initializer()
+  }
+  const closeModal = () => {
+    setStopModal(false)
+    setIsActive(true)
+  }
+
+  // =====end=====
   const [endModal, setEndModal] = useState(false)
   const secondeChanceHandler = () => {
     setEndModal(false)
@@ -106,19 +114,31 @@ const AppProvider = ({ children }) => {
   }
   const newGameHandler = () => {
     setEndModal(false)
-    setMistakes(0)
+    setDifficultyModal(true)
+  }
 
-    //new modal and get this k and routing
+  // =====end=====
+  const [difficultyModal, setDifficultyModal] = useState(false)
+  const closeDifficultyModal = () => {
+    setDifficultyModal(false)
+  }
+
+  const closeDifficultyModalRouting = () => {
+    closeDifficultyModal(true)
+    setEndModal(false)
+    setMistakes(0)
+    initializer()
   }
 
   return (
     <AppContext.Provider
       value={{
-        setLoading,
+        stopModal,
         endModal,
+        difficultyModal,
+        closeDifficultyModalRouting,
         width,
         isActive,
-        isModalOpen,
         isNoteON,
         toggleNote,
         openModal,
@@ -140,6 +160,8 @@ const AppProvider = ({ children }) => {
         fault,
         setFault,
         tableGenerator,
+        empty,
+        closeDifficultyModal,
       }}>
       {children}
     </AppContext.Provider>

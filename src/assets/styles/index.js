@@ -29,10 +29,9 @@ export const MainWrapper = styled('div')(() => ({
       marginTop: '2rem',
     },
   },
-  '@media (width<= 795px)': {
+  '@media (width<= 800px)': {
     display: 'flex',
     flexDirection: 'column',
-    // background: 'red',
   },
 }))
 
