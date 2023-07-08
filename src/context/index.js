@@ -37,8 +37,8 @@ const AppProvider = ({ children }) => {
   }
   //
 
-  const [unSolved, setUnSolved] = useState([])
-  const [Solved, setSolved] = useState([])
+  const [unSolved, setUnSolved] = useState(saveLocal('unSolved'))
+  const [Solved, setSolved] = useState(saveLocal('Solved'))
 
   const tableGenerator = (K) => {
     setLoading(true)
@@ -47,15 +47,12 @@ const AppProvider = ({ children }) => {
 
     setUnSolved(sudoku.rowMaker())
     setSolved(sudoku.rowMakerAnswer())
-    if (sudoku.rowMaker().length) {
-      setLoading(false)
-    }
+    return sudoku.rowMaker()
   }
-
-  // useEffect(() => {
-  //   localStorage.setItem('unSolved', JSON.stringify(unSolved))
-  //   localStorage.setItem('Solved', JSON.stringify(Solved))
-  // }, [unSolved, Solved])
+  useEffect(() => {
+    localStorage.setItem('unSolved', JSON.stringify(unSolved))
+    localStorage.setItem('Solved', JSON.stringify(Solved))
+  }, [unSolved, Solved])
 
   //selected coloring
   const [selectedNumber, setSelectedNumber] = useState('')
@@ -117,7 +114,7 @@ const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        loading,
+        setLoading,
         endModal,
         width,
         isActive,

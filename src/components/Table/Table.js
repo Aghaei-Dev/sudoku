@@ -6,16 +6,16 @@ import { useGlobalContext } from '../../context'
 import { Square, Cell, Loading } from '../../components'
 
 const Table = ({ K }) => {
-  const { isModalOpen, width, unSolved, tableGenerator, loading } =
-    useGlobalContext()
+  const { isModalOpen, width, unSolved, tableGenerator } = useGlobalContext()
 
   useEffect(() => {
     tableGenerator(K)
   }, [])
 
-  if (loading) {
+  if (!unSolved) {
     return <Loading />
   }
+
   return (
     <TableWrapper width={width}>
       {unSolved.map((item, i) => {
