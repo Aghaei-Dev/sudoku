@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { numbers } from '../../assets/constants'
 import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
@@ -52,13 +52,12 @@ const Wrapper = styled('div')(() => ({
       backgroundColor: 'var(--gray-100)',
     },
   },
-  '@media (width>= 795px)': {
+  '@media (width>= 701px)': {
     display: 'grid',
     placeItems: 'center',
     gridTemplateColumns: ' repeat(3, 1fr)',
     gridTemplateRows: 'repeat(3, 1fr)',
     gap: '.4rem',
-    fontSize: '1rem',
     div: {
       width: '100%',
       height: '100%',

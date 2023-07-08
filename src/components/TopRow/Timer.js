@@ -37,33 +37,31 @@ const Timer = () => {
     return () => clearInterval(intervalId)
   }, [isActive, counter])
 
-  // function stopTimer() {
-  //   setIsActive(false)
-  //   setCounter(0)
-  //   setSecond('00')
-  //   setMinute('00')
-  // }
-
   return (
     <Wrapper>
-      <p>
+      <p onClick={isActive ? openModal : closeModal}>
         {minute} : {second}
       </p>
-      <IconButton
-        sx={{ padding: '.1rem', background: 'var(--gray-100)' }}
-        size='small'
-        onClick={isActive ? openModal : closeModal}>
+      <IconBtn size='small' onClick={isActive ? openModal : closeModal}>
         {isActive ? (
           <PauseOutlinedIcon sx={{ padding: '.3rem' }} />
         ) : (
           <PlayArrowIcon sx={{ padding: '.3rem' }} />
         )}
-      </IconButton>
+      </IconBtn>
     </Wrapper>
   )
 }
 
 export default Timer
+
+const IconBtn = styled(IconButton)(() => ({
+  padding: '.1rem',
+  background: 'var(--gray-100)',
+  '*': {
+    cursor: 'pointer',
+  },
+}))
 
 const Wrapper = styled('div')(() => ({
   display: 'flex',
@@ -73,5 +71,6 @@ const Wrapper = styled('div')(() => ({
   p: {
     color: 'var(--gray-300)',
     fontWeight: '700',
+    cursor: 'pointer',
   },
 }))

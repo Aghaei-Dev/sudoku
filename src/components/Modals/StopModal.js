@@ -1,10 +1,7 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
-
 import { IconButton } from '@mui/material'
-
 import { PlayArrowIcon } from '../../assets/icons'
-
 import { useGlobalContext } from '../../context'
 
 const StopModal = () => {

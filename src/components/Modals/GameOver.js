@@ -2,7 +2,8 @@ import React from 'react'
 import { styled } from '@mui/material/styles'
 import { Button } from '@mui/material'
 import { useGlobalContext } from '../../context'
-import { ModalWrapper } from '../../assets/styles/index'
+import { ModalWrapper } from '../../global'
+
 
 const GameOver = () => {
   const { secondeChanceHandler, newGameHandler } = useGlobalContext()

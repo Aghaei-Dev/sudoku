@@ -1,7 +1,8 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
 import { Button } from '@mui/material'
-import { ModalWrapper } from '../../assets/styles/index'
+import { ModalWrapper } from '../../global'
+
 const NewGame = () => {
   return (
     <ModalWrapper>

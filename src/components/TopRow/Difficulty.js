@@ -1,14 +1,12 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
-
 import { useNavigate } from 'react-router-dom'
 import { gameMode } from '../../assets/constants'
 import { useGlobalContext } from '../../context'
+
 const Difficulty = ({ mode }) => {
   const { width } = useGlobalContext()
-
   let navigate = useNavigate()
-
   return (
     <Wrapper>
       {width >= 580 && <span>Difficulty : </span>}

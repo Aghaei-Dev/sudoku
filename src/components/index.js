@@ -19,6 +19,7 @@ import StopModal from './Modals/StopModal'
 import NewGame from './Modals/NewGame'
 import GameOver from './Modals/GameOver'
 import DifficultyModal from './Modals/DifficultyModal'
+import CenterRow from './Modals/CenterRow'
 
 import ORG from './ORG'
 
@@ -40,5 +41,6 @@ export {
   Badge,
   Loading,
   DifficultyModal,
+  CenterRow,
   ORG,
 }

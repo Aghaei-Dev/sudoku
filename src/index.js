@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { AppProvider } from './context'
 import App from './App'
 
-import './assets/styles/index.css'
+import './global/index.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(

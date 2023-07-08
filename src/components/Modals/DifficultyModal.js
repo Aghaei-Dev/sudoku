@@ -1,14 +1,22 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
-import { ModalWrapper } from '../../assets/styles/index'
+import { ModalWrapper } from '../../global'
 import { ReplayIcon, GridOnOutlinedIcon } from '../../assets/icons'
 import { gameMode } from '../../assets/constants'
 import { Link, useHref } from 'react-router-dom'
 import { useGlobalContext } from '../../context'
+
 const DifficultyModal = () => {
-  const href = useHref()
-  const { closeDifficultyModal, closeDifficultyModalRouting } =
+  const href = useHref().slice(1)
+  const { closeDifficultyModal, closeDifficultyModalRouting, restart } =
     useGlobalContext()
+
+  const { id: k } = gameMode.find((item) => {
+    if (item.gameMode === href) {
+      return item.id
+    }
+    return 0
+  })
 
   return (
     <Wrapper>
@@ -20,7 +28,11 @@ const DifficultyModal = () => {
           {gameMode.map((item) => {
             const { id, gameMode } = item
             return (
-              <Btn key={id} onClick={closeDifficultyModalRouting}>
+              <Btn
+                key={id}
+                onClick={() => {
+                  gameMode === href ? restart(k) : closeDifficultyModalRouting()
+                }}>
                 <Link to={`/${gameMode}`}>
                   <GridOnOutlinedIcon />
                   {gameMode}
@@ -28,8 +40,8 @@ const DifficultyModal = () => {
               </Btn>
             )
           })}
-          <Btn>
-            <Link to={`${href}`}>
+          <Btn onClick={() => restart(k)}>
+            <Link to={`/${href}`}>
               <ReplayIcon />
               restart
             </Link>
@@ -55,7 +67,7 @@ const Btn = styled('div')(() => ({
   '*': {
     cursor: 'pointer',
   },
-  ':first-child': {
+  ':first-of-type': {
     borderTopLeftRadius: 'var( --radius)',
     borderTopRightRadius: 'var( --radius)',
   },

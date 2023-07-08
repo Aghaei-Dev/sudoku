@@ -40,12 +40,6 @@ const AppProvider = ({ children }) => {
     localStorage.setItem('Solved', JSON.stringify(Solved))
   }, [unSolved, Solved])
 
-  const initializer = () => {
-    setSelectedNumber('')
-    setSelectedNumberIndex('')
-    setSelectedSquare('')
-    setFault(false)
-  }
   //selected coloring
   const [selectedNumber, setSelectedNumber] = useState('')
   const [selectedNumberIndex, setSelectedNumberIndex] = useState('')
@@ -108,6 +102,7 @@ const AppProvider = ({ children }) => {
 
   // =====end=====
   const [endModal, setEndModal] = useState(false)
+
   const secondeChanceHandler = () => {
     setEndModal(false)
     setMistakes(2)
@@ -117,7 +112,7 @@ const AppProvider = ({ children }) => {
     setDifficultyModal(true)
   }
 
-  // =====end=====
+  // =====difficulty=====
   const [difficultyModal, setDifficultyModal] = useState(false)
   const closeDifficultyModal = () => {
     setDifficultyModal(false)
@@ -128,6 +123,22 @@ const AppProvider = ({ children }) => {
     setEndModal(false)
     setMistakes(0)
     initializer()
+  }
+  const restart = (K) => {
+    closeDifficultyModalRouting()
+    tableGenerator(K)
+  }
+
+  //make coloring and mistakes to default
+  const initializer = () => {
+    setSelectedNumber('')
+    setSelectedNumberIndex('')
+    setSelectedSquare('')
+    setFault(false)
+  }
+  const initializerAll = () => {
+    initializer()
+    setMistakes(0)
   }
 
   return (
@@ -162,6 +173,9 @@ const AppProvider = ({ children }) => {
         tableGenerator,
         empty,
         closeDifficultyModal,
+        restart,
+        initializer,
+        initializerAll,
       }}>
       {children}
     </AppContext.Provider>

@@ -14,7 +14,7 @@ import {
   Loading,
 } from '../components'
 
-import { MainWrapper } from '../assets/styles'
+import { MainWrapper } from '../global'
 import { useGlobalContext } from '../context'
 const ORG = ({ K, mode }) => {
   const { width, loading, mistakes, difficultyModal } = useGlobalContext()
@@ -24,7 +24,6 @@ const ORG = ({ K, mode }) => {
       {mistakes === 3 && <GameOver />}
       {loading && <Loading />}
       {difficultyModal && <DifficultyModal />}
-
       {/* {true && <NewGame />} */}
 
       <div className='top-row'>

@@ -1,63 +1,33 @@
 export class Sudoku {
-  // Constructor
-
   constructor(N, K) {
     this.N = N
     this.K = K
 
-    // برای اینکه جدول چند در چند باشد
-    // محاسبه ریشه ان و رند کردن ان ب کف/اعشار نداشته باشیم
+    // N for N*N table
+    //K for removing numbers from the table and starting game
+    //summary : K uses for detecting level
 
     this.SRN = Math.floor(Math.sqrt(N))
 
-    //در ابتدا تمام خانه های جواب و سوال با صفر(خالی) پر میشود
-    this.mat = Array.from(
-      {
-        length: N,
-      },
-      () =>
-        Array.from(
-          {
-            length: N,
-          },
-          () => 0
-        )
+    //initialize empty-answer-mat(main matrix) with N^2 empty 0 cell
+    this.mat = Array.from({ length: N }, () =>
+      Array.from({ length: N }, () => 0)
     )
-    this.answer = Array.from(
-      {
-        length: N,
-      },
-      () =>
-        Array.from(
-          {
-            length: N,
-          },
-          () => 0
-        )
+    this.answer = Array.from({ length: N }, () =>
+      Array.from({ length: N }, () => 0)
     )
-    this.empty = Array.from(
-      {
-        length: N,
-      },
-      () =>
-        Array.from(
-          {
-            length: N,
-          },
-          () => 0
-        )
+    this.empty = Array.from({ length: N }, () =>
+      Array.from({ length: N }, () => 0)
     )
   }
-  // سازنده سودوکو
+
   fillValues() {
     // Fill the diagonal of SRN x SRN matrices
     this.fillDiagonal()
     // Fill remaining blocks
     this.fillRemaining(0, this.SRN)
-    //در ابتدا همه ی خانه ها پر میشوند سپس با این فانک کا رفم پاک میشوند
     this.removeKDigits()
   }
-  //قطر
   // Fill the diagonal SRN number of SRN x SRN matrices
   fillDiagonal() {
     for (let i = 0; i < this.N; i += this.SRN) {
@@ -78,7 +48,7 @@ export class Sudoku {
     return true
   }
 
-  // Fill a 3 x 3 matrix.
+  // Fill a N x N matrix.
   fillBox(row, col) {
     let num = 0
     for (let i = 0; i < this.SRN; i++) {
@@ -95,13 +65,12 @@ export class Sudoku {
     }
   }
 
-  // Random generator
+  // Random number generator between 1 to N
   randomGenerator(num) {
     return Math.floor(Math.random() * num + 1)
   }
-  //i square
-  //j index
-  // Check if safe to put in cell
+
+  //check is safe for put number to that cell
   checkIfSafe(i, j, num) {
     return (
       this.unUsedInRow(i, num) &&
@@ -110,7 +79,7 @@ export class Sudoku {
     )
   }
 
-  // check in the row for existence
+  // check row for th number if the number used in row return false
   unUsedInRow(i, num) {
     for (let j = 0; j < this.N; j++) {
       if (this.mat[i][j] === num) {
@@ -120,7 +89,7 @@ export class Sudoku {
     return true
   }
 
-  // check in the col for existence
+  // check col for th number if the number used in col return false
   unUsedInCol(j, num) {
     for (let i = 0; i < this.N; i++) {
       if (this.mat[i][j] === num) {
@@ -166,11 +135,11 @@ export class Sudoku {
     return false
   }
 
-  //پاک کردن کا عدد از جدول برای شروع بازی
+  //removing K numbers from main mat matrix for starting the game
   removeKDigits() {
     let count = this.K
     while (count !== 0) {
-      //استخراج ای و جی به صورت تصادفی
+      //i and j are random
       let i = Math.floor(Math.random() * this.N)
       let j = Math.floor(Math.random() * this.N)
       if (this.mat[i][j] !== 0) {
@@ -181,6 +150,7 @@ export class Sudoku {
 
     return
   }
+
   colMaker() {
     let array = []
     for (let a = 0; a < 3; a++) {
@@ -196,7 +166,6 @@ export class Sudoku {
   }
   rowMaker() {
     let array = []
-
     for (let b = 0; b < 9; b += 3) {
       for (let a = 0; a < 9; a += 3) {
         for (let i = b; i < b + 3; i++) {
@@ -222,14 +191,14 @@ export class Sudoku {
     }
     return this.splitArray(array, 9)
   }
-  splitArray(arr, chunkSize) {
-    let result = []
 
-    for (let i = 0; i < arr.length; i += chunkSize) {
-      let chunk = arr.slice(i, i + chunkSize)
+  //split an input array to pieces that have size length
+  splitArray(arr, size) {
+    let result = []
+    for (let i = 0; i < arr.length; i += size) {
+      let chunk = arr.slice(i, i + size)
       result.push(chunk)
     }
-
     return result
   }
 }
