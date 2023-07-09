@@ -9,5 +9,5 @@ export default Mistakes
 
 const Mistake = styled('p')(() => ({
   fontWeight: '600',
-  color: 'var(--gray-600)',
+  color: 'var(--text-600)',
 }))

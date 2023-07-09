@@ -44,12 +44,12 @@ const Wrapper = styled('div')(() => ({
   fontSize: '13vw',
   div: {
     lineHeight: 'initial',
-    color: ' var(--blue-500)',
+    color: ' var(--bg-p-500)',
     padding: '0.1rem 0.3rem',
     cursor: 'pointer',
     borderRadius: 'var(--radius)',
     ':active': {
-      backgroundColor: 'var(--gray-100)',
+      backgroundColor: 'var(--text-100)',
     },
   },
   '@media (width>= 701px)': {
@@ -64,12 +64,12 @@ const Wrapper = styled('div')(() => ({
       display: 'grid',
       placeItems: 'center',
       fontSize: '3rem',
-      backgroundColor: 'var(--gray-100)',
+      backgroundColor: 'var(--text-100)',
       ':hover': {
-        backgroundColor: 'var(--gray-200)',
+        backgroundColor: 'var(--text-200)',
       },
       ':active': {
-        backgroundColor: ' var(--gray-300)',
+        backgroundColor: ' var(--text-300)',
       },
     },
   },

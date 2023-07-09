@@ -15,17 +15,14 @@ const Cell = ({ number, index, square }) => {
 
   //square coloring and same numbers and now cell
   const condition_1 =
-    (number === selectedNumber && selectedNumber !== 0 && 'var(--blue-200)') ||
+    (number === selectedNumber && selectedNumber !== 0 && 'var(--bg-p-200)') ||
     (selectedNumberIndex === index &&
       selectedSquare === square &&
-      'var(--blue-200)')
+      'var(--bg-p-200)')
 
   //square coloring and same numbers and now cell
   const condition_2 =
-    selectedNumberIndex === index &&
-    selectedSquare === square &&
-    fault &&
-    '#ff9aaf'
+    selectedNumberIndex === index && selectedSquare === square && fault && 'red'
 
   return (
     <CellWrapper
@@ -57,12 +54,12 @@ export default Cell
 <span>9</span> */
 }
 const CellWrapper = styled('div')(() => ({
-  border: '.1rem solid var( --bg-border-light)',
+  border: '.1rem solid var(--table-line-light)',
   fontSize: ' 1.5rem',
   display: 'grid',
   placeItems: 'center',
   cursor: 'pointer',
-  color: 'var(--clr-black)',
+  color: 'var(--bg-black)',
   // gridTemplateColumns: ' repeat(3, 1fr)',
   // gridTemplateRows: ' repeat(3, 1fr)',
 }))

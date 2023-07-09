@@ -56,15 +56,15 @@ export const ModalWrapper = styled('div')(() => ({
     gap: '.6rem',
     width: '308px',
     padding: '1.75rem',
-    background: 'var(--clr-white)',
+    background: 'var(--bg-main)',
     borderRadius: 'var(--radius)',
     h2: {
       fontSize: '1.2rem',
-      color: 'var(--gray-700)',
+      color: 'var(--text-700)',
     },
     p: {
       fontSize: '.8rem',
-      color: 'var(--gray-300)',
+      color: 'var(--text-300)',
       fontWeight: '600',
     },
     '.container': {

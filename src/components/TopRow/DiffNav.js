@@ -11,7 +11,7 @@ const DiffNav = () => {
   useEffect(() => {
     hrefCapitalizer(href)
   }, [href])
-  
+
   return (
     <Wrapper>
       <ul>
@@ -48,19 +48,19 @@ const Wrapper = styled('nav')(() => ({
     p: {
       fontSize: '1rem',
       fontWeight: '600',
-      color: 'var(--gray-300)',
+      color: 'var(--text-300)',
     },
     li: {
       margin: '0 .1rem',
     },
   },
   '.link-btn': {
-    color: 'var(--gray-500)',
+    color: 'var(--text-500)',
     fontWeight: '600',
     textTransform: 'capitalize',
   },
   '.link-btn.active': {
-    color: ' var(--blue-500)',
+    color: ' var(--bg-p-500)',
   },
   '@media (width<= 350px)': {
     padding: '0',

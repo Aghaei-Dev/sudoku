@@ -40,20 +40,20 @@ const Wrapper = styled('div')(() => ({
   span: {
     fontSize: '1rem',
     fontWeight: '700',
-    color: 'var(--gray-600)',
+    color: 'var(--text-600)',
   },
   select: {
-    background: 'var(--clr-white)',
+    background: 'var(--bg-main)',
     border: 'none',
     outline: 'none',
     margin: '1rem 0 1.5rem',
     fontSize: '.9rem',
     fontWeight: '700',
-    color: 'var(--gray-300)',
+    color: 'var(--text-300)',
     option: {
       fontSize: '1rem',
       fontWeight: '400',
-      color: 'var(--gray-900)',
+      color: 'var(--text-900)',
     },
   },
 }))

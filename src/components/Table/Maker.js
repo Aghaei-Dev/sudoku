@@ -52,13 +52,13 @@ const TableWrapper = styled('div')(() => ({
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
   gridTemplateRows: 'repeat(3, 1fr)',
-  border: ' 1px solid var(--bg-border-dark)',
+  border: ' 1px solid var(--table-line-dark)',
   borderRadius: ' var(--radius)',
   width: '500px',
   height: '500px',
   cursor: 'pointer',
   position: 'relative',
-  color: 'var(--primary-blue-10)',
+  // color: 'var(--bg-p-100)',
   // forgive me for this media query
   //for square shape of table we must do this
   '@media (width<= 860px)': {

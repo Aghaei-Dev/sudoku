@@ -7,7 +7,7 @@ import {
   Numbers,
   FourButton,
   Mistakes,
-  NewGame,
+  // NewGame,
   GameOver,
   DifficultyModal,
   Loading,

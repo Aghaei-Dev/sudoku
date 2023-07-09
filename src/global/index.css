@@ -6,38 +6,39 @@ Global Styles And Variables
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
 
 :root {
-  --gold: #ffcf00;
-  --clr-white: #fff;
-  --clr-black: #222;
+  --bg-percent: #ffcf00;
+  --bg-main: #fff;
+  --bg-black: #222;
   --bg-border: #e3e3e3;
-  --bg-border-dark: rgba(0, 0, 0, 0.7);
-  --bg-border-light: rgba(0, 0, 0, 0.07);
-  --bg-light: #f5f5f5f5;
+  --bg-border-light: #f5f5f5f5;
+  --table-line-dark: rgba(0, 0, 0, 0.7);
+  --table-line-light: rgba(0, 0, 0, 0.07);
+
   /* blue */
-  --blue-50: #f7fbff;
-  --blue-100: #d9ecff;
-  --blue-200: #9cceff;
-  --blue-300: #5eafff;
-  --blue-400: #2191ff;
-  --blue-500: #0072e3;
-  --blue-600: #0063c4;
-  --blue-700: #0053a6;
-  --blue-800: #004487;
-  --blue-900: #003569;
-  --blue-950: #002d59;
+  --bg-p-50: #f7fbff;
+  --bg-p-100: #d9ecff;
+  --bg-p-200: #9cceff;
+  --bg-p-300: #5eafff;
+  --bg-p-400: #2191ff;
+  --bg-p-500: #0072e3;
+  --bg-p-600: #0063c4;
+  --bg-p-700: #0053a6;
+  --bg-p-800: #004487;
+  --bg-p-900: #003569;
+  --bg-p-950: #002d59;
 
   /* gray */
-  --gray-50: #f3f3f5;
-  --gray-100: #e3e5e8;
-  --gray-200: #c5c8ce;
-  --gray-300: #a6abb5;
-  --gray-400: #888e9b;
-  --gray-500: #6b7280;
-  --gray-600: #585e6a;
-  --gray-700: #464a54;
-  --gray-800: #33373d;
-  --gray-900: #212327;
-  --gray-950: #17191c;
+  --text-50: #f3f3f5;
+  --text-100: #e3e5e8;
+  --text-200: #c5c8ce;
+  --text-300: #a6abb5;
+  --text-400: #888e9b;
+  --text-500: #6b7280;
+  --text-600: #585e6a;
+  --text-700: #464a54;
+  --text-800: #33373d;
+  --text-900: #212327;
+  --text-950: #17191c;
 
   --transition: all 0.3s linear;
   --spacing: 0.1rem;
@@ -46,63 +47,48 @@ Global Styles And Variables
   --fixed-width: 620px;
 }
 .darkMode {
-  --gold: #ffd100;
-  --clr-white: #121212;
-  --clr-black: #fff;
-  --bg-border: #333;
-  --bg-light: #222;
-  --bg-border-dark: rgba(255, 255, 255, 0.8);
-  --bg-border-light: rgba(255, 255, 255, 0.45);
+  --bg-main: #101010;
+  --bg-black: #fff;
+  --bg-border: #aaa;
+  --bg-border-light: #f5f5f5f5;
+  --table-line-dark: rgba(255, 255, 255, 0.7);
+  --table-line-light: rgba(255, 255, 255, 0.2);
 
-  /* blue */
-  --blue-50: #002d59;
-  --blue-100: #003569;
-  --blue-200: #004487;
-  --blue-300: #0053a6;
-  --blue-400: #0063c4;
-  --blue-500: #0072e3;
-  --blue-600: #2191ff;
-  --blue-700: #5eafff;
-  --blue-800: #9cceff;
-  --blue-900: #d9ecff;
-  --blue-950: #f7fbff;
+  --bg-p-100: #2191ff;
+  --bg-p-200: #0063c4;
 
   /* gray */
-  --gray-50: #17191c;
-  --gray-100: #212327;
-  --gray-200: #33373d;
-  --gray-300: #464a54;
-  --gray-400: #585e6a;
-  --gray-500: #6b7280;
-  --gray-600: #888e9b;
-  --gray-700: #a6abb5;
-  --gray-800: #c5c8ce;
-  --gray-900: #e3e5e8;
-  --gray-950: #f3f3f5;
+  --text-50: #17191c;
+  --text-100: #212327;
+  --text-200: #33373d;
+  --text-300: #464a54;
+  --text-400: #585e6a;
+
+  --text-500: #6b7280;
+
+  --text-600: #888e9b;
+  --text-700: #a6abb5;
+  --text-800: #c5c8ce;
+  --text-900: #e3e5e8;
+  --text-950: #f3f3f5;
+}
+.darkMode.red {
+  --bg-p-100: #e4152e;
+  --bg-p-200: #b51125;
+}
+.darkMode.green {
+  --bg-p-100: #17cf8f;
+  --bg-p-200: #12a170;
 }
 .red {
-  --blue-50: #580812;
-  --blue-100: #860d1b;
-  --blue-200: #b51125;
-  --blue-300: #e4152e;
-  --blue-400: #ed3f54;
-  --blue-500: #f06475;
-  --blue-600: #f48a96;
-  --blue-700: #f7afb8;
-  --blue-800: #fbd4d9;
-  --blue-900: #fde7ea;
+  --bg-p-100: #f7aeb7;
+  --bg-p-200: #f48996;
+  --bg-p-500: #f06475;
 }
 .green {
-  --blue-50: #0d7350;
-  --blue-100: #12a170;
-  --blue-200: #17cf8f;
-  --blue-300: #31e8a9;
-  --blue-400: #5fedbc;
-  --blue-500: #17cf8f;
-  --blue-600: #9ff4d7;
-  --blue-700: #bff8e4;
-  --blue-800: #dffbf2;
-  --blue-900: #effdf8;
+  --bg-p-100: #96f3d3;
+  --bg-p-200: #28e7a5;
+  --bg-p-500: #17cf8f;
 }
 ::selection {
   background: inherit;
@@ -122,7 +108,7 @@ Global Styles And Variables
     width: 0.3rem;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: var(--bg-light);
+    background-color: var(--bg-border-light);
     border-radius: 50rem;
   }
   &::-webkit-scrollbar-thumb:hover {
@@ -140,8 +126,8 @@ body {
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--clr-white);
-  color: var(--gray-900);
+  background: var(--bg-main);
+  color: var(--text-800);
   line-height: 1.5;
   font-size: 0.875rem;
   transition: color 0.3s, background 0.3s;

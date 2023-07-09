@@ -15,12 +15,12 @@ import Table from './Table/Table'
 import Square from './Table/Square'
 import Cell from './Table/Cell'
 
-import Loading from './Modals/Loading'
-import StopModal from './Modals/StopModal'
-import NewGame from './Modals/NewGame'
-import GameOver from './Modals/GameOver'
-import DifficultyModal from './Modals/DifficultyModal'
-import CenterRow from './Modals/CenterRow'
+import Loading from './Modal/Loading'
+import StopModal from './Modal/StopModal'
+import NewGame from './Modal/NewGame'
+import GameOver from './Modal/GameOver'
+import DifficultyModal from './Modal/DifficultyModal'
+import CenterRow from './Modal/CenterRow'
 
 import ORG from './ORG'
 

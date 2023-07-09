@@ -23,9 +23,12 @@ export default function ErrorPage() {
 }
 
 const Btn = styled(Button)(() => ({
-  background: 'var(--blue-500)',
+  background: 'var(--bg-p-500)',
   ':hover': {
-    background: 'var(--blue-600)',
+    background: 'var(--bg-p-600)',
+  },
+  '*': {
+    cursor: 'pointer',
   },
 }))
 

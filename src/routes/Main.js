@@ -88,7 +88,7 @@ const Wrapper = styled('div')(() => ({
   textTransform: 'none',
   maxWidth: '680px',
   padding: '.5rem',
-  color: 'var(--gray-700)',
+  color: 'var(--text-700)',
   height: 'calc(100vh - 53.5px)',
   overflow: 'auto',
   textAlign: 'center',
@@ -99,7 +99,7 @@ const Wrapper = styled('div')(() => ({
   p: {
     textAlign: 'justify',
     lineHeight: '1.8rem',
-    color: 'var(--gray-500)',
+    color: 'var(--text-500)',
   },
   img: {
     maxWidth: '90vw',

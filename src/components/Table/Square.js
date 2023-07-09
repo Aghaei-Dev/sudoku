@@ -11,7 +11,7 @@ const Square = ({ children, number }) => {
         setSelectedSquare(number)
       }}
       style={{
-        background: number === selectedSquare && 'var(--blue-100)',
+        background: number === selectedSquare && 'var(--bg-p-100)',
       }}>
       {children}
     </SquareWrapper>
@@ -20,7 +20,7 @@ const Square = ({ children, number }) => {
 
 export default Square
 const SquareWrapper = styled('div')(() => ({
-  border: '1px solid var(--bg-border-dark)',
+  border: '1px solid var(--table-line-dark)',
   display: 'grid',
   gridTemplateColumns: ' repeat(3, 1fr)',
   gridTemplateRows: ' repeat(3, 1fr)',

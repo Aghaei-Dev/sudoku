@@ -20,29 +20,29 @@ const FourButton = () => {
     <Wrapper>
       <div className='item'>
         <IconBtn>
-          <ReplayIcon sx={{ fontSize: '2rem' }} />
+          <ReplayIcon className='size' />
         </IconBtn>
         <p>undo</p>
       </div>
       <div className='item'>
         <IconBtn>
-          <ClearIcon sx={{ fontSize: '2rem' }} />
+          <ClearIcon className='size' />
         </IconBtn>
         <p>erase</p>
       </div>
       <div className='item'>
         <IconBtn
-          style={{ borderColor: isNoteON && 'var(--blue-500)' }}
+          style={{ borderColor: isNoteON && 'var(--bg-p-500)' }}
           onClick={toggleNote}>
           <Badge content={isNoteON ? 'on' : 'off'} />
-          <ModeEditIcon sx={{ fontSize: '2rem' }} />
+          <ModeEditIcon className='size' />
         </IconBtn>
         <p>notes</p>
       </div>
       <div className='item'>
         <IconBtn>
           <Badge content='4' isHint />
-          <LightbulbIcon sx={{ fontSize: '2rem' }} />
+          <LightbulbIcon className='size' />
         </IconBtn>
         <p>hint</p>
       </div>
@@ -55,15 +55,18 @@ export default FourButton
 const IconBtn = styled(IconButton)(() => ({
   cursor: 'pointer',
   padding: '1rem',
-  color: 'var(--blue-500)',
-  background: 'var(--gray-100)',
-  border: '2px solid var(--clr-white)',
+  color: 'var(--bg-p-500)',
+  background: 'var(--text-100)',
+  border: '2px solid var(--bg-main)',
   position: 'relative',
   '*': {
     cursor: 'pointer',
   },
   ':hover': {
-    background: 'var(--gray-200)',
+    background: 'var(--text-200)',
+  },
+  '.size': {
+    fontSize: '2rem',
   },
   '@media (width<= 350px)': {
     padding: '0.5rem',
@@ -80,7 +83,7 @@ const Wrapper = styled('div')(() => ({
     p: {
       paddingTop: '.5rem',
       alignSelf: 'start',
-      color: 'var(--blue-500)',
+      color: 'var(--bg-p-500)',
       fontWeight: '500',
     },
   },

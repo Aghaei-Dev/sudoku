@@ -19,11 +19,11 @@ const CircleIco = styled(CircleIcon)(() => ({
 }))
 
 const Wrapper = styled('h3')(() => ({
-  background: 'var( --bg-light)',
+  background: 'var(--bg-border-light)',
   margin: '2rem 0',
   padding: '2rem 1.5rem ',
   display: 'flex',
   alignItems: 'center',
   textAlign: 'start',
-  color: 'var(--gray-700)',
+  color: 'var(--text-700)',
 }))

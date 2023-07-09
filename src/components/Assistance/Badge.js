@@ -16,8 +16,8 @@ export default Badge
 const Wrapper = styled('span')(({ isHint, isNoteON }) => ({
   fontWeight: '700',
   textTransform: 'uppercase',
-  background: !isNoteON && !isHint ? 'var(--gray-300)' : 'var(--blue-500)',
-  color: 'var(--clr-white)',
+  background: !isNoteON && !isHint ? 'var(--text-300)' : 'var(--bg-p-500)',
+  color: 'white',
   position: 'absolute',
   top: '0',
   right: '0',

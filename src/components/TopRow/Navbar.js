@@ -25,7 +25,7 @@ const Navbar = () => {
     } else {
       document.documentElement.classList.remove('darkMode')
     }
-    
+
     colorSetter(theme, 'red')
     colorSetter(theme, 'green')
   }, [darkMode, theme])
@@ -41,7 +41,7 @@ const Navbar = () => {
       ) : (
         <div className='theme flex-between '>
           theme :
-          <div className='flex-between '>
+          <div style={{ padding: '0 .5rem' }} className='flex-between '>
             {colors.map((item) => {
               const { id, colorName, value } = item
               return (
@@ -71,7 +71,7 @@ const Navbar = () => {
 export default Navbar
 const Btn = styled(Button)(() => ({
   textTransform: 'capitalize',
-  color: 'var(--blue-500)',
+  color: 'var(--bg-p-500)',
   '*': {
     cursor: 'pointer',
   },
@@ -82,14 +82,14 @@ const IconBtn = styled(IconButton)(() => ({
   },
 }))
 const Circle = styled('span')(({ color, selected }) => ({
-  border: `.5rem solid ${color}`,
+  border: `.7rem solid ${color}`,
   borderRadius: '50%',
-  margin: '0 .1rem',
+  margin: '0 .2rem',
   cursor: 'pointer',
   position: 'relative',
   '::after': {
     content: selected && '"✓"',
-    fontSize: '.9rem',
+    fontSize: '1rem',
     color: 'white',
     position: 'absolute',
     top: '50%',

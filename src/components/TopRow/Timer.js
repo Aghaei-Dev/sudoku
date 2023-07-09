@@ -57,9 +57,9 @@ export default Timer
 
 const IconBtn = styled(IconButton)(() => ({
   padding: '.1rem',
-  background: 'var(--gray-100)',
+  background: 'var(--text-100)',
   ':hover': {
-    background: 'var(--gray-200)',
+    background: 'var(--text-200)',
   },
   '*': {
     cursor: 'pointer',
@@ -72,7 +72,7 @@ const Wrapper = styled('div')(() => ({
   justifyContent: 'space-between',
   width: '80px',
   p: {
-    color: 'var(--gray-300)',
+    color: 'var(--text-300)',
     fontWeight: '700',
     cursor: 'pointer',
   },
