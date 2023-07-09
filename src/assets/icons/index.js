@@ -9,6 +9,8 @@ import ClearIcon from '@mui/icons-material/Clear'
 import ModeEditIcon from '@mui/icons-material/ModeEdit'
 import LightbulbIcon from '@mui/icons-material/Lightbulb'
 import GridOnOutlinedIcon from '@mui/icons-material/GridOnOutlined'
+import Brightness7OutlinedIcon from '@mui/icons-material/Brightness7Outlined'
+import Brightness4OutlinedIcon from '@mui/icons-material/Brightness4Outlined'
 export {
   HomeOutlinedIcon,
   PlayArrowIcon,
@@ -21,4 +23,6 @@ export {
   ModeEditIcon,
   LightbulbIcon,
   GridOnOutlinedIcon,
+  Brightness7OutlinedIcon,
+  Brightness4OutlinedIcon,
 }

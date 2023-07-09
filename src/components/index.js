@@ -3,8 +3,9 @@ import Badge from './Assistance/Badge'
 
 import Difficulty from './TopRow/Difficulty'
 import Timer from './TopRow/Timer'
-import Navbar from './TopRow/Navbar'
 import Mistakes from './TopRow/Mistakes'
+import Navbar from './TopRow/Navbar'
+import DiffNav from './TopRow/DiffNav'
 
 import Numbers from './BottomRow/Numbers'
 import FourButton from './BottomRow/FourButton'
@@ -34,6 +35,7 @@ export {
   Cell,
   Maker,
   Navbar,
+  DiffNav,
   TextTitle,
   Mistakes,
   NewGame,

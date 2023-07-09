@@ -1,76 +1,112 @@
 import React, { useEffect } from 'react'
-import { gameMode } from '../../assets/constants'
-import { Link, useHref } from 'react-router-dom'
-import { Button } from '@mui/material'
 import { styled } from '@mui/material/styles'
+import { Button, IconButton } from '@mui/material'
+import { Link, useHref } from 'react-router-dom'
+import {
+  Brightness7OutlinedIcon,
+  Brightness4OutlinedIcon,
+  GridOnOutlinedIcon,
+} from '../../assets/icons'
+import { colorSetter } from '../../functions'
+import { colors } from '../../assets/constants'
+import { useLocalStorage } from '../../hook'
+const Navbar = () => {
+  const href = useHref()
+  const [darkMode, setDarkMode] = useLocalStorage('darkMode', false)
+  const [theme, setTheme] = useLocalStorage('theme', 'blue')
 
-const Navbar = ({ difficulty }) => {
-  const href = useHref().slice(1)
-
+  const toggleDarkMode = () => {
+    setDarkMode((prevValue) => !prevValue)
+    document.documentElement.classList.toggle('darkMode')
+  }
   useEffect(() => {
-    if (href.length > 0) {
-      document.title = `Sudoku - ${
-        href.charAt(0).toUpperCase() + href.slice(1) //for capitalize
-      } Level`
+    if (darkMode) {
+      document.documentElement.classList.add('darkMode')
+    } else {
+      document.documentElement.classList.remove('darkMode')
     }
-  }, [href])
+    
+    colorSetter(theme, 'red')
+    colorSetter(theme, 'green')
+  }, [darkMode, theme])
 
   return (
-    <Wrapper difficulty={difficulty}>
-      <ul>
-        {difficulty && <p>difficulty:</p>}
-        {gameMode.map((item) => {
-          return (
-            <li key={item.id}>
-              {
-                <Link to={`/${item.gameMode}`}>
-                  <Button
-                    size={difficulty ? 'small' : ''}
-                    className={`${
-                      href === item.gameMode ? 'link-btn active' : 'link-btn'
-                    }`}>
-                    {item.gameMode}
-                  </Button>
-                </Link>
-              }
-            </li>
-          )
-        })}
-      </ul>
+    <Wrapper className='flex-between'>
+      {href === '/' ? (
+        <Link to='easy'>
+          <Btn variant='cont' startIcon={<GridOnOutlinedIcon />}>
+            play
+          </Btn>
+        </Link>
+      ) : (
+        <div className='theme flex-between '>
+          theme :
+          <div className='flex-between '>
+            {colors.map((item) => {
+              const { id, colorName, value } = item
+              return (
+                <Circle
+                  onClick={() => {
+                    setTheme(colorName)
+                  }}
+                  key={id}
+                  color={value}
+                  selected={colorName === theme}
+                />
+              )
+            })}
+          </div>
+        </div>
+      )}
+      <div className='dark-mode'>
+        <span onClick={toggleDarkMode}>{darkMode ? 'dark' : 'light'} mode</span>
+        <IconBtn sx={{ ml: 1 }} onClick={toggleDarkMode} color='inherit'>
+          {darkMode ? <Brightness4OutlinedIcon /> : <Brightness7OutlinedIcon />}
+        </IconBtn>
+      </div>
     </Wrapper>
   )
 }
 
 export default Navbar
-
-const Wrapper = styled('nav')(({ difficulty }) => ({
-  borderBottom: !difficulty && 'solid 1px var(--bg-border)',
-  padding: difficulty ? '.5rem 0 1rem' : '0.5rem 0',
-  ul: {
-    display: 'flex',
-    justifyContent: !difficulty && ' space-between',
-    alignItems: 'center',
-    p: {
-      fontSize: '1rem',
-      fontWeight: '600',
-      color: 'var(--gray-300)',
-    },
-    li: {
-      margin: difficulty && '0 .1rem',
+const Btn = styled(Button)(() => ({
+  textTransform: 'capitalize',
+  color: 'var(--blue-500)',
+  '*': {
+    cursor: 'pointer',
+  },
+}))
+const IconBtn = styled(IconButton)(() => ({
+  '*': {
+    cursor: 'pointer',
+  },
+}))
+const Circle = styled('span')(({ color, selected }) => ({
+  border: `.5rem solid ${color}`,
+  borderRadius: '50%',
+  margin: '0 .1rem',
+  cursor: 'pointer',
+  position: 'relative',
+  '::after': {
+    content: selected && '"✓"',
+    fontSize: '.9rem',
+    color: 'white',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%,-50%)',
+  },
+}))
+const Wrapper = styled('div')(() => ({
+  borderBottom: '1px solid var(--bg-border)',
+  padding: '.5rem',
+  '.theme': {},
+  '.dark-mode': {
+    '*': {
+      cursor: 'pointer',
     },
   },
-  '.link-btn': {
-    color: 'var(--gray-500)',
-    fontWeight: '600',
-    textTransform: 'capitalize',
-  },
-  '.link-btn.active': {
-    color: ' var(--blue-500)',
-  },
-  '@media (width<= 350px)': {
-    padding: '0',
-    '.link-btn': {
-      padding: '0',
-    },
+  '@media (width<= 400px)': {
+    padding: '0rem',
   },
 }))

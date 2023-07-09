@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { Sudoku, saveLocal } from '../functions'
+import { Sudoku } from '../functions'
+import { useLocalStorage } from '../hook'
 
 const AppContext = React.createContext()
 
@@ -22,11 +23,11 @@ const AppProvider = ({ children }) => {
   const toggleNote = () => {
     setIsNoteON(!isNoteON)
   }
-  //
 
-  const [unSolved, setUnSolved] = useState(saveLocal('unSolved'))
-  const [Solved, setSolved] = useState(saveLocal('Solved'))
   const [empty, setEmpty] = useState([])
+
+  const [unSolved, setUnSolved] = useLocalStorage('unSolved', [])
+  const [Solved, setSolved] = useLocalStorage('Solved', [])
 
   const tableGenerator = (K) => {
     const sudoku = new Sudoku(9, K)
@@ -47,6 +48,7 @@ const AppProvider = ({ children }) => {
   const [fault, setFault] = useState(false)
   const [mistakes, setMistakes] = useState(0)
 
+  //why this happen?????
   const writeNumberInTable = (number) => {
     setFault(false)
     if (selectedNumber === 0) {
@@ -55,13 +57,13 @@ const AppProvider = ({ children }) => {
           const newArray = unSolved[i]
           for (let j = 0; j < newArray.length; j++) {
             if (j === selectedNumberIndex) {
-              if (whatMustBe() === number) {
-                newArray[j] = number
-                setFault(false)
-              } else {
+              if (whatMustBe() !== number) {
                 newArray[j] = number
                 setFault(true)
                 setMistakes(mistakes + 1)
+              } else {
+                newArray[j] = number
+                setFault(false)
               }
             }
           }

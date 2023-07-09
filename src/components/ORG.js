@@ -6,12 +6,12 @@ import {
   Timer,
   Numbers,
   FourButton,
-  Navbar,
   Mistakes,
   NewGame,
   GameOver,
   DifficultyModal,
   Loading,
+  DiffNav,
 } from '../components'
 
 import { MainWrapper } from '../global'
@@ -27,7 +27,7 @@ const ORG = ({ K, mode }) => {
       {/* {true && <NewGame />} */}
 
       <div className='top-row'>
-        {width >= 980 ? <Navbar difficulty /> : <Difficulty mode={mode} />}
+        {width >= 980 ? <DiffNav /> : <Difficulty mode={mode} />}
         <Mistakes miss={mistakes} />
         <Timer />
       </div>

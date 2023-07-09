@@ -57,12 +57,14 @@ const IconBtn = styled(IconButton)(() => ({
   padding: '1rem',
   color: 'var(--blue-500)',
   background: 'var(--gray-100)',
-  border: '2px solid white',
+  border: '2px solid var(--clr-white)',
   position: 'relative',
   '*': {
     cursor: 'pointer',
   },
-
+  ':hover': {
+    background: 'var(--gray-200)',
+  },
   '@media (width<= 350px)': {
     padding: '0.5rem',
   },

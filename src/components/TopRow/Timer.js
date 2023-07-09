@@ -58,6 +58,9 @@ export default Timer
 const IconBtn = styled(IconButton)(() => ({
   padding: '.1rem',
   background: 'var(--gray-100)',
+  ':hover': {
+    background: 'var(--gray-200)',
+  },
   '*': {
     cursor: 'pointer',
   },

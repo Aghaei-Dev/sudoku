@@ -4,7 +4,7 @@ export const MainWrapper = styled('div')(() => ({
   width: '100%',
   display: 'grid',
   gridTemplateRows: 'auto 1fr',
-  gridTemplateColumns: 'auto auto',
+  gridTemplateColumns: 'auto .4fr',
   padding: '.5rem',
   position: 'relative',
   margin: 'auto',
@@ -56,7 +56,7 @@ export const ModalWrapper = styled('div')(() => ({
     gap: '.6rem',
     width: '308px',
     padding: '1.75rem',
-    background: 'white',
+    background: 'var(--clr-white)',
     borderRadius: 'var(--radius)',
     h2: {
       fontSize: '1.2rem',

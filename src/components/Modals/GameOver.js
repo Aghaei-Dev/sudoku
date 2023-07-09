@@ -4,7 +4,6 @@ import { Button } from '@mui/material'
 import { useGlobalContext } from '../../context'
 import { ModalWrapper } from '../../global'
 
-
 const GameOver = () => {
   const { secondeChanceHandler, newGameHandler } = useGlobalContext()
   return (
@@ -31,6 +30,6 @@ const Btn = styled(Button)(({ variant }) => ({
   textTransform: 'capitalize',
   padding: '.5rem',
   fontWeight: '600',
-  background: variant === 'contained' ? 'var(--blue-500)' : 'var(--clr-white)',
+  background: variant === 'contained' ? 'var(--blue-500)' : '',
   width: variant === 'contained' && '95%',
 }))

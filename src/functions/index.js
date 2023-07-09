@@ -203,11 +203,18 @@ export class Sudoku {
   }
 }
 
-export const saveLocal = (key) => {
-  let isKeyExist = localStorage.getItem(`${key}`)
-  if (isKeyExist) {
-    return JSON.parse(localStorage.getItem(`${key}`))
+export const hrefCapitalizer = (href) => {
+  if (href.length > 0) {
+    document.title = `Sudoku - ${
+      href.charAt(0).toUpperCase() + href.slice(1)
+    } Level`
+  }
+}
+
+export const colorSetter = (theme, color) => {
+  if (theme === color) {
+    document.documentElement.classList.add(color)
   } else {
-    return ''
+    document.documentElement.classList.remove(color)
   }
 }

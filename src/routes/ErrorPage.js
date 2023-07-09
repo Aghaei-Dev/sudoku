@@ -6,21 +6,28 @@ import { HomeOutlinedIcon } from '../assets/icons'
 export default function ErrorPage() {
   return (
     <Wrapper>
-      <div>
+      <div className='flex-center'>
         <h1>Looks like you got lost 🤣</h1>
         <p>We can't seem to find the page you're looking for</p>
         <Link to=''>
-          <Button
+          <Btn
             endIcon={<HomeOutlinedIcon sx={{ marginBottom: '.3rem' }} />}
             size='large'
             variant='contained'>
             Back
-          </Button>
+          </Btn>
         </Link>
       </div>
     </Wrapper>
   )
 }
+
+const Btn = styled(Button)(() => ({
+  background: 'var(--blue-500)',
+  ':hover': {
+    background: 'var(--blue-600)',
+  },
+}))
 
 const Wrapper = styled('div')(() => ({
   display: 'grid',
@@ -28,12 +35,9 @@ const Wrapper = styled('div')(() => ({
   height: '100vh',
   div: {
     padding: '3rem',
-    display: 'flex',
-    justifyContent: 'center',
     flexDirection: 'column',
-    alignItems: 'center',
-    gap: '2.5rem',
     textAlign: 'justify',
+    gap: '2.5rem',
 
     '@media (width<= 460px)': {
       h1: {

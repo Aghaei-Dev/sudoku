@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { styled } from '@mui/material/styles'
-import { useNavigate } from 'react-router-dom'
+import { useHref, useNavigate } from 'react-router-dom'
 import { gameMode } from '../../assets/constants'
 import { useGlobalContext } from '../../context'
+import { hrefCapitalizer } from '../../functions'
 
 const Difficulty = ({ mode }) => {
   const { width } = useGlobalContext()
   let navigate = useNavigate()
+  const href = useHref().slice(1)
+
+  useEffect(() => {
+    hrefCapitalizer(href)
+  }, [href])
+
   return (
     <Wrapper>
       {width >= 580 && <span>Difficulty : </span>}
@@ -36,6 +43,7 @@ const Wrapper = styled('div')(() => ({
     color: 'var(--gray-600)',
   },
   select: {
+    background: 'var(--clr-white)',
     border: 'none',
     outline: 'none',
     margin: '1rem 0 1.5rem',

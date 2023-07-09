@@ -7,3 +7,9 @@ export const gameMode = [
 ]
 
 export const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+export const colors = [
+  { id: 1, colorName: 'blue', value: '#0072e3' },
+  { id: 2, colorName: 'red', value: '#ef4444' },
+  { id: 3, colorName: 'green', value: '#10B981' },
+]
