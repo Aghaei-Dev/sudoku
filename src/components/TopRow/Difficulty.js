@@ -2,11 +2,9 @@ import React, { useEffect } from 'react'
 import { styled } from '@mui/material/styles'
 import { useHref, useNavigate } from 'react-router-dom'
 import { gameMode } from '../../assets/constants'
-import { useGlobalContext } from '../../context'
 import { hrefCapitalizer } from '../../functions'
 
 const Difficulty = ({ mode }) => {
-  const { width } = useGlobalContext()
   let navigate = useNavigate()
   const href = useHref().slice(1)
 
@@ -16,7 +14,7 @@ const Difficulty = ({ mode }) => {
 
   return (
     <Wrapper>
-      {width >= 580 && <span>Difficulty : </span>}
+      {window.innerWidth >= 580 && <span>Difficulty : </span>}
       <select
         defaultValue={mode}
         onChange={(e) => {

@@ -1,10 +1,11 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
-const CenterRow = ({ able }) => {
+const CenterRow = ({ winRate }) => {
   return (
     <Wrapper>
       <p>
-        only <span> {able} %</span> of players were able to solve this puzzle!
+        only <span> {winRate} %</span> of players were able to solve this
+        puzzle!
       </p>
     </Wrapper>
   )

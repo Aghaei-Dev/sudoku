@@ -9,7 +9,7 @@ const Maker = ({ array, modal }) => {
   const { initializerAll } = useGlobalContext()
   const href = useHref().slice(1)
 
-  const { able } = gameMode.find((item) => {
+  const { winRate } = gameMode.find((item) => {
     if (item.gameMode === href) {
       return item.id
     }
@@ -35,12 +35,12 @@ const Maker = ({ array, modal }) => {
         return (
           <Square key={i} index={i} number={i}>
             {array[i].map((item, index) => {
-              return <Cell number={item} key={index} index={index} square={i} />
+              return <Cell {...item} key={index} index={index} square={i} />
             })}
           </Square>
         )
       })}
-      {show && <CenterRow able={able} />}
+      {show && <CenterRow winRate={winRate} />}
       {modal && <StopModal />}
     </TableWrapper>
   )

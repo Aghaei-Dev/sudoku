@@ -14,7 +14,7 @@ import { useGlobalContext } from '../../context'
 import { Badge } from '..'
 
 const FourButton = () => {
-  const { isNoteON, toggleNote } = useGlobalContext()
+  const { isNoteON, toggleNote, eraseNumber } = useGlobalContext()
 
   return (
     <Wrapper>
@@ -25,7 +25,7 @@ const FourButton = () => {
         <p>undo</p>
       </div>
       <div className='item'>
-        <IconBtn>
+        <IconBtn onClick={eraseNumber}>
           <ClearIcon className='size' />
         </IconBtn>
         <p>erase</p>

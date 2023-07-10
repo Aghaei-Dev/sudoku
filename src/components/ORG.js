@@ -17,7 +17,7 @@ import {
 import { MainWrapper } from '../global'
 import { useGlobalContext } from '../context'
 const ORG = ({ K, mode }) => {
-  const { width, loading, mistakes, difficultyModal } = useGlobalContext()
+  const { loading, mistakes, difficultyModal } = useGlobalContext()
 
   return (
     <MainWrapper>
@@ -27,7 +27,7 @@ const ORG = ({ K, mode }) => {
       {/* {true && <NewGame />} */}
 
       <div className='top-row'>
-        {width >= 980 ? <DiffNav /> : <Difficulty mode={mode} />}
+        {window.innerWidth >= 980 ? <DiffNav /> : <Difficulty mode={mode} />}
         <Mistakes miss={mistakes} />
         <Timer />
       </div>
@@ -43,3 +43,5 @@ const ORG = ({ K, mode }) => {
 }
 
 export default ORG
+
+//here we have width

@@ -5,29 +5,14 @@ import { useLocalStorage } from '../hook'
 const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
-  const [width, setWidth] = useState(window.innerWidth)
-  const [height, setHeight] = useState(window.innerHeight)
-  const resize = () => {
-    setWidth(window.innerWidth)
-    setHeight(window.innerHeight)
-  }
-  useEffect(() => {
-    window.addEventListener('resize', resize)
-    return () => {
-      window.removeEventListener('resize', resize)
-    }
-  }, [width, height])
-
   const [isNoteON, setIsNoteON] = useState(false)
-
   const toggleNote = () => {
     setIsNoteON(!isNoteON)
   }
 
-  const [empty, setEmpty] = useState([])
-
   const [unSolved, setUnSolved] = useLocalStorage('unSolved', [])
-  const [Solved, setSolved] = useLocalStorage('Solved', [])
+  const [Solved, setSolved] = useState([])
+  const [empty, setEmpty] = useState([])
 
   const tableGenerator = (K) => {
     const sudoku = new Sudoku(9, K)
@@ -36,57 +21,78 @@ const AppProvider = ({ children }) => {
     setSolved(sudoku.rowMakerAnswer())
     setEmpty(sudoku.empty)
   }
-  useEffect(() => {
-    localStorage.setItem('unSolved', JSON.stringify(unSolved))
-    localStorage.setItem('Solved', JSON.stringify(Solved))
-  }, [unSolved, Solved])
 
   //selected coloring
   const [selectedNumber, setSelectedNumber] = useState('')
   const [selectedNumberIndex, setSelectedNumberIndex] = useState('')
   const [selectedSquare, setSelectedSquare] = useState('')
-  const [fault, setFault] = useState(false)
-  const [mistakes, setMistakes] = useState(0)
+  const [mistakes, setMistakes] = useLocalStorage('mistakes', 0)
+  const [mustChange, setMustChange] = useState(false)
 
-  //why this happen?????
+  //table manipulating
+
+  const howManyRemain = () => {
+    const obj = {
+      0: 0,
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+      6: 0,
+      7: 0,
+      8: 0,
+      9: 0,
+    }
+    for (let i = 0; i < unSolved.length; i++) {
+      for (let j = 0; j < unSolved[i].length; j++) {
+        obj[unSolved[i][j].val]++
+      }
+    }
+    return obj
+  }
   const writeNumberInTable = (number) => {
-    setFault(false)
     if (selectedNumber === 0) {
-      for (let i = 0; i < unSolved.length; i++) {
-        if (i === selectedSquare) {
-          const newArray = unSolved[i]
-          for (let j = 0; j < newArray.length; j++) {
-            if (j === selectedNumberIndex) {
-              if (whatMustBe() !== number) {
-                newArray[j] = number
-                setFault(true)
-                setMistakes(mistakes + 1)
-              } else {
-                newArray[j] = number
-                setFault(false)
-              }
-            }
-          }
-          unSolved[i] = newArray
-        }
+      unSolved[selectedSquare][selectedNumberIndex].val = number
+      if (whatMustBe() === number) {
+        setSelectedNumber(number)
+      } else {
+        unSolved[selectedSquare][selectedNumberIndex].mistake = true
+        unSolved[selectedSquare][selectedNumberIndex].editable = true
+        setMistakes(mistakes + 1)
       }
       setUnSolved(unSolved)
     }
+    setMustChange(true)
   }
+
+  let conditionForSelectingCells =
+    selectedSquare ||
+    selectedNumberIndex ||
+    (selectedSquare === 0 && selectedNumberIndex === 0)
 
   const whatMustBe = () => {
-    for (let i = 0; i < Solved.length; i++) {
-      if (i === selectedSquare) {
-        const newArray = Solved[i]
-        for (let j = 0; j < newArray.length; j++) {
-          if (j === selectedNumberIndex) {
-            return newArray[j]
-          }
-        }
-      }
+    if (conditionForSelectingCells) {
+      return Solved[selectedSquare][selectedNumberIndex]
     }
   }
+  const eraseNumber = () => {
+    if (
+      conditionForSelectingCells &&
+      unSolved[selectedSquare][selectedNumberIndex].editable
+    ) {
+      initializer()
+      unSolved[selectedSquare][selectedNumberIndex].val = 0
+      unSolved[selectedSquare][selectedNumberIndex].editable = false
+      unSolved[selectedSquare][selectedNumberIndex].mistake = false
+    }
+    setMustChange(true)
+  }
 
+  useEffect(() => {
+    setMustChange(false)
+    localStorage.setItem('unSolved', JSON.stringify(unSolved))
+  }, [mustChange])
   // ========= modals =========
 
   // =====stop=====
@@ -136,7 +142,6 @@ const AppProvider = ({ children }) => {
     setSelectedNumber('')
     setSelectedNumberIndex('')
     setSelectedSquare('')
-    setFault(false)
   }
   const initializerAll = () => {
     initializer()
@@ -150,7 +155,6 @@ const AppProvider = ({ children }) => {
         endModal,
         difficultyModal,
         closeDifficultyModalRouting,
-        width,
         isActive,
         isNoteON,
         toggleNote,
@@ -170,14 +174,14 @@ const AppProvider = ({ children }) => {
         secondeChanceHandler,
         newGameHandler,
         unSolved,
-        fault,
-        setFault,
         tableGenerator,
         empty,
         closeDifficultyModal,
         restart,
         initializer,
         initializerAll,
+        howManyRemain,
+        eraseNumber,
       }}>
       {children}
     </AppContext.Provider>

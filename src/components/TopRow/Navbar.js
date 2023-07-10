@@ -7,27 +7,27 @@ import {
   Brightness4OutlinedIcon,
   GridOnOutlinedIcon,
 } from '../../assets/icons'
-import { colorSetter } from '../../functions'
+import { themeChanger } from '../../functions'
 import { colors } from '../../assets/constants'
 import { useLocalStorage } from '../../hook'
+
+import useSound from 'use-sound'
+import { switchLight } from '../../assets/sound'
+
 const Navbar = () => {
   const href = useHref()
+  const [play] = useSound(switchLight)
   const [darkMode, setDarkMode] = useLocalStorage('darkMode', false)
   const [theme, setTheme] = useLocalStorage('theme', 'blue')
 
   const toggleDarkMode = () => {
     setDarkMode((prevValue) => !prevValue)
-    document.documentElement.classList.toggle('darkMode')
+    play()
   }
   useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('darkMode')
-    } else {
-      document.documentElement.classList.remove('darkMode')
-    }
-
-    colorSetter(theme, 'red')
-    colorSetter(theme, 'green')
+    themeChanger(darkMode, '', 'darkMode')
+    themeChanger(false, theme, 'red')
+    themeChanger(false, theme, 'green')
   }, [darkMode, theme])
 
   return (

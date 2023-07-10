@@ -1,41 +1,34 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
-const Cell = ({ number, index, square }) => {
+const Cell = ({ val, conflict, mistake, index, square }) => {
   const {
     selectedNumber,
     setSelectedNumber,
     selectedNumberIndex,
     selectedSquare,
     setSelectedNumberIndex,
-    fault,
-    setFault,
   } = useGlobalContext()
   //what must colored
-
   //square coloring and same numbers and now cell
   const condition_1 =
-    (number === selectedNumber && selectedNumber !== 0 && 'var(--bg-p-200)') ||
+    (val === selectedNumber && selectedNumber !== 0 && 'var(--bg-p-200)') ||
     (selectedNumberIndex === index &&
       selectedSquare === square &&
       'var(--bg-p-200)')
 
-  //square coloring and same numbers and now cell
-  const condition_2 =
-    selectedNumberIndex === index && selectedSquare === square && fault && 'red'
-
   return (
     <CellWrapper
       onClick={() => {
-        setFault(false)
-        setSelectedNumber(number)
+        setSelectedNumber(val)
         setSelectedNumberIndex(index)
         // console.log(`square :${selectedSquare}   cell :${selectedNumberIndex}`)
       }}
       style={{
-        background: condition_2 || condition_1,
+        background: condition_1 || (mistake && '#fe9999'),
+        color: mistake && 'red',
       }}>
-      {number === 0 ? '' : number}
+      {val === 0 ? '' : val}
     </CellWrapper>
   )
 }

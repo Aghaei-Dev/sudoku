@@ -11,7 +11,9 @@ export class Sudoku {
 
     //initialize empty-answer-mat(main matrix) with N^2 empty 0 cell
     this.mat = Array.from({ length: N }, () =>
-      Array.from({ length: N }, () => 0)
+      Array.from({ length: N }, () => {
+        return { val: 0, editable: false, conflict: false, mistake: false }
+      })
     )
     this.answer = Array.from({ length: N }, () =>
       Array.from({ length: N }, () => 0)
@@ -40,7 +42,7 @@ export class Sudoku {
   unUsedInBox(rowStart, colStart, num) {
     for (let i = 0; i < this.SRN; i++) {
       for (let j = 0; j < this.SRN; j++) {
-        if (this.mat[rowStart + i][colStart + j] === num) {
+        if (this.mat[rowStart + i][colStart + j].val === num) {
           return false
         }
       }
@@ -60,7 +62,7 @@ export class Sudoku {
           }
         }
         this.answer[row + i][col + j] = num
-        this.mat[row + i][col + j] = num
+        this.mat[row + i][col + j].val = num
       }
     }
   }
@@ -82,7 +84,7 @@ export class Sudoku {
   // check row for th number if the number used in row return false
   unUsedInRow(i, num) {
     for (let j = 0; j < this.N; j++) {
-      if (this.mat[i][j] === num) {
+      if (this.mat[i][j].val === num) {
         return false
       }
     }
@@ -92,7 +94,7 @@ export class Sudoku {
   // check col for th number if the number used in col return false
   unUsedInCol(j, num) {
     for (let i = 0; i < this.N; i++) {
-      if (this.mat[i][j] === num) {
+      if (this.mat[i][j].val === num) {
         return false
       }
     }
@@ -114,19 +116,19 @@ export class Sudoku {
     }
 
     // Skip cells that are already filled
-    if (this.mat[i][j] !== 0) {
+    if (this.mat[i][j].val !== 0) {
       return this.fillRemaining(i, j + 1)
     }
 
     // Try filling the current cell with a valid value
     for (let num = 1; num <= this.N; num++) {
       if (this.checkIfSafe(i, j, num)) {
-        this.mat[i][j] = num
+        this.mat[i][j].val = num
         this.answer[i][j] = num
         if (this.fillRemaining(i, j + 1)) {
           return true
         }
-        this.mat[i][j] = 0
+        this.mat[i][j].val = 0
         this.answer[i][j] = 0
       }
     }
@@ -142,28 +144,29 @@ export class Sudoku {
       //i and j are random
       let i = Math.floor(Math.random() * this.N)
       let j = Math.floor(Math.random() * this.N)
-      if (this.mat[i][j] !== 0) {
+      if (this.mat[i][j].val !== 0) {
         count--
-        this.mat[i][j] = 0
+        this.mat[i][j].val = 0
+        this.mat[i][j].editable = true
       }
     }
 
     return
   }
 
-  colMaker() {
-    let array = []
-    for (let a = 0; a < 3; a++) {
-      for (let b = 0; b < 3; b++) {
-        for (let i = a; i < this.N; i += 3) {
-          for (let j = b; j < this.N; j += 3) {
-            array = [...array, this.mat[i][j]]
-          }
-        }
-      }
-    }
-    return this.splitArray(array, 9)
-  }
+  // colMaker() {
+  //   let array = []
+  //   for (let a = 0; a < 3; a++) {
+  //     for (let b = 0; b < 3; b++) {
+  //       for (let i = a; i < this.N; i += 3) {
+  //         for (let j = b; j < this.N; j += 3) {
+  //           array = [...array, this.mat[i][j]]
+  //         }
+  //       }
+  //     }
+  //   }
+  //   return this.splitArray(array, 9)
+  // }
   rowMaker() {
     let array = []
     for (let b = 0; b < 9; b += 3) {
@@ -211,8 +214,8 @@ export const hrefCapitalizer = (href) => {
   }
 }
 
-export const colorSetter = (theme, color) => {
-  if (theme === color) {
+export const themeChanger = (darkMode, theme, color) => {
+  if (darkMode || theme === color) {
     document.documentElement.classList.add(color)
   } else {
     document.documentElement.classList.remove(color)

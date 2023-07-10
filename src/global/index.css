@@ -50,7 +50,7 @@ Global Styles And Variables
   --bg-main: #101010;
   --bg-black: #fff;
   --bg-border: #aaa;
-  --bg-border-light: #f5f5f5f5;
+  --bg-border-light: #202020;
   --table-line-dark: rgba(255, 255, 255, 0.7);
   --table-line-light: rgba(255, 255, 255, 0.2);
 
@@ -73,8 +73,8 @@ Global Styles And Variables
   --text-950: #f3f3f5;
 }
 .darkMode.red {
-  --bg-p-100: #e4152e;
-  --bg-p-200: #b51125;
+  --bg-p-100: #eb3147;
+  --bg-p-200: #9d0f20;
 }
 .darkMode.green {
   --bg-p-100: #17cf8f;

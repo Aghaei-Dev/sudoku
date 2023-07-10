@@ -30,6 +30,10 @@ const Btn = styled(Button)(({ variant }) => ({
   textTransform: 'capitalize',
   padding: '.5rem',
   fontWeight: '600',
-  background: variant === 'contained' ? 'var(--bg-p-500)' : '',
+  background: variant === 'contained' ? 'var(--bg-p-500)' : 'transparent',
   width: variant === 'contained' && '95%',
+  color: variant === 'text' && 'var(--bg-p-500)',
+  ':hover': {
+    background: variant === 'contained' && 'var(--bg-p-500)',
+  },
 }))

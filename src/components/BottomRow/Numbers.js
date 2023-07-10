@@ -1,33 +1,37 @@
 import React from 'react'
-import { numbers } from '../../assets/constants'
 import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
 
 const Numbers = () => {
-  const { writeNumberInTable } = useGlobalContext()
+  const { writeNumberInTable, howManyRemain } = useGlobalContext()
 
-  const key = (e) => {
-    if (numbers.find((item) => item === Number(e.key))) {
-      console.log(Number(e.key))
-    }
-  }
-  React.useEffect(() => {
-    window.addEventListener('keydown', key)
-    return () => {
-      window.removeEventListener('keydown', key)
-    }
-  }, [])
+  // keyboard event
+  // const key = (e) => {
+  //   if (numbers.find((item) => item === Number(e.key))) {
+  //     console.log(Number(e.key))
+  //   }
+  // }
+  // React.useEffect(() => {
+  //   window.addEventListener('keydown', key)
+  //   return () => {
+  //     window.removeEventListener('keydown', key)
+  //   }
+  // }, [])
+
   return (
     <Wrapper>
-      {numbers.map((item, index) => {
+      {Object.values(howManyRemain()).map((usedIn, index) => {
         return (
-          <div
-            key={index}
-            onClick={() => {
-              writeNumberInTable(item)
-            }}>
-            {item}
-          </div>
+          index !== 0 && (
+            <div
+              onClick={() => {
+                writeNumberInTable(index)
+              }}
+              style={{ visibility: usedIn === 9 && 'hidden' }}
+              key={index}>
+              {index}
+            </div>
+          )
         )
       })}
     </Wrapper>

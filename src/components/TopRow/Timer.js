@@ -9,7 +9,6 @@ const Timer = () => {
   const [second, setSecond] = useState('00')
   const [minute, setMinute] = useState('00')
   const [counter, setCounter] = useState(0)
-
   useEffect(() => {
     let intervalId
 
@@ -33,7 +32,6 @@ const Timer = () => {
         setCounter((counter) => counter + 1)
       }, 1000)
     }
-
     return () => clearInterval(intervalId)
   }, [isActive, counter])
 
