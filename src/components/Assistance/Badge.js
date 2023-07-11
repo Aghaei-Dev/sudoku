@@ -3,9 +3,9 @@ import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
 
 const Badge = ({ content, isHint }) => {
-  const { isNoteON } = useGlobalContext()
+  const { isNoteON, hintRemain } = useGlobalContext()
   return (
-    <Wrapper isHint={isHint} isNoteON={isNoteON}>
+    <Wrapper isHint={isHint} isNoteON={isNoteON} hintRemain={hintRemain}>
       {content}
     </Wrapper>
   )
@@ -13,10 +13,13 @@ const Badge = ({ content, isHint }) => {
 
 export default Badge
 
-const Wrapper = styled('span')(({ isHint, isNoteON }) => ({
+const Wrapper = styled('span')(({ isHint, isNoteON, hintRemain }) => ({
   fontWeight: '700',
   textTransform: 'uppercase',
-  background: !isNoteON && !isHint ? 'var(--text-300)' : 'var(--bg-p-500)',
+  background:
+    (!isNoteON && !isHint) || (isHint && hintRemain === 0)
+      ? 'var(--text-300)'
+      : 'var(--bg-p-500)',
   color: 'white',
   position: 'absolute',
   top: '0',

@@ -14,7 +14,8 @@ import { useGlobalContext } from '../../context'
 import { Badge } from '..'
 
 const FourButton = () => {
-  const { isNoteON, toggleNote, eraseNumber } = useGlobalContext()
+  const { isNoteON, toggleNote, eraseNumber, hintHandler, hintRemain } =
+    useGlobalContext()
 
   return (
     <Wrapper>
@@ -40,8 +41,8 @@ const FourButton = () => {
         <p>notes</p>
       </div>
       <div className='item'>
-        <IconBtn>
-          <Badge content='4' isHint />
+        <IconBtn onClick={hintHandler}>
+          <Badge content={hintRemain} isHint />
           <LightbulbIcon className='size' />
         </IconBtn>
         <p>hint</p>
@@ -57,7 +58,7 @@ const IconBtn = styled(IconButton)(() => ({
   padding: '1rem',
   color: 'var(--bg-p-500)',
   background: 'var(--text-100)',
-  border: '2px solid var(--bg-main)',
+  border: '2px solid transparent',
   position: 'relative',
   '*': {
     cursor: 'pointer',

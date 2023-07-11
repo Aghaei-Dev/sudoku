@@ -5,19 +5,6 @@ import { useGlobalContext } from '../../context'
 const Numbers = () => {
   const { writeNumberInTable, howManyRemain } = useGlobalContext()
 
-  // keyboard event
-  // const key = (e) => {
-  //   if (numbers.find((item) => item === Number(e.key))) {
-  //     console.log(Number(e.key))
-  //   }
-  // }
-  // React.useEffect(() => {
-  //   window.addEventListener('keydown', key)
-  //   return () => {
-  //     window.removeEventListener('keydown', key)
-  //   }
-  // }, [])
-
   return (
     <Wrapper>
       {Object.values(howManyRemain()).map((usedIn, index) => {

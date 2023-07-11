@@ -22,6 +22,7 @@ const AppProvider = ({ children }) => {
     setUnSolved(sudoku.rowMaker())
     setSolved(sudoku.rowMakerAnswer())
     setEmpty(sudoku.empty)
+    setHintRemain(3)
   }
 
   //selected coloring
@@ -36,7 +37,9 @@ const AppProvider = ({ children }) => {
     selectedSquare ||
     selectedNumberIndex ||
     (selectedSquare === 0 && selectedNumberIndex === 0)
-
+  if (conditionForSelectingCells) {
+    var cell = unSolved[selectedSquare][selectedNumberIndex]
+  }
   const [falsePlay] = useSound(falseSound)
   const [truePlay] = useSound(trueSound)
 
@@ -61,7 +64,6 @@ const AppProvider = ({ children }) => {
     return obj
   }
   const writeNumberInTable = (number) => {
-    let cell = unSolved[selectedSquare][selectedNumberIndex]
     if (selectedNumber === 0 && !isNoteON) {
       cell.val = number
       if (whatMustBe() === number) {
@@ -76,28 +78,32 @@ const AppProvider = ({ children }) => {
       setUnSolved(unSolved)
     }
     if (selectedNumber === 0 && isNoteON) {
-      if (conditionForSelectingCells) {
-        if (cell.note[number] === number) {
-          cell.note[number] = null
-        } else {
-          cell.note[number] = number
-        }
+      if (cell.note[number] === number) {
+        cell.note[number] = null
+      } else {
+        cell.note[number] = number
       }
     }
     setMustChange(true)
   }
   const whatMustBe = () => {
-    if (conditionForSelectingCells) {
-      return Solved[selectedSquare][selectedNumberIndex]
-    }
+    return Solved[selectedSquare][selectedNumberIndex]
   }
   const eraseNumber = () => {
-    let cell = unSolved[selectedSquare][selectedNumberIndex]
     if (conditionForSelectingCells && cell.editable) {
       initializer()
       cell.val = 0
       cell.editable = false
       cell.mistake = false
+    }
+    setMustChange(true)
+  }
+  const [hintRemain, setHintRemain] = useLocalStorage('hintRemain', 3)
+  const hintHandler = () => {
+    if (hintRemain > 0 && selectedNumber === 0 && !isNoteON && cell.val === 0) {
+      setHintRemain((prev) => prev - 1)
+      cell.val = whatMustBe()
+      setUnSolved(unSolved)
     }
     setMustChange(true)
   }
@@ -107,6 +113,7 @@ const AppProvider = ({ children }) => {
     localStorage.setItem('unSolved', JSON.stringify(unSolved))
     // eslint-disable-next-line
   }, [mustChange])
+
   // ========= modals =========
 
   // =====stop=====
@@ -167,6 +174,21 @@ const AppProvider = ({ children }) => {
     setMistakes(0)
   }
 
+  //key board event
+  // const key = (e) => {
+  //   const number = Number(e.key)
+  //   if (!isNaN(number) && number !== 0) {
+  //     return number
+  //   }
+  // }
+  // React.useEffect(() => {
+  //   window.addEventListener('keydown', key)
+
+  //   return () => {
+  //     window.removeEventListener('keydown', key)
+  //   }
+  // }, [])
+
   return (
     <AppContext.Provider
       value={{
@@ -201,6 +223,8 @@ const AppProvider = ({ children }) => {
         initializerAll,
         howManyRemain,
         eraseNumber,
+        hintHandler,
+        hintRemain,
       }}>
       {children}
     </AppContext.Provider>

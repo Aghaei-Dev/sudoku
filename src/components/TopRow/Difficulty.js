@@ -41,7 +41,7 @@ const Wrapper = styled('div')(() => ({
     color: 'var(--text-600)',
   },
   select: {
-    background: 'var(--bg-main)',
+    background: 'transparent',
     border: 'none',
     outline: 'none',
     margin: '1rem 0 1.5rem',
