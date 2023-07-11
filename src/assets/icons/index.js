@@ -11,6 +11,8 @@ import LightbulbIcon from '@mui/icons-material/Lightbulb'
 import GridOnOutlinedIcon from '@mui/icons-material/GridOnOutlined'
 import Brightness7OutlinedIcon from '@mui/icons-material/Brightness7Outlined'
 import Brightness4OutlinedIcon from '@mui/icons-material/Brightness4Outlined'
+import TimerOutlinedIcon from '@mui/icons-material/TimerOutlined'
+import SignalCellularAltOutlinedIcon from '@mui/icons-material/SignalCellularAltOutlined'
 export {
   HomeOutlinedIcon,
   PlayArrowIcon,
@@ -25,4 +27,6 @@ export {
   GridOnOutlinedIcon,
   Brightness7OutlinedIcon,
   Brightness4OutlinedIcon,
+  TimerOutlinedIcon,
+  SignalCellularAltOutlinedIcon,
 }

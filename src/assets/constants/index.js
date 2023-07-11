@@ -8,9 +8,6 @@ export const gameMode = [
 
 export const colors = [
   { id: 1, colorName: 'blue', value: '#0072e3' },
-  { id: 2, colorName: 'red', value: '#f06475' },
-  { id: 3, colorName: 'green', value: '#17cf8f' },
+  { id: 2, colorName: 'purple', value: '#8560C2' },
+  { id: 3, colorName: 'green', value: '#77DD77' },
 ]
-
-
-

@@ -12,21 +12,29 @@ import { colors } from '../../assets/constants'
 import { useLocalStorage } from '../../hook'
 
 import useSound from 'use-sound'
-import { switchLight } from '../../assets/sound'
+import { switchLight, changeTheme } from '../../assets/sound'
 
 const Navbar = () => {
   const href = useHref()
-  const [play] = useSound(switchLight)
+  const [darkModeSound] = useSound(switchLight)
+  const [themeSound] = useSound(changeTheme)
+
   const [darkMode, setDarkMode] = useLocalStorage('darkMode', false)
   const [theme, setTheme] = useLocalStorage('theme', 'blue')
 
   const toggleDarkMode = () => {
     setDarkMode((prevValue) => !prevValue)
-    play()
+    darkModeSound()
+  }
+  const toggleTheme = (colorName) => {
+    if (theme !== colorName) {
+      setTheme(colorName)
+      themeSound()
+    }
   }
   useEffect(() => {
     themeChanger(darkMode, '', 'darkMode')
-    themeChanger(false, theme, 'red')
+    themeChanger(false, theme, 'purple')
     themeChanger(false, theme, 'green')
   }, [darkMode, theme])
 
@@ -46,9 +54,7 @@ const Navbar = () => {
               const { id, colorName, value } = item
               return (
                 <Circle
-                  onClick={() => {
-                    setTheme(colorName)
-                  }}
+                  onClick={() => toggleTheme(colorName)}
                   key={id}
                   color={value}
                   selected={colorName === theme}
@@ -88,6 +94,7 @@ const Circle = styled('span')(({ color, selected }) => ({
   cursor: 'pointer',
   position: 'relative',
   '::after': {
+    cursor: 'pointer',
     content: selected && '"✓"',
     fontSize: '1rem',
     color: 'white',

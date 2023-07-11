@@ -1,13 +1,13 @@
 import { styled } from '@mui/material/styles'
 
 export const MainWrapper = styled('div')(() => ({
-  width: '100%',
+  maxWidth: '900px',
   display: 'grid',
   gridTemplateRows: 'auto 1fr',
   gridTemplateColumns: 'auto .4fr',
   padding: '.5rem',
   position: 'relative',
-  margin: 'auto',
+  // margin: 'auto',
   columnGap: '.5rem',
   '.top-row': {
     gridColumn: '2 span',

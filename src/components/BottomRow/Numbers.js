@@ -67,7 +67,7 @@ const Wrapper = styled('div')(() => ({
       height: '100%',
       display: 'grid',
       placeItems: 'center',
-      fontSize: '3rem',
+      fontSize: '4rem',
       backgroundColor: 'var(--text-100)',
       ':hover': {
         backgroundColor: 'var(--text-200)',

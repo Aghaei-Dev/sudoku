@@ -74,9 +74,10 @@ const IconBtn = styled(IconButton)(() => ({
 }))
 
 const Wrapper = styled('div')(() => ({
+  alignSelf: 'start',
   display: 'grid',
   gridTemplateColumns: 'repeat(4,1fr)',
-  gap: '1rem',
+  columnGap: '1rem',
   '.item': {
     display: 'grid',
     placeItems: 'center',
@@ -86,6 +87,9 @@ const Wrapper = styled('div')(() => ({
       color: 'var(--bg-p-500)',
       fontWeight: '500',
     },
+  },
+  '@media (width<= 700px)': {
+    alignSelf: 'stretch',
   },
   '@media (width<= 350px)': {
     padding: '0',

@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from 'react'
 import { Sudoku } from '../functions'
 import { useLocalStorage } from '../hook'
 
+import { falseSound, trueSound, stop, play } from '../assets/sound'
+import useSound from 'use-sound'
 const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
@@ -30,6 +32,13 @@ const AppProvider = ({ children }) => {
   const [mustChange, setMustChange] = useState(false)
 
   //table manipulating
+  let conditionForSelectingCells =
+    selectedSquare ||
+    selectedNumberIndex ||
+    (selectedSquare === 0 && selectedNumberIndex === 0)
+
+  const [falsePlay] = useSound(falseSound)
+  const [truePlay] = useSound(trueSound)
 
   const howManyRemain = () => {
     const obj = {
@@ -52,39 +61,43 @@ const AppProvider = ({ children }) => {
     return obj
   }
   const writeNumberInTable = (number) => {
-    if (selectedNumber === 0) {
-      unSolved[selectedSquare][selectedNumberIndex].val = number
+    let cell = unSolved[selectedSquare][selectedNumberIndex]
+    if (selectedNumber === 0 && !isNoteON) {
+      cell.val = number
       if (whatMustBe() === number) {
         setSelectedNumber(number)
+        truePlay()
       } else {
-        unSolved[selectedSquare][selectedNumberIndex].mistake = true
-        unSolved[selectedSquare][selectedNumberIndex].editable = true
+        cell.mistake = true
+        cell.editable = true
         setMistakes(mistakes + 1)
+        falsePlay()
       }
       setUnSolved(unSolved)
     }
+    if (selectedNumber === 0 && isNoteON) {
+      if (conditionForSelectingCells) {
+        if (cell.note[number] === number) {
+          cell.note[number] = null
+        } else {
+          cell.note[number] = number
+        }
+      }
+    }
     setMustChange(true)
   }
-
-  let conditionForSelectingCells =
-    selectedSquare ||
-    selectedNumberIndex ||
-    (selectedSquare === 0 && selectedNumberIndex === 0)
-
   const whatMustBe = () => {
     if (conditionForSelectingCells) {
       return Solved[selectedSquare][selectedNumberIndex]
     }
   }
   const eraseNumber = () => {
-    if (
-      conditionForSelectingCells &&
-      unSolved[selectedSquare][selectedNumberIndex].editable
-    ) {
+    let cell = unSolved[selectedSquare][selectedNumberIndex]
+    if (conditionForSelectingCells && cell.editable) {
       initializer()
-      unSolved[selectedSquare][selectedNumberIndex].val = 0
-      unSolved[selectedSquare][selectedNumberIndex].editable = false
-      unSolved[selectedSquare][selectedNumberIndex].mistake = false
+      cell.val = 0
+      cell.editable = false
+      cell.mistake = false
     }
     setMustChange(true)
   }
@@ -92,20 +105,26 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     setMustChange(false)
     localStorage.setItem('unSolved', JSON.stringify(unSolved))
+    // eslint-disable-next-line
   }, [mustChange])
   // ========= modals =========
 
   // =====stop=====
   const [stopModal, setStopModal] = useState(false)
   const [isActive, setIsActive] = useState(true)
+  const [stopPlay] = useSound(stop)
+  const [playPlay] = useSound(play)
+
   const openModal = () => {
     setStopModal(true)
     setIsActive(false)
     initializer()
+    stopPlay()
   }
   const closeModal = () => {
     setStopModal(false)
     setIsActive(true)
+    playPlay()
   }
 
   // =====end=====

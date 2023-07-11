@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
-import { Square, Cell, StopModal, CenterRow } from '../../components'
+import { Square, Cell, StopModal, CenterRow, Win } from '../../components'
 import { useHref } from 'react-router-dom'
 import { gameMode } from '../../assets/constants'
 
 const Maker = ({ array, modal }) => {
-  const { initializerAll } = useGlobalContext()
+  const { initializerAll, howManyRemain } = useGlobalContext()
   const href = useHref().slice(1)
 
   const { winRate } = gameMode.find((item) => {
@@ -40,6 +40,9 @@ const Maker = ({ array, modal }) => {
           </Square>
         )
       })}
+      {Object.values(howManyRemain())[0] === 0 && (
+        <Win time={'5:10'} difficulty={'easy'} />
+      )}
       {show && <CenterRow winRate={winRate} />}
       {modal && <StopModal />}
     </TableWrapper>
@@ -49,6 +52,7 @@ const Maker = ({ array, modal }) => {
 export default Maker
 
 const TableWrapper = styled('div')(() => ({
+  overflow: 'hidden',
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
   gridTemplateRows: 'repeat(3, 1fr)',

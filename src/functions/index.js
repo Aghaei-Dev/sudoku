@@ -12,7 +12,13 @@ export class Sudoku {
     //initialize empty-answer-mat(main matrix) with N^2 empty 0 cell
     this.mat = Array.from({ length: N }, () =>
       Array.from({ length: N }, () => {
-        return { val: 0, editable: false, conflict: false, mistake: false }
+        return {
+          val: 0,
+          editable: false,
+          conflict: false,
+          mistake: false,
+          note: [null, null, null, null, null, null, null, null, null, null],
+        }
       })
     )
     this.answer = Array.from({ length: N }, () =>

@@ -24,7 +24,6 @@ const Overlay = styled('div')(() => ({
   position: 'absolute',
   display: 'grid',
   placeItems: 'center',
-  border: ' 1px solid var(--table-line-dark)',
   button: {
     background: 'var(--bg-p-500)',
     transition: 'var(--transition)',
