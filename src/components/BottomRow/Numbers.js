@@ -13,8 +13,11 @@ const Numbers = () => {
           index !== 0 && (
             <div
               onClick={() => {
-                writeNumberInTable(index)
-                if (stopModal) closeModal()
+                if (stopModal) {
+                  closeModal()
+                } else {
+                  writeNumberInTable(index)
+                }
               }}
               style={{ visibility: usedIn === 9 && 'hidden' }}
               key={index}>

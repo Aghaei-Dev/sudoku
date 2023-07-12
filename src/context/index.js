@@ -54,38 +54,41 @@ const AppProvider = ({ children }) => {
     return obj
   }
   const writeNumberInTable = (number) => {
-    //toggling val
-    if (cell.editable && cell.val === number) {
-      cell.mistake = false
-      cell.val = 0
-      setMustChange(true)
-      setSelectedNumber(0)
-      return
-    }
-    //make real number(user answer)
-    if (selectedNumber === 0 && !isNoteON) {
-      cell.val = number
-      if (whatMustBe() === number) {
+    if (cell) {
+      //toggling val
+      if (cell.editable && cell.val === number && !isNoteON) {
         cell.mistake = false
-        setSelectedNumber(number)
-        truePlay()
-      } else {
-        cell.mistake = true
-        cell.editable = true
-        setMistakes(mistakes + 1)
-        falsePlay()
+        cell.val = 0
+        setMustChange(true)
+        setSelectedNumber(0)
+        return
       }
-      setUnSolved(unSolved)
-    }
-    //make notes
-    if (selectedNumber === 0 && isNoteON) {
-      if (cell.note[number] === number) {
-        cell.note[number] = null
-      } else {
-        cell.note[number] = number
+      //make real number(user answer)
+      if (selectedNumber === 0 && !isNoteON) {
+        cell.val = number
+        if (whatMustBe() === number) {
+          cell.mistake = false
+          setSelectedNumber(number)
+          truePlay()
+        } else {
+          cell.mistake = true
+          cell.editable = true
+          setMistakes(mistakes + 1)
+          falsePlay()
+        }
+        setUnSolved(unSolved)
       }
+      //make notes
+
+      if (selectedNumber === 0 && isNoteON) {
+        if (cell.note[number] === number) {
+          cell.note[number] = null
+        } else {
+          cell.note[number] = number
+        }
+      }
+      setMustChange(true)
     }
-    setMustChange(true)
   }
   const whatMustBe = () => {
     return Solved[selectedSquare][selectedNumberIndex]

@@ -56,6 +56,7 @@ const FourButton = () => {
             }
           }}>
           <BorderWrapper isNoteON={isNoteON} />
+
           <Badge content={isNoteON ? 'on' : 'off'} />
           <ModeEditIcon className='size' />
         </IconBtn>

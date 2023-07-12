@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
 
 const Badge = ({ content, isHint }) => {
+  console.log('badge')
   const { isNoteON, hintRemain } = useGlobalContext()
   return (
     <Wrapper isHint={isHint} isNoteON={isNoteON} hintRemain={hintRemain}>
