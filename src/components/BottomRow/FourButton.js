@@ -14,25 +14,47 @@ import { useGlobalContext } from '../../context'
 import { Badge } from '..'
 
 const FourButton = () => {
-  const { isNoteON, toggleNote, eraseNumber, hintHandler, hintRemain } =
-    useGlobalContext()
+  const {
+    isNoteON,
+    toggleNote,
+    eraseNumber,
+    hintHandler,
+    hintRemain,
+    closeModal,
+    stopModal,
+  } = useGlobalContext()
+  // closeModal()
 
   return (
     <Wrapper>
       <div className='item'>
-        <IconBtn>
+        <IconBtn
+          onClick={() => {
+            if (stopModal) closeModal()
+          }}>
           <ReplayIcon className='size' />
         </IconBtn>
         <p>undo</p>
       </div>
       <div className='item'>
-        <IconBtn onClick={eraseNumber}>
+        <IconBtn
+          onClick={() => {
+            eraseNumber()
+            if (stopModal) closeModal()
+          }}>
           <ClearIcon className='size' />
         </IconBtn>
         <p>erase</p>
       </div>
       <div className='item'>
-        <IconBtn onClick={toggleNote}>
+        <IconBtn
+          onClick={() => {
+            if (stopModal) {
+              closeModal()
+            } else {
+              toggleNote()
+            }
+          }}>
           <BorderWrapper isNoteON={isNoteON} />
           <Badge content={isNoteON ? 'on' : 'off'} />
           <ModeEditIcon className='size' />
@@ -40,7 +62,11 @@ const FourButton = () => {
         <p>notes</p>
       </div>
       <div className='item'>
-        <IconBtn onClick={hintHandler}>
+        <IconBtn
+          onClick={() => {
+            hintHandler()
+            if (stopModal) closeModal()
+          }}>
           <Badge content={hintRemain} isHint />
           <LightbulbIcon className='size' />
         </IconBtn>

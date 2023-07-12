@@ -27,7 +27,7 @@ const Wrapper = styled('span')(({ isHint, isNoteON, hintRemain }) => ({
   transform: 'translate(30%,-25%)',
   fontSize: isHint ? '.7rem' : '.6rem',
   width: !isHint && '28px',
-  padding: isHint ? '.4rem .56rem' : '.3rem 0',
+  padding: isHint ? '.4rem .6rem' : '.3rem 0',
   borderRadius: isHint ? '50%' : '50rem',
   display: 'grid',
   placeItems: 'center',

@@ -21,5 +21,6 @@ const MicroCellWrapper = styled('div')(() => ({
   span: {
     display: 'grid',
     placeItems: 'center',
+    color: 'var(--text-800)',
   },
 }))

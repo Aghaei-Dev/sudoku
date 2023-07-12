@@ -4,11 +4,10 @@ export const MainWrapper = styled('div')(() => ({
   maxWidth: '900px',
   display: 'grid',
   gridTemplateRows: 'auto 1fr',
-  gridTemplateColumns: 'auto .4fr',
+  gridTemplateColumns: 'auto 1fr',
   padding: '.5rem',
   position: 'relative',
-  // margin: 'auto',
-  columnGap: '.5rem',
+  columnGap: '1rem',
   '.top-row': {
     gridColumn: '2 span',
     width: '100%',
@@ -23,7 +22,8 @@ export const MainWrapper = styled('div')(() => ({
   },
   '.right': {
     display: 'grid',
-    gridTemplateRows: 'auto auto',
+    gridTemplateRows: 'auto 1fr',
+    rowGap: '1rem',
     '@media (width<= 700px)': {
       display: 'flex',
       flexDirection: 'column',

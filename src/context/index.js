@@ -54,9 +54,19 @@ const AppProvider = ({ children }) => {
     return obj
   }
   const writeNumberInTable = (number) => {
+    //toggling val
+    if (cell.editable && cell.val === number) {
+      cell.mistake = false
+      cell.val = 0
+      setMustChange(true)
+      setSelectedNumber(0)
+      return
+    }
+    //make real number(user answer)
     if (selectedNumber === 0 && !isNoteON) {
       cell.val = number
       if (whatMustBe() === number) {
+        cell.mistake = false
         setSelectedNumber(number)
         truePlay()
       } else {
@@ -67,6 +77,7 @@ const AppProvider = ({ children }) => {
       }
       setUnSolved(unSolved)
     }
+    //make notes
     if (selectedNumber === 0 && isNoteON) {
       if (cell.note[number] === number) {
         cell.note[number] = null
@@ -81,7 +92,6 @@ const AppProvider = ({ children }) => {
   }
   const eraseNumber = () => {
     if (conditionForSelectingCells && cell.editable) {
-      initializer()
       cell.val = 0
       cell.note = []
       cell.mistake = false

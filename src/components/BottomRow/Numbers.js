@@ -3,7 +3,8 @@ import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
 
 const Numbers = () => {
-  const { writeNumberInTable, howManyRemain } = useGlobalContext()
+  const { writeNumberInTable, howManyRemain, closeModal, stopModal } =
+    useGlobalContext()
 
   return (
     <Wrapper>
@@ -13,6 +14,7 @@ const Numbers = () => {
             <div
               onClick={() => {
                 writeNumberInTable(index)
+                if (stopModal) closeModal()
               }}
               style={{ visibility: usedIn === 9 && 'hidden' }}
               key={index}>
