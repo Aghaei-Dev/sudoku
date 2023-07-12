@@ -31,6 +31,7 @@ const AppProvider = ({ children }) => {
   const [selectedSquare, setSelectedSquare] = useState('')
   const [mistakes, setMistakes] = useLocalStorage('mistakes', 0)
   const [mustChange, setMustChange] = useState(false)
+  const [hintRemain, setHintRemain] = useLocalStorage('hintRemain', 3)
 
   //table manipulating
   let conditionForSelectingCells =
@@ -44,18 +45,7 @@ const AppProvider = ({ children }) => {
   const [truePlay] = useSound(trueSound)
 
   const howManyRemain = () => {
-    const obj = {
-      0: 0,
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0,
-      6: 0,
-      7: 0,
-      8: 0,
-      9: 0,
-    }
+    const obj = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 }
     for (let i = 0; i < unSolved.length; i++) {
       for (let j = 0; j < unSolved[i].length; j++) {
         obj[unSolved[i][j].val]++
@@ -93,17 +83,18 @@ const AppProvider = ({ children }) => {
     if (conditionForSelectingCells && cell.editable) {
       initializer()
       cell.val = 0
-      cell.editable = false
+      cell.note = []
       cell.mistake = false
     }
     setMustChange(true)
   }
-  const [hintRemain, setHintRemain] = useLocalStorage('hintRemain', 3)
   const hintHandler = () => {
     if (hintRemain > 0 && selectedNumber === 0 && !isNoteON && cell.val === 0) {
       setHintRemain((prev) => prev - 1)
       cell.val = whatMustBe()
+      cell.editable = false
       setUnSolved(unSolved)
+      setSelectedNumber(whatMustBe())
     }
     setMustChange(true)
   }

@@ -52,6 +52,7 @@ const Wrapper = styled('div')(() => ({
       fontSize: '1rem',
       fontWeight: '400',
       color: 'var(--text-900)',
+      background: 'var(--bg-main)',
     },
   },
 }))

@@ -4,9 +4,9 @@ import {
   TimerOutlinedIcon,
   SignalCellularAltOutlinedIcon,
 } from '../../assets/icons'
-import { Divider } from '@mui/material'
-
-const Win = ({ difficulty, time }) => {
+import { useHref } from 'react-router-dom'
+const Win = ({ time }) => {
+  const difficulty = useHref().slice(1)
   return (
     <Overlay>
       <div>
