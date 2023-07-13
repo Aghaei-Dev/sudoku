@@ -11,7 +11,7 @@ import {
 } from '../../assets/icons'
 
 import { useGlobalContext } from '../../context'
-import { Badge } from '..'
+import { Badge, Tooltip } from '..'
 
 const FourButton = () => {
   const {
@@ -23,7 +23,6 @@ const FourButton = () => {
     closeModal,
     stopModal,
   } = useGlobalContext()
-  // closeModal()
 
   return (
     <Wrapper>
@@ -37,40 +36,49 @@ const FourButton = () => {
         <p>undo</p>
       </div>
       <div className='item'>
-        <IconBtn
-          onClick={() => {
-            eraseNumber()
-            if (stopModal) closeModal()
-          }}>
-          <ClearIcon className='size' />
-        </IconBtn>
+        <Tooltip title='HotKey : d , delete , backSpace'>
+          <IconBtn
+            onClick={() => {
+              eraseNumber()
+              if (stopModal) closeModal()
+            }}>
+            <ClearIcon className='size' />
+          </IconBtn>
+        </Tooltip>
+
         <p>erase</p>
       </div>
       <div className='item'>
-        <IconBtn
-          onClick={() => {
-            if (stopModal) {
-              closeModal()
-            } else {
-              toggleNote()
-            }
-          }}>
-          <BorderWrapper isNoteON={isNoteON} />
+        <Tooltip title='HotKey : n'>
+          <IconBtn
+            onClick={() => {
+              if (stopModal) {
+                closeModal()
+              } else {
+                toggleNote()
+              }
+            }}>
+            <BorderWrapper isNoteON={isNoteON} />
 
-          <Badge content={isNoteON ? 'on' : 'off'} />
-          <ModeEditIcon className='size' />
-        </IconBtn>
+            <Badge content={isNoteON ? 'on' : 'off'} />
+            <ModeEditIcon className='size' />
+          </IconBtn>
+        </Tooltip>
+
         <p>notes</p>
       </div>
       <div className='item'>
-        <IconBtn
-          onClick={() => {
-            hintHandler()
-            if (stopModal) closeModal()
-          }}>
-          <Badge content={hintRemain} isHint />
-          <LightbulbIcon className='size' />
-        </IconBtn>
+        <Tooltip title='Hot Key : h'>
+          <IconBtn
+            onClick={() => {
+              hintHandler()
+              if (stopModal) closeModal()
+            }}>
+            <Badge content={hintRemain} isHint />
+            <LightbulbIcon className='size' />
+          </IconBtn>
+        </Tooltip>
+
         <p>hint</p>
       </div>
     </Wrapper>

@@ -18,9 +18,8 @@ import { MainWrapper } from '../global'
 import { useGlobalContext } from '../context'
 const ORG = ({ K, mode }) => {
   const { loading, mistakes, difficultyModal } = useGlobalContext()
-
   return (
-    <MainWrapper>
+    <MainWrapper >
       {mistakes === 3 && <GameOver />}
       {loading && <Loading />}
       {difficultyModal && <DifficultyModal />}

@@ -1,5 +1,6 @@
 import TextTitle from './Assistance/TextTitle'
 import Badge from './Assistance/Badge'
+import Tooltip from './Assistance/Tooltip'
 
 import Difficulty from './TopRow/Difficulty'
 import Timer from './TopRow/Timer'
@@ -28,6 +29,7 @@ import ORG from './ORG'
 
 export {
   Difficulty,
+  Tooltip,
   FourButton,
   StopModal,
   Numbers,

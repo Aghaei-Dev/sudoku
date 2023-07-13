@@ -18,6 +18,7 @@ const Cell = ({ val, conflict, editable, mistake, note, index, square }) => {
     (selectedNumberIndex === index &&
       selectedSquare === square &&
       'var(--bg-p-200)')
+
   return (
     <CellWrapper
       onClick={() => {

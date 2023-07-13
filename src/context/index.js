@@ -1,9 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react'
-import { Sudoku } from '../functions'
+import React, { useState, useContext, useEffect, useCallback } from 'react'
+import { Sudoku, safeRowSquare, safeColSquare } from '../functions'
 import { useLocalStorage } from '../hook'
 
 import { falseSound, trueSound, stop, play } from '../assets/sound'
 import useSound from 'use-sound'
+
 const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
@@ -25,13 +26,14 @@ const AppProvider = ({ children }) => {
     setHintRemain(3)
   }
 
-  //selected coloring
+  //for coloring table
   const [selectedNumber, setSelectedNumber] = useState('')
   const [selectedNumberIndex, setSelectedNumberIndex] = useState('')
   const [selectedSquare, setSelectedSquare] = useState('')
+
   const [mistakes, setMistakes] = useLocalStorage('mistakes', 0)
-  const [mustChange, setMustChange] = useState(false)
   const [hintRemain, setHintRemain] = useLocalStorage('hintRemain', 3)
+  const [mustChange, setMustChange] = useState(false)
 
   //table manipulating
   let conditionForSelectingCells =
@@ -79,7 +81,6 @@ const AppProvider = ({ children }) => {
         setUnSolved(unSolved)
       }
       //make notes
-
       if (selectedNumber === 0 && isNoteON) {
         if (cell.note[number] === number) {
           cell.note[number] = null
@@ -98,6 +99,7 @@ const AppProvider = ({ children }) => {
       cell.val = 0
       cell.note = []
       cell.mistake = false
+      setSelectedNumber(0)
     }
     setMustChange(true)
   }
@@ -117,6 +119,136 @@ const AppProvider = ({ children }) => {
     localStorage.setItem('unSolved', JSON.stringify(unSolved))
     // eslint-disable-next-line
   }, [mustChange])
+
+  //handling keyboard movement keys and numbers and btn
+
+  const move = (arrow, num) => {
+    if (conditionForSelectingCells) {
+      switch (arrow) {
+        case 'ArrowUp':
+          if (num / 3 < 1 && selectedSquare < 3) {
+            return
+          }
+          if (num - 3 < 0) {
+            setSelectedSquare(safeColSquare(selectedSquare - 3))
+            setSelectedNumberIndex(num + 6)
+            setSelectedNumber(
+              unSolved[safeColSquare(selectedSquare - 3)][num + 6].val
+            )
+            return
+          } else {
+            setSelectedNumberIndex(num - 3)
+            setSelectedNumber(unSolved[selectedSquare][num - 3].val)
+            return
+          }
+        case 'ArrowDown':
+          if (num / 3 >= 2 && selectedSquare >= 6) {
+            return
+          }
+          if (num + 3 > 8) {
+            setSelectedSquare(safeColSquare(selectedSquare + 3))
+            setSelectedNumberIndex(num - 6)
+            setSelectedNumber(
+              unSolved[safeColSquare(selectedSquare + 3)][num - 6].val
+            )
+            return
+          } else {
+            setSelectedNumberIndex(num + 3)
+            setSelectedNumber(unSolved[selectedSquare][num + 3].val)
+            return
+          }
+        case 'ArrowLeft':
+          if (selectedSquare % 3 === 0 && selectedNumberIndex % 3 === 0) {
+            return
+          }
+          if (num === 0 || num === 3 || num === 6) {
+            setSelectedSquare(safeRowSquare('left', selectedSquare))
+            setSelectedNumberIndex(num + 2)
+            setSelectedNumber(
+              unSolved[safeRowSquare('left', selectedSquare)][num + 2].val
+            )
+
+            return
+          } else {
+            setSelectedNumberIndex(num - 1)
+            setSelectedNumber(unSolved[selectedSquare][num - 1].val)
+            return
+          }
+
+        case 'ArrowRight':
+          if (
+            (selectedSquare + 1) % 3 === 0 &&
+            (selectedNumberIndex + 1) % 3 === 0
+          ) {
+            return
+          }
+          if (num + 1 === 3 || num + 1 === 6 || num + 1 === 9) {
+            setSelectedSquare(safeRowSquare('right', selectedSquare))
+            setSelectedNumberIndex(num - 2)
+            setSelectedNumber(
+              unSolved[safeRowSquare('right', selectedSquare)][num - 2].val
+            )
+            return
+          } else {
+            setSelectedNumberIndex(num + 1)
+            setSelectedNumber(unSolved[selectedSquare][num + 1].val)
+            return
+          }
+        default:
+          console.log('404')
+          return
+      }
+    } else {
+      setSelectedNumber(0)
+      setSelectedNumberIndex(0)
+      setSelectedSquare(0)
+    }
+  }
+  const handleKeyPress = useCallback(
+    (e) => {
+      const val = e.key
+      //movement
+      if (val.includes('Arrow')) {
+        const arrow = val
+        move(arrow, selectedNumberIndex)
+      }
+
+      //insert number
+      const number = Number(val)
+      if (number) {
+        writeNumberInTable(number)
+      }
+
+      //deleting
+      if (
+        val === 'Delete' ||
+        val === 'Backspace' ||
+        val === 'D' ||
+        val === 'd'
+      ) {
+        eraseNumber()
+      }
+
+      //hint
+      if (val === 'h' || val === 'H' || val === '/') {
+        hintHandler()
+      }
+
+      //notes
+      if (val === 'N' || val === 'n') {
+        toggleNote()
+      }
+    },
+    // eslint-disable-next-line
+    [selectedSquare, selectedNumberIndex, selectedNumber, isNoteON]
+  )
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [handleKeyPress])
 
   // ========= modals =========
 
@@ -177,21 +309,6 @@ const AppProvider = ({ children }) => {
     initializer()
     setMistakes(0)
   }
-
-  //key board event
-  // const key = (e) => {
-  //   const number = Number(e.key)
-  //   if (!isNaN(number) && number !== 0) {
-  //     return number
-  //   }
-  // }
-  // React.useEffect(() => {
-  //   window.addEventListener('keydown', key)
-
-  //   return () => {
-  //     window.removeEventListener('keydown', key)
-  //   }
-  // }, [])
 
   return (
     <AppContext.Provider
