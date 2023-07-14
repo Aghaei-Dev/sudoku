@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import {
   Table,
@@ -17,10 +17,26 @@ import {
 import { MainWrapper } from '../global'
 import { useGlobalContext } from '../context'
 const ORG = ({ K, mode }) => {
-  const { loading, mistakes, difficultyModal } = useGlobalContext()
+  const {
+    loading,
+    mistakes,
+    difficultyModal,
+    setIsActive,
+    endModal,
+    setEndModal,
+  } = useGlobalContext()
+
+  useEffect(() => {
+    if (mistakes === 3) {
+      setEndModal(true)
+      setIsActive(false)
+    }
+    // eslint-disable-next-line
+  }, [mistakes])
+
   return (
-    <MainWrapper >
-      {mistakes === 3 && <GameOver />}
+    <MainWrapper>
+      {endModal && <GameOver />}
       {loading && <Loading />}
       {difficultyModal && <DifficultyModal />}
       {/* {true && <NewGame />} */}

@@ -59,7 +59,7 @@ export default DifficultyModal
 const Btn = styled('div')(() => ({
   cursor: 'pointer',
   width: '100%',
-  background: 'var(--bg-p-50)',
+  background: 'var(--text-50)',
   border: 'none',
   borderBottom: '1px solid var(--bg-border-light)',
   color: 'var(--bg-p-500)',

@@ -9,9 +9,9 @@ const Timer = () => {
   const [second, setSecond] = useState('00')
   const [minute, setMinute] = useState('00')
   const [counter, setCounter] = useState(0)
+
   useEffect(() => {
     let intervalId
-
     if (isActive) {
       intervalId = setInterval(() => {
         const secondCounter = counter % 60

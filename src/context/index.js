@@ -120,6 +120,69 @@ const AppProvider = ({ children }) => {
     // eslint-disable-next-line
   }, [mustChange])
 
+  // ========= modals =========
+
+  // =====stop=====
+  const [stopModal, setStopModal] = useState(false)
+  const [isActive, setIsActive] = useState(true)
+  const [stopPlay] = useSound(stop)
+  const [playPlay] = useSound(play)
+
+  const openModal = () => {
+    setStopModal(true)
+    setIsActive(false)
+    initializer()
+    stopPlay()
+  }
+  const closeModal = () => {
+    setStopModal(false)
+    setIsActive(true)
+    playPlay()
+  }
+
+  // =====end=====
+  const [endModal, setEndModal] = useState(false)
+
+  const secondeChanceHandler = () => {
+    setEndModal(false)
+    setIsActive(true)
+    setMistakes(2)
+  }
+  const newGameHandler = () => {
+    setDifficultyModal(true)
+  }
+
+  // =====difficulty=====
+  const [difficultyModal, setDifficultyModal] = useState(false)
+
+  const closeDifficultyModal = () => {
+    setDifficultyModal(false)
+
+    setIsActive(true)
+  }
+
+  const closeDifficultyModalRouting = () => {
+    closeDifficultyModal(true)
+    setEndModal(false)
+    setMistakes(0)
+    initializer()
+  }
+  const restart = (K) => {
+    closeDifficultyModalRouting()
+    tableGenerator(K)
+  }
+
+  //make coloring and mistakes to default
+  const initializer = () => {
+    setSelectedNumber('')
+    setSelectedNumberIndex('')
+    setSelectedSquare('')
+  }
+  const initializerAll = () => {
+    initializer()
+    setMistakes(0)
+  }
+
   //handling keyboard movement keys and numbers and btn
 
   const move = (arrow, num) => {
@@ -240,75 +303,16 @@ const AppProvider = ({ children }) => {
       }
     },
     // eslint-disable-next-line
-    [selectedSquare, selectedNumberIndex, selectedNumber, isNoteON]
+    [selectedSquare, selectedNumberIndex, selectedNumber, isNoteON, mistakes]
   )
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyPress)
-
+    if (!endModal) {
+      document.addEventListener('keydown', handleKeyPress)
+    }
     return () => {
       document.removeEventListener('keydown', handleKeyPress)
     }
-  }, [handleKeyPress])
-
-  // ========= modals =========
-
-  // =====stop=====
-  const [stopModal, setStopModal] = useState(false)
-  const [isActive, setIsActive] = useState(true)
-  const [stopPlay] = useSound(stop)
-  const [playPlay] = useSound(play)
-
-  const openModal = () => {
-    setStopModal(true)
-    setIsActive(false)
-    initializer()
-    stopPlay()
-  }
-  const closeModal = () => {
-    setStopModal(false)
-    setIsActive(true)
-    playPlay()
-  }
-
-  // =====end=====
-  const [endModal, setEndModal] = useState(false)
-
-  const secondeChanceHandler = () => {
-    setEndModal(false)
-    setMistakes(2)
-  }
-  const newGameHandler = () => {
-    setEndModal(false)
-    setDifficultyModal(true)
-  }
-
-  // =====difficulty=====
-  const [difficultyModal, setDifficultyModal] = useState(false)
-  const closeDifficultyModal = () => {
-    setDifficultyModal(false)
-  }
-
-  const closeDifficultyModalRouting = () => {
-    closeDifficultyModal(true)
-    setEndModal(false)
-    setMistakes(0)
-    initializer()
-  }
-  const restart = (K) => {
-    closeDifficultyModalRouting()
-    tableGenerator(K)
-  }
-
-  //make coloring and mistakes to default
-  const initializer = () => {
-    setSelectedNumber('')
-    setSelectedNumberIndex('')
-    setSelectedSquare('')
-  }
-  const initializerAll = () => {
-    initializer()
-    setMistakes(0)
-  }
+  }, [handleKeyPress, endModal])
 
   return (
     <AppContext.Provider
