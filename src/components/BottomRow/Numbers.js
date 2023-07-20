@@ -19,7 +19,7 @@ const Numbers = () => {
                   writeNumberInTable(index)
                 }
               }}
-              style={{ visibility: usedIn >= 9 && 'hidden' }}
+              style={{ visibility: usedIn === 9 && 'hidden' }}
               key={index}>
               {index}
             </div>

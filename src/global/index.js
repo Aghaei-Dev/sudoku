@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles'
 export const MainWrapper = styled('div')(() => ({
   maxWidth: '900px',
   display: 'grid',
+  margin: 'auto',
   gridTemplateRows: 'auto 1fr',
   gridTemplateColumns: 'auto 1fr',
   padding: '.5rem',

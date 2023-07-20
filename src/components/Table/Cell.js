@@ -49,4 +49,7 @@ const CellWrapper = styled('div')(() => ({
   '*': {
     cursor: 'pointer',
   },
+  '@media (max-height: 700px) and (width<= 700px)': {
+    fontSize: ' 1.3rem',
+  },
 }))

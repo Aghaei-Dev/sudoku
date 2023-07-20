@@ -228,6 +228,8 @@ export const themeChanger = (darkMode, theme, color) => {
   }
 }
 
+// these functions are for arrow mapping
+
 export const safeColSquare = (square) => {
   if (square < 0) return square + 3
   if (square > 8) return square - 3

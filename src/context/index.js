@@ -1,13 +1,21 @@
-import React, { useState, useContext, useEffect, useCallback } from 'react'
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  useCallback,
+  createContext,
+} from 'react'
 import { Sudoku, safeRowSquare, safeColSquare } from '../functions'
 import { useLocalStorage } from '../hook'
 
 import { falseSound, trueSound, stop, play } from '../assets/sound'
 import useSound from 'use-sound'
 
-const AppContext = React.createContext()
+const AppContext = createContext()
 
 const AppProvider = ({ children }) => {
+  const [playAudio, setPlayAudio] = useLocalStorage('playAudio', true)
+
   const [isNoteON, setIsNoteON] = useState(false)
   const toggleNote = () => {
     setIsNoteON(!isNoteON)
@@ -25,7 +33,6 @@ const AppProvider = ({ children }) => {
     setEmpty(sudoku.empty)
     setHintRemain(3)
   }
-
   //for coloring table
   const [selectedNumber, setSelectedNumber] = useState('')
   const [selectedNumberIndex, setSelectedNumberIndex] = useState('')
@@ -71,12 +78,12 @@ const AppProvider = ({ children }) => {
         if (whatMustBe() === number) {
           cell.mistake = false
           setSelectedNumber(number)
-          truePlay()
+          playAudio && truePlay()
         } else {
           cell.mistake = true
           cell.editable = true
           setMistakes(mistakes + 1)
-          falsePlay()
+          playAudio && falsePlay()
         }
         setUnSolved(unSolved)
       }
@@ -132,12 +139,12 @@ const AppProvider = ({ children }) => {
     setStopModal(true)
     setIsActive(false)
     initializer()
-    stopPlay()
+    playAudio && stopPlay()
   }
   const closeModal = () => {
     setStopModal(false)
     setIsActive(true)
-    playPlay()
+    playAudio && playPlay()
   }
 
   // =====end=====
@@ -270,6 +277,8 @@ const AppProvider = ({ children }) => {
   const handleKeyPress = useCallback(
     (e) => {
       const val = e.key
+      const _ = !e.repeat
+
       //movement
       if (val.includes('Arrow')) {
         const arrow = val
@@ -278,7 +287,7 @@ const AppProvider = ({ children }) => {
 
       //insert number
       const number = Number(val)
-      if (number) {
+      if (number && _) {
         writeNumberInTable(number)
       }
 
@@ -298,12 +307,26 @@ const AppProvider = ({ children }) => {
       }
 
       //notes
-      if (val === 'N' || val === 'n') {
+      if ((val === 'N' || val === 'n') && _) {
         toggleNote()
+      }
+      if (val === ' ' && _) {
+        if (stopModal) {
+          closeModal()
+        } else {
+          openModal()
+        }
       }
     },
     // eslint-disable-next-line
-    [selectedSquare, selectedNumberIndex, selectedNumber, isNoteON, mistakes]
+    [
+      selectedSquare,
+      selectedNumberIndex,
+      selectedNumber,
+      isNoteON,
+      mistakes,
+      stopModal,
+    ]
   )
   useEffect(() => {
     if (!endModal) {
@@ -350,6 +373,8 @@ const AppProvider = ({ children }) => {
         eraseNumber,
         hintHandler,
         hintRemain,
+        playAudio,
+        setPlayAudio,
       }}>
       {children}
     </AppContext.Provider>

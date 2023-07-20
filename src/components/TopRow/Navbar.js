@@ -6,31 +6,45 @@ import {
   Brightness7OutlinedIcon,
   Brightness4OutlinedIcon,
   GridOnOutlinedIcon,
+  VolumeUpOutlinedIcon,
+  VolumeMuteOutlinedIcon,
 } from '../../assets/icons'
 import { themeChanger } from '../../functions'
 import { colors } from '../../assets/constants'
 import { useLocalStorage } from '../../hook'
 
 import useSound from 'use-sound'
-import { switchLight, changeTheme } from '../../assets/sound'
+import { switchLight, changeTheme, mute, unmute } from '../../assets/sound'
+import { useGlobalContext } from '../../context'
 
 const Navbar = () => {
   const href = useHref()
+  const { playAudio, setPlayAudio } = useGlobalContext()
   const [darkModeSound] = useSound(switchLight)
   const [themeSound] = useSound(changeTheme)
+  const [mutePlay] = useSound(mute)
+  const [unmutePlay] = useSound(unmute)
 
   const [darkMode, setDarkMode] = useLocalStorage('darkMode', false)
   const [theme, setTheme] = useLocalStorage('theme', 'blue')
 
   const toggleDarkMode = () => {
     setDarkMode((prevValue) => !prevValue)
-    darkModeSound()
+    playAudio && darkModeSound()
   }
   const toggleTheme = (colorName) => {
     if (theme !== colorName) {
       setTheme(colorName)
-      themeSound()
+      playAudio && themeSound()
     }
+  }
+  const muteSound = () => {
+    mutePlay()
+    setPlayAudio(false)
+  }
+  const unmuteSound = () => {
+    unmutePlay()
+    setPlayAudio(true)
   }
   useEffect(() => {
     themeChanger(darkMode, '', 'darkMode')
@@ -65,9 +79,22 @@ const Navbar = () => {
         </div>
       )}
       <div className='dark-mode'>
-        <span onClick={toggleDarkMode}>{darkMode ? 'dark' : 'light'} mode</span>
-        <IconBtn sx={{ ml: 1 }} onClick={toggleDarkMode} color='inherit'>
-          {darkMode ? <Brightness4OutlinedIcon /> : <Brightness7OutlinedIcon />}
+        <div>
+          <span onClick={toggleDarkMode}>
+            {darkMode ? 'dark' : 'light'} mode
+          </span>
+          <IconBtn sx={{ ml: 1 }} onClick={toggleDarkMode} color='inherit'>
+            {darkMode ? (
+              <Brightness4OutlinedIcon />
+            ) : (
+              <Brightness7OutlinedIcon />
+            )}
+          </IconBtn>
+        </div>
+        <IconBtn
+          onClick={() => (playAudio ? muteSound() : unmuteSound())}
+          color='inherit'>
+          {playAudio ? <VolumeUpOutlinedIcon /> : <VolumeMuteOutlinedIcon />}
         </IconBtn>
       </div>
     </Wrapper>
@@ -107,8 +134,11 @@ const Circle = styled('span')(({ color, selected }) => ({
 const Wrapper = styled('div')(() => ({
   borderBottom: '1px solid var(--bg-border)',
   padding: '.5rem',
-  '.theme': {},
+
   '.dark-mode': {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '.5rem',
     '*': {
       cursor: 'pointer',
     },
