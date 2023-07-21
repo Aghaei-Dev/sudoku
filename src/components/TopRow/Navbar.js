@@ -83,7 +83,7 @@ const Navbar = () => {
           <span onClick={toggleDarkMode}>
             {darkMode ? 'dark' : 'light'} mode
           </span>
-          <IconBtn sx={{ ml: 1 }} onClick={toggleDarkMode} color='inherit'>
+          <IconBtn onClick={toggleDarkMode} color='inherit'>
             {darkMode ? (
               <Brightness4OutlinedIcon />
             ) : (
