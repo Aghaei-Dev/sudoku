@@ -40,6 +40,9 @@ const AppProvider = ({ children }) => {
 
   const [mistakes, setMistakes] = useLocalStorage('mistakes', 0)
   const [hintRemain, setHintRemain] = useLocalStorage('hintRemain', 3)
+  //for undo purpose
+  const [stack, setStack] = useState([])
+
   const [mustChange, setMustChange] = useState(false)
 
   //table manipulating
@@ -70,16 +73,28 @@ const AppProvider = ({ children }) => {
         cell.val = 0
         setMustChange(true)
         setSelectedNumber(0)
+
         return
       }
       //make real number(user answer)
       if (selectedNumber === 0 && !isNoteON) {
         cell.val = number
+
         if (whatMustBe() === number) {
           cell.mistake = false
           setSelectedNumber(number)
           playAudio && truePlay()
         } else {
+          setStack([
+            {
+              val: number,
+              mistake: cell.mistake,
+              selectedSquare: selectedSquare,
+              selectedNumberIndex: selectedNumberIndex,
+            },
+            ...stack,
+          ])
+
           cell.mistake = true
           cell.editable = true
           setMistakes(mistakes + 1)
@@ -98,6 +113,7 @@ const AppProvider = ({ children }) => {
       setMustChange(true)
     }
   }
+
   const whatMustBe = () => {
     return Solved[selectedSquare][selectedNumberIndex]
   }
@@ -119,6 +135,20 @@ const AppProvider = ({ children }) => {
       setSelectedNumber(whatMustBe())
     }
     setMustChange(true)
+  }
+  const undoHandler = () => {
+    if (stack.length) {
+      const { selectedSquare, selectedNumberIndex } = stack[0]
+      let cell = unSolved[selectedSquare][selectedNumberIndex]
+      cell.val = 0
+      cell.mistake = false
+
+      setSelectedSquare(selectedSquare)
+      setSelectedNumber(0)
+      setSelectedNumberIndex(selectedNumberIndex)
+      stack.shift()
+      setMustChange(true)
+    }
   }
 
   useEffect(() => {
@@ -310,6 +340,12 @@ const AppProvider = ({ children }) => {
       if ((val === 'N' || val === 'n') && _) {
         toggleNote()
       }
+
+      //undo
+      if ((val === 'U' || val === 'u') && _) {
+        undoHandler()
+      }
+
       if (val === ' ' && _) {
         if (stopModal) {
           closeModal()
@@ -375,6 +411,7 @@ const AppProvider = ({ children }) => {
         hintRemain,
         playAudio,
         setPlayAudio,
+        undoHandler,
       }}>
       {children}
     </AppContext.Provider>
