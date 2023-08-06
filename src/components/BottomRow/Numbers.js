@@ -5,7 +5,6 @@ import { useGlobalContext } from '../../context'
 const Numbers = () => {
   const { writeNumberInTable, howManyRemain, closeModal, stopModal } =
     useGlobalContext()
-
   return (
     <Wrapper>
       {Object.values(howManyRemain()).map((usedIn, index) => {
@@ -22,6 +21,7 @@ const Numbers = () => {
               style={{ visibility: usedIn >= 9 && 'hidden' }}
               key={index}>
               {index}
+              <span>{9 - usedIn}</span>
             </div>
           )
         )
@@ -39,11 +39,26 @@ const Wrapper = styled('div')(() => ({
   alignItems: 'center',
   fontSize: '13vw',
   div: {
+    width: '10%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     lineHeight: 'initial',
     color: ' var(--bg-p-500)',
     padding: '0.1rem 0.3rem',
     cursor: 'pointer',
     borderRadius: 'var(--radius)',
+    position: 'relative',
+    span: {
+      lineHeight: '1',
+      position: 'absolute',
+      top: '100%',
+      left: '50%',
+      transform: 'translate(-50%,-110%)',
+      fontSize: '.8rem',
+      color: 'var(--text-700)',
+    },
+    backgroundColor: 'var(--text-50)',
     ':active': {
       backgroundColor: 'var(--text-100)',
     },
@@ -61,6 +76,12 @@ const Wrapper = styled('div')(() => ({
       placeItems: 'center',
       fontSize: '3rem',
       backgroundColor: 'var(--text-100)',
+      span: {
+        top: '100%',
+        left: '100%',
+        transform: 'translate(-100%,-100%)',
+        fontSize: '1rem',
+      },
       ':hover': {
         backgroundColor: 'var(--text-200)',
       },

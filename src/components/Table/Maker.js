@@ -28,7 +28,6 @@ const Maker = ({ array, modal }) => {
     }
     // eslint-disable-next-line
   }, [show])
-
   return (
     <TableWrapper>
       {array.map((_, i) => {

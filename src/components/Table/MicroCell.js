@@ -1,10 +1,23 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
+import { useGlobalContext } from '../../context'
 const MicroCell = ({ array }) => {
+  const { selectedNumber } = useGlobalContext()
   return (
     <MicroCellWrapper>
       {array.map((item, index) => {
-        return index !== 0 && <span key={index}>{item}</span>
+        return (
+          index !== 0 && (
+            <span
+              style={{
+                background: item === selectedNumber && 'var(--bg-p-200)',
+                color: item === selectedNumber && 'var(--bg-p-50)',
+              }}
+              key={index}>
+              {item}
+            </span>
+          )
+        )
       })}
     </MicroCellWrapper>
   )

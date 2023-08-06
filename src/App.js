@@ -14,6 +14,7 @@ function App() {
         <Route path='hard' element={<Hard />} />
         <Route path='expert' element={<Expert />} />
         <Route path='evil' element={<Evil />} />
+
         <Route path='*' element={<ErrorPage />} />
       </Routes>
     </Router>

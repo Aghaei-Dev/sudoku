@@ -17,7 +17,7 @@ export class Sudoku {
           editable: false,
           conflict: false,
           mistake: false,
-          note: [null, null, null, null, null, null, null, null, null, null],
+          note: Array.from({ length: N + 1 }, () => null),
         }
       })
     )
