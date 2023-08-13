@@ -5,7 +5,8 @@ import {
   SignalCellularAltOutlinedIcon,
 } from '../../assets/icons'
 import { useHref } from 'react-router-dom'
-const Win = ({ time }) => {
+
+export default function Win({ time }) {
   const difficulty = useHref().slice(1)
   return (
     <Overlay>
@@ -22,8 +23,6 @@ const Win = ({ time }) => {
     </Overlay>
   )
 }
-
-export default Win
 
 const Overlay = styled('div')(() => {
   return {

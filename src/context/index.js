@@ -5,21 +5,18 @@ import React, {
   useCallback,
   createContext,
 } from 'react'
+import useSound from 'use-sound'
 import { Sudoku, safeRowSquare, safeColSquare } from '../functions'
 import { useLocalStorage } from '../hook'
-
 import { falseSound, trueSound, stop, play } from '../assets/sound'
-import useSound from 'use-sound'
 
-const AppContext = createContext()
+export const AppContext = createContext()
 
-const AppProvider = ({ children }) => {
+export const AppProvider = ({ children }) => {
   const [playAudio, setPlayAudio] = useLocalStorage('playAudio', true)
 
   const [isNoteON, setIsNoteON] = useState(false)
-  const toggleNote = () => {
-    setIsNoteON(!isNoteON)
-  }
+  const toggleNote = () => setIsNoteON(!isNoteON)
 
   const [unSolved, setUnSolved] = useLocalStorage('unSolved', [])
   const [Solved, setSolved] = useState([])
@@ -40,6 +37,7 @@ const AppProvider = ({ children }) => {
 
   const [mistakes, setMistakes] = useLocalStorage('mistakes', 0)
   const [hintRemain, setHintRemain] = useLocalStorage('hintRemain', 3)
+
   //for undo purpose
   const [stack, setStack] = useState([])
 
@@ -114,9 +112,8 @@ const AppProvider = ({ children }) => {
     }
   }
 
-  const whatMustBe = () => {
-    return Solved[selectedSquare][selectedNumberIndex]
-  }
+  const whatMustBe = () => Solved[selectedSquare][selectedNumberIndex]
+
   const eraseNumber = () => {
     if (conditionForSelectingCells && cell.editable) {
       cell.val = 0
@@ -185,9 +182,7 @@ const AppProvider = ({ children }) => {
     setIsActive(true)
     setMistakes(2)
   }
-  const newGameHandler = () => {
-    setDifficultyModal(true)
-  }
+  const newGameHandler = () => setDifficultyModal(true)
 
   // =====difficulty=====
   const [difficultyModal, setDifficultyModal] = useState(false)
@@ -274,7 +269,6 @@ const AppProvider = ({ children }) => {
             setSelectedNumber(unSolved[selectedSquare][num - 1].val)
             return
           }
-
         case 'ArrowRight':
           if (
             (selectedSquare + 1) % 3 === 0 &&
@@ -421,5 +415,3 @@ const AppProvider = ({ children }) => {
 export const useGlobalContext = () => {
   return useContext(AppContext)
 }
-
-export { AppContext, AppProvider }

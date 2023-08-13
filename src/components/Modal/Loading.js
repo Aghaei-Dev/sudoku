@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles'
 import { CircularProgress } from '@mui/material'
 import { ModalWrapper } from '../../global'
 
-const Loading = () => {
+export default function Loading() {
   return (
     <Wrapper>
       <span>
@@ -13,8 +13,6 @@ const Loading = () => {
     </Wrapper>
   )
 }
-
-export default Loading
 
 const Wrapper = styled(ModalWrapper)(() => ({
   background: 'var(--bg-main)',

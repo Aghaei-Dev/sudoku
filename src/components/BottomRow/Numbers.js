@@ -1,8 +1,7 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
-
-const Numbers = () => {
+export default function Numbers() {
   const { writeNumberInTable, howManyRemain, closeModal, stopModal } =
     useGlobalContext()
   return (
@@ -30,15 +29,15 @@ const Numbers = () => {
   )
 }
 
-export default Numbers
-
 const Wrapper = styled('div')(() => ({
   width: '100%',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
   fontSize: '13vw',
+
   div: {
+    transition: ' background .3s ',
     width: '10%',
     display: 'flex',
     justifyContent: 'center',

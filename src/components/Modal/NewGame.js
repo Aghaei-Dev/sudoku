@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles'
 import { Button } from '@mui/material'
 import { ModalWrapper } from '../../global'
 
-const NewGame = () => {
+export default function NewGame() {
   return (
     <ModalWrapper>
       <div>
@@ -29,8 +29,6 @@ const NewGame = () => {
     </ModalWrapper>
   )
 }
-
-export default NewGame
 
 const Btn = styled(Button)(({ variant }) => ({
   textTransform: 'capitalize',

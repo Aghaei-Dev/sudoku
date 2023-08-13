@@ -17,7 +17,7 @@ import useSound from 'use-sound'
 import { switchLight, changeTheme, mute, unmute } from '../../assets/sound'
 import { useGlobalContext } from '../../context'
 
-const Navbar = () => {
+export default function Navbar() {
   const href = useHref()
   const { playAudio, setPlayAudio } = useGlobalContext()
   const [darkModeSound] = useSound(switchLight)
@@ -101,7 +101,6 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
 const Btn = styled(Button)(() => ({
   textTransform: 'capitalize',
   color: 'var(--bg-p-500)',
@@ -143,7 +142,7 @@ const Wrapper = styled('div')(() => ({
       cursor: 'pointer',
     },
   },
-  '@media (width<= 400px)': {
-    padding: '0rem',
+  '@media (width<= 425px)': {
+    padding: '.1rem',
   },
 }))

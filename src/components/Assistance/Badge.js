@@ -2,7 +2,7 @@ import React from 'react'
 import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
 
-const Badge = ({ content, isHint }) => {
+export default function Badge({ content, isHint }) {
   const { isNoteON, hintRemain } = useGlobalContext()
   return (
     <Wrapper isHint={isHint} isNoteON={isNoteON} hintRemain={hintRemain}>
@@ -11,9 +11,8 @@ const Badge = ({ content, isHint }) => {
   )
 }
 
-export default Badge
-
 const Wrapper = styled('span')(({ isHint, isNoteON, hintRemain }) => ({
+  transition: 'background .3s ',
   fontWeight: '700',
   textTransform: 'uppercase',
   background:

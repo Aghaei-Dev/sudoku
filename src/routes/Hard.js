@@ -1,7 +1,5 @@
 import React from 'react'
 import { ORG } from '../components'
-const Hard = () => {
-  return <ORG  K={66} mode='hard' />
+export default function Hard() {
+  return <ORG K={66} mode='hard' />
 }
-
-export default Hard

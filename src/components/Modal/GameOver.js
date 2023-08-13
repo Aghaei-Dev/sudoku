@@ -4,7 +4,7 @@ import { Button } from '@mui/material'
 import { useGlobalContext } from '../../context'
 import { ModalWrapper } from '../../global'
 
-const GameOver = () => {
+export default function GameOver() {
   const { secondeChanceHandler, newGameHandler } = useGlobalContext()
   return (
     <ModalWrapper>
@@ -23,8 +23,6 @@ const GameOver = () => {
     </ModalWrapper>
   )
 }
-
-export default GameOver
 
 const Btn = styled(Button)(({ variant }) => ({
   textTransform: 'capitalize',

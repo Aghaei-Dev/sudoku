@@ -1,7 +1,7 @@
 import React from 'react'
 import { CircleIcon } from '../../assets/icons'
 import { styled } from '@mui/material/styles'
-const TextTitle = ({ title }) => {
+export default function TextTitle({ title }) {
   return (
     <Wrapper>
       <CircleIco />
@@ -10,8 +10,6 @@ const TextTitle = ({ title }) => {
   )
 }
 
-export default TextTitle
-
 const CircleIco = styled(CircleIcon)(() => ({
   marginRight: '1rem',
   alignSelf: 'start',
@@ -19,6 +17,7 @@ const CircleIco = styled(CircleIcon)(() => ({
 }))
 
 const Wrapper = styled('h3')(() => ({
+  transition: ' background .3s ',
   background: 'var(--bg-border-light)',
   margin: '2rem 0',
   padding: '2rem 1.5rem ',

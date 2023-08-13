@@ -30,6 +30,10 @@ export const MainWrapper = styled('div')(() => ({
       flexDirection: 'column',
       marginTop: '1rem',
     },
+    '@media (width<= 425px)': {
+      marginTop: '.5rem',
+      rowGap: '.5rem',
+    },
   },
   '@media (width<= 700px)': {
     display: 'flex',

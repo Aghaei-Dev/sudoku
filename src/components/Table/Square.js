@@ -2,7 +2,7 @@ import React from 'react'
 import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
 
-const Square = ({ children, number }) => {
+export default function Square({ children, number }) {
   const { selectedSquare, setSelectedSquare } = useGlobalContext()
 
   return (
@@ -18,7 +18,6 @@ const Square = ({ children, number }) => {
   )
 }
 
-export default Square
 const SquareWrapper = styled('div')(() => ({
   border: '1px solid var(--table-line-dark)',
   display: 'grid',

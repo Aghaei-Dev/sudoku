@@ -214,9 +214,7 @@ export class Sudoku {
 
 export const hrefCapitalizer = (href) => {
   if (href.length > 0) {
-    document.title = `Sudoku - ${
-      href.charAt(0).toUpperCase() + href.slice(1)
-    } Level`
+    document.title = `Sudoku - ${href[0].toUpperCase() + href.slice(1)} Level`
   }
 }
 

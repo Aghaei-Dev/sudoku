@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { styled } from '@mui/material/styles'
 
-const Tooltip = ({ delay, children, title, placement }) => {
+export default function Tooltip({ delay, children, title, placement }) {
   let timeout
   const [active, setActive] = useState(false)
 
@@ -23,8 +23,6 @@ const Tooltip = ({ delay, children, title, placement }) => {
     </Wrapper>
   )
 }
-
-export default Tooltip
 
 const Wrapper = styled('div')(() => ({
   position: 'relative',

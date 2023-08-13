@@ -1,7 +1,7 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
-const MicroCell = ({ array }) => {
+export default function  MicroCell  ({ array }) {
   const { selectedNumber } = useGlobalContext()
   return (
     <MicroCellWrapper>
@@ -23,7 +23,7 @@ const MicroCell = ({ array }) => {
   )
 }
 
-export default MicroCell
+
 
 const MicroCellWrapper = styled('div')(() => ({
   fontSize: '.5rem',

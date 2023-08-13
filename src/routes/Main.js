@@ -2,7 +2,7 @@ import React from 'react'
 import { TextTitle } from '../components'
 import { styled } from '@mui/material/styles'
 import { rule2, rule4 } from '../assets/images'
-const Main = () => {
+export default function Main() {
   return (
     <Wrapper>
       <h1>how to play sudoku ?</h1>
@@ -81,7 +81,6 @@ const Main = () => {
     </Wrapper>
   )
 }
-export default Main
 
 const Wrapper = styled('div')(() => ({
   margin: 'auto',

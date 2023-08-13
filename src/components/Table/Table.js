@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useGlobalContext } from '../../context'
 import { Loading, Maker } from '../../components'
 
-const Table = ({ K }) => {
+export default function Table({ K }) {
   const { stopModal, unSolved, tableGenerator, empty } = useGlobalContext()
 
   useEffect(() => {
@@ -20,5 +20,3 @@ const Table = ({ K }) => {
     return <Maker array={unSolved} />
   }
 }
-
-export default Table

@@ -5,7 +5,7 @@ import { Button } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { hrefCapitalizer } from '../../functions'
 
-const DiffNav = () => {
+export default function DiffNav() {
   const href = useHref().slice(1)
 
   useEffect(() => {
@@ -37,8 +37,6 @@ const DiffNav = () => {
     </Wrapper>
   )
 }
-
-export default DiffNav
 
 const Wrapper = styled('nav')(() => ({
   padding: '.5rem 0 1rem',

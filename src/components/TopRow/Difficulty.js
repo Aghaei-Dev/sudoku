@@ -4,7 +4,7 @@ import { useHref, useNavigate } from 'react-router-dom'
 import { gameMode } from '../../assets/constants'
 import { hrefCapitalizer } from '../../functions'
 
-const Difficulty = ({ mode }) => {
+export default function Difficulty({ mode }) {
   let navigate = useNavigate()
   const href = useHref().slice(1)
 
@@ -31,8 +31,6 @@ const Difficulty = ({ mode }) => {
     </Wrapper>
   )
 }
-
-export default Difficulty
 
 const Wrapper = styled('div')(() => ({
   span: {

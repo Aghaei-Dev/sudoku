@@ -6,7 +6,7 @@ import { gameMode } from '../../assets/constants'
 import { Link, useHref } from 'react-router-dom'
 import { useGlobalContext } from '../../context'
 
-const DifficultyModal = () => {
+export default function DifficultyModal() {
   const href = useHref().slice(1)
   const { closeDifficultyModal, closeDifficultyModalRouting, restart } =
     useGlobalContext()
@@ -55,7 +55,6 @@ const DifficultyModal = () => {
   )
 }
 
-export default DifficultyModal
 const Btn = styled('div')(() => ({
   cursor: 'pointer',
   width: '100%',

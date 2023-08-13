@@ -1,29 +1,20 @@
-import TextTitle from './Assistance/TextTitle'
-import Badge from './Assistance/Badge'
-import Tooltip from './Assistance/Tooltip'
+import { TextTitle, Tooltip, Badge } from './Assistance'
 
-import Difficulty from './TopRow/Difficulty'
-import Timer from './TopRow/Timer'
-import Mistakes from './TopRow/Mistakes'
-import Navbar from './TopRow/Navbar'
-import DiffNav from './TopRow/DiffNav'
+import { Numbers, FourButton } from './BottomRow'
 
-import Numbers from './BottomRow/Numbers'
-import FourButton from './BottomRow/FourButton'
+import { DiffNav, Difficulty, Timer, Navbar, Mistakes } from './TopRow'
 
-import Maker from './Table/Maker'
-import Table from './Table/Table'
-import Square from './Table/Square'
-import Cell from './Table/Cell'
-import MicroCell from './Table/MicroCell'
+import { Maker, Table, Square, Cell, MicroCell } from './Table'
 
-import Loading from './Modal/Loading'
-import StopModal from './Modal/StopModal'
-import NewGame from './Modal/NewGame'
-import GameOver from './Modal/GameOver'
-import DifficultyModal from './Modal/DifficultyModal'
-import Win from './Modal/Win'
-import CenterRow from './Modal/CenterRow'
+import {
+  Loading,
+  StopModal,
+  NewGame,
+  GameOver,
+  DifficultyModal,
+  Win,
+  CenterRow,
+} from './Modal'
 
 import ORG from './ORG'
 

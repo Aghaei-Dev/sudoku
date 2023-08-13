@@ -4,7 +4,7 @@ import { IconButton } from '@mui/material'
 import { PlayArrowIcon } from '../../assets/icons'
 import { useGlobalContext } from '../../context'
 
-const StopModal = () => {
+export default function StopModal() {
   const { closeModal } = useGlobalContext()
 
   return (
@@ -15,8 +15,6 @@ const StopModal = () => {
     </Overlay>
   )
 }
-
-export default StopModal
 
 const Overlay = styled('div')(() => ({
   width: ' 100%',

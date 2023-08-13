@@ -2,7 +2,15 @@ import React from 'react'
 import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
 import { MicroCell } from '../'
-const Cell = ({ val, conflict, editable, mistake, note, index, square }) => {
+export default function Cell({
+  val,
+  conflict,
+  editable,
+  mistake,
+  note,
+  index,
+  square,
+}) {
   const {
     selectedNumber,
     setSelectedNumber,
@@ -37,8 +45,6 @@ const Cell = ({ val, conflict, editable, mistake, note, index, square }) => {
   )
 }
 
-export default Cell
-
 const CellWrapper = styled('div')(() => ({
   border: '.1rem solid var(--table-line-light)',
   fontSize: ' 1.5rem',
@@ -48,8 +54,5 @@ const CellWrapper = styled('div')(() => ({
   color: 'var(--bg-black)',
   '*': {
     cursor: 'pointer',
-  },
-  '@media (max-height: 700px) and (width<= 700px)': {
-    fontSize: ' 1.3rem',
   },
 }))

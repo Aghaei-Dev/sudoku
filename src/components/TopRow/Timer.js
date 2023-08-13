@@ -3,8 +3,8 @@ import { IconButton } from '@mui/material'
 import { useGlobalContext } from '../../context'
 import { PlayArrowIcon, PauseOutlinedIcon } from '../../assets/icons'
 import { styled } from '@mui/material/styles'
-
-const Timer = () => {
+import { Tooltip } from '..'
+export default function Timer() {
   const { isActive, openModal, closeModal } = useGlobalContext()
   const [second, setSecond] = useState('00')
   const [minute, setMinute] = useState('00')
@@ -36,24 +36,25 @@ const Timer = () => {
   }, [isActive, counter])
 
   return (
-    <Wrapper>
-      <p onClick={isActive ? openModal : closeModal}>
-        {minute} : {second}
-      </p>
-      <IconBtn size='small' onClick={isActive ? openModal : closeModal}>
-        {isActive ? (
-          <PauseOutlinedIcon sx={{ padding: '.3rem' }} />
-        ) : (
-          <PlayArrowIcon sx={{ padding: '.3rem' }} />
-        )}
-      </IconBtn>
-    </Wrapper>
+    <Tooltip placement='left' title='HotKey : space'>
+      <Wrapper>
+        <p onClick={isActive ? openModal : closeModal}>
+          {minute} : {second}
+        </p>
+        <IconBtn size='small' onClick={isActive ? openModal : closeModal}>
+          {isActive ? (
+            <PauseOutlinedIcon sx={{ padding: '.3rem' }} />
+          ) : (
+            <PlayArrowIcon sx={{ padding: '.3rem' }} />
+          )}
+        </IconBtn>
+      </Wrapper>
+    </Tooltip>
   )
 }
 
-export default Timer
-
 const IconBtn = styled(IconButton)(() => ({
+  transition: ' background .3s ',
   padding: '.1rem',
   background: 'var(--text-100)',
   ':hover': {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
-const CenterRow = ({ winRate }) => {
+export default function CenterRow({ winRate }) {
   return (
     <Wrapper>
       <p>
@@ -10,8 +10,6 @@ const CenterRow = ({ winRate }) => {
     </Wrapper>
   )
 }
-
-export default CenterRow
 
 const Wrapper = styled('div')(() => ({
   width: '90%',

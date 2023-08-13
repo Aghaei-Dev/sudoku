@@ -5,7 +5,7 @@ import { Square, Cell, StopModal, CenterRow, Win } from '../../components'
 import { useHref } from 'react-router-dom'
 import { gameMode } from '../../assets/constants'
 
-const Maker = ({ array, modal }) => {
+export default function Maker({ array, modal }) {
   const { initializerAll, howManyRemain } = useGlobalContext()
   const href = useHref().slice(1)
 
@@ -48,8 +48,6 @@ const Maker = ({ array, modal }) => {
   )
 }
 
-export default Maker
-
 const TableWrapper = styled('div')(() => ({
   overflow: 'hidden',
   display: 'grid',
@@ -64,6 +62,7 @@ const TableWrapper = styled('div')(() => ({
   // color: 'var(--bg-p-100)',
   // forgive me for this media query
   //for square shape of table we must do this
+  //i haven't any other idea
   '@media (width<= 860px)': {
     width: '450px',
     height: '450px',

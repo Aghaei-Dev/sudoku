@@ -13,10 +13,9 @@ import {
   Loading,
   DiffNav,
 } from '../components'
-
 import { MainWrapper } from '../global'
 import { useGlobalContext } from '../context'
-const ORG = ({ K, mode }) => {
+export default function ORG({ K, mode }) {
   const {
     loading,
     mistakes,
@@ -56,7 +55,3 @@ const ORG = ({ K, mode }) => {
     </MainWrapper>
   )
 }
-
-export default ORG
-
-//here we have width

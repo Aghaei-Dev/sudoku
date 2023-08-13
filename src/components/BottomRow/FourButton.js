@@ -6,7 +6,7 @@ import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
 import { Badge, Tooltip } from '..'
 
-const FourButton = () => {
+export default function FourButton() {
   const {
     isNoteON,
     toggleNote,
@@ -109,8 +109,6 @@ const FourButton = () => {
   )
 }
 
-export default FourButton
-
 const SVGicon = styled(SvgIcon)(() => ({
   fontSize: '2rem',
 }))
@@ -121,14 +119,13 @@ const IconBtn = styled(IconButton)(() => ({
   color: 'var(--bg-p-500)',
   background: 'var(--text-100)',
   position: 'relative',
+  transition: ' background 0.3s ',
+
   '*': {
     cursor: 'pointer',
   },
   ':hover': {
     background: 'var(--text-200)',
-  },
-  '@media (width<= 350px)': {
-    padding: '0.5rem',
   },
 }))
 
@@ -154,13 +151,6 @@ const Wrapper = styled('div')(() => ({
     padding: '0',
     '.link-btn': {
       padding: '0',
-    },
-  },
-  '@media (max-height: 700px) and (width<= 700px)': {
-    '.item': {
-      p: {
-        display: 'none',
-      },
     },
   },
 }))
