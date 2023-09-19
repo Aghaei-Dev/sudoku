@@ -19,12 +19,21 @@ export default function Tooltip({ delay, children, title, placement }) {
   return (
     <Wrapper onMouseEnter={show} onMouseLeave={hide}>
       {children}
-      {active && <div className={`tooltip ${placement || 'top'}`}>{title}</div>}
+      <span>
+        {active && (
+          <div className={`tooltip ${placement || 'top'}`}>{title}</div>
+        )}
+      </span>
     </Wrapper>
   )
 }
 
 const Wrapper = styled('div')(() => ({
+  '@media (width<=1024px)': {
+    span: {
+      display: 'none',
+    },
+  },
   position: 'relative',
   '.tooltip': {
     position: 'absolute',

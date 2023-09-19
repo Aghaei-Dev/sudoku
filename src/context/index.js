@@ -7,18 +7,22 @@ import React, {
 } from 'react'
 import useSound from 'use-sound'
 import { Sudoku, safeRowSquare, safeColSquare } from '../functions'
-import { useLocalStorage } from '../hook'
+import { useStorage } from '../hook'
 import { falseSound, trueSound, stop, play } from '../assets/sound'
 
 export const AppContext = createContext()
 
 export const AppProvider = ({ children }) => {
-  const [playAudio, setPlayAudio] = useLocalStorage('playAudio', true)
+  const [playAudio, setPlayAudio] = useStorage(
+    'localStorage',
+    'playAudio',
+    true
+  )
 
   const [isNoteON, setIsNoteON] = useState(false)
   const toggleNote = () => setIsNoteON(!isNoteON)
 
-  const [unSolved, setUnSolved] = useLocalStorage('unSolved', [])
+  const [unSolved, setUnSolved] = useStorage('localStorage', 'unSolved', [])
   const [Solved, setSolved] = useState([])
   const [empty, setEmpty] = useState([])
 
@@ -35,8 +39,12 @@ export const AppProvider = ({ children }) => {
   const [selectedNumberIndex, setSelectedNumberIndex] = useState('')
   const [selectedSquare, setSelectedSquare] = useState('')
 
-  const [mistakes, setMistakes] = useLocalStorage('mistakes', 0)
-  const [hintRemain, setHintRemain] = useLocalStorage('hintRemain', 3)
+  const [mistakes, setMistakes] = useStorage('localStorage', 'mistakes', 0)
+  const [hintRemain, setHintRemain] = useStorage(
+    'localStorage',
+    'hintRemain',
+    3
+  )
 
   //for undo purpose
   const [stack, setStack] = useState([])

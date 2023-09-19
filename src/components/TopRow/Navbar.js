@@ -11,7 +11,7 @@ import {
 } from '../../assets/icons'
 import { themeChanger } from '../../functions'
 import { colors } from '../../assets/constants'
-import { useLocalStorage } from '../../hook'
+import { useStorage } from '../../hook'
 
 import useSound from 'use-sound'
 import { switchLight, changeTheme, mute, unmute } from '../../assets/sound'
@@ -25,8 +25,8 @@ export default function Navbar() {
   const [mutePlay] = useSound(mute)
   const [unmutePlay] = useSound(unmute)
 
-  const [darkMode, setDarkMode] = useLocalStorage('darkMode', false)
-  const [theme, setTheme] = useLocalStorage('theme', 'blue')
+  const [darkMode, setDarkMode] = useStorage('localStorage', 'darkMode', false)
+  const [theme, setTheme] = useStorage('localStorage', 'theme', 'blue')
 
   const toggleDarkMode = () => {
     setDarkMode((prevValue) => !prevValue)
