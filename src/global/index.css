@@ -1,0 +1,155 @@
+/*
+=============== 
+Global Styles And Variables
+===============
+*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+
+:root {
+  --bg-percent: #ffcf00;
+  --bg-main: #fff;
+  --bg-black: #222;
+  --bg-border: #e3e3e3;
+  --bg-border-light: #f5f5f5f5;
+  --table-line-dark: rgba(0, 0, 0, 0.7);
+  --table-line-light: rgba(0, 0, 0, 0.07);
+
+  /* blue */
+  --bg-p-50: #f7fbff;
+  --bg-p-100: #d9ecff;
+  --bg-p-200: #9cceff;
+  --bg-p-300: #5eafff;
+  --bg-p-400: #2191ff;
+  --bg-p-500: #0072e3;
+  --bg-p-600: #0063c4;
+  --bg-p-700: #0053a6;
+  --bg-p-800: #004487;
+  --bg-p-900: #003569;
+  --bg-p-950: #002d59;
+  --bg-error: #ffb6b3;
+  --clr-error: #ff3429;
+
+  /* gray */
+  --text-50: #f3f3f5;
+  --text-100: #e3e5e8;
+  --text-200: #c5c8ce;
+  --text-300: #a6abb5;
+  --text-400: #888e9b;
+  --text-500: #6b7280;
+  --text-600: #585e6a;
+  --text-700: #464a54;
+  --text-800: #33373d;
+  --text-900: #212327;
+  --text-950: #17191c;
+
+  --transition: all 0.3s linear;
+  --spacing: 0.1rem;
+  --radius: 0.25rem;
+  --max-width: 1170px;
+  --fixed-width: 620px;
+}
+.darkMode {
+  --bg-main: #101010;
+  --bg-black: #fff;
+  --bg-border: #aaa;
+  --bg-border-light: #202020;
+  --table-line-dark: rgba(255, 255, 255, 0.7);
+  --table-line-light: rgba(255, 255, 255, 0.2);
+
+  --bg-p-100: #2191ff;
+  --bg-p-200: #0063c4;
+  --bg-p-600: #9cceff;
+
+  --bg-error: #ff6961;
+  --clr-error: #b80900;
+  /* gray */
+  --text-50: #17191c;
+  --text-100: #212327;
+  --text-200: #33373d;
+  --text-300: #464a54;
+  --text-400: #585e6a;
+
+  --text-500: #6b7280;
+
+  --text-600: #888e9b;
+  --text-700: #a6abb5;
+  --text-800: #c5c8ce;
+  --text-900: #e3e5e8;
+  --text-950: #f3f3f5;
+}
+
+.darkMode.purple {
+  --bg-p-100: #9c7dcd;
+  --bg-p-200: #6f45b4;
+  --bg-p-600: #c0ade0;
+}
+.darkMode.green {
+  --bg-p-100: #77dd77;
+  --bg-p-200: #2fba2f;
+  --bg-p-600: #c1f0c1;
+}
+.purple {
+  --bg-p-100: #d4c7ea;
+  --bg-p-200: #b29bd9;
+  --bg-p-500: #8560c2;
+  --bg-p-600: #613d9e;
+}
+.green {
+  --bg-p-100: #d9f5d9;
+  --bg-p-200: #a8e9a8;
+  --bg-p-500: #3ecf3e;
+  --bg-p-600: #1f7e1f;
+}
+::selection {
+  background: inherit;
+  color: inherit;
+}
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-transform: capitalize;
+  list-style-type: none;
+  text-decoration: none;
+  cursor: default;
+  &::-webkit-scrollbar {
+    width: 0.3rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--bg-border-light);
+    border-radius: 50rem;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: var(--bg-border);
+  }
+}
+html,
+body {
+  margin: auto;
+  max-width: var(--max-width);
+  height: 100vh;
+  overflow: hidden;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-main);
+  color: var(--text-800);
+  line-height: 1.5;
+  font-size: 0.875rem;
+  transition: color 0.3s, background 0.3s;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
