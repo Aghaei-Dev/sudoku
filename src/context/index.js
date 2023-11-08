@@ -38,13 +38,10 @@ export const AppProvider = ({ children }) => {
   const [selectedNumber, setSelectedNumber] = useState('')
   const [selectedNumberIndex, setSelectedNumberIndex] = useState('')
   const [selectedSquare, setSelectedSquare] = useState('')
+  const [colorizeNumber, setColorizeNumber] = useState('')
 
   const [mistakes, setMistakes] = useStorage('localStorage', 'mistakes', 0)
-  const [hintRemain, setHintRemain] = useStorage(
-    'localStorage',
-    'hintRemain',
-    3
-  )
+  const [hintRemain, setHintRemain] = useStorage('localStorage', 'hintRemain')
 
   //for undo purpose
   const [stack, setStack] = useState([])
@@ -223,8 +220,14 @@ export const AppProvider = ({ children }) => {
     setMistakes(0)
   }
 
+  const colorizeHandler = (value) => {
+    if (value) {
+      setColorizeNumber(value)
+    } else {
+      setColorizeNumber((lastVal) => lastVal)
+    }
+  }
   //handling keyboard movement keys and numbers and btn
-
   const move = (arrow, num) => {
     if (conditionForSelectingCells) {
       switch (arrow) {
@@ -233,31 +236,43 @@ export const AppProvider = ({ children }) => {
             return
           }
           if (num - 3 < 0) {
+            const value =
+              unSolved[safeColSquare(selectedSquare - 3)][num + 6].val
+
             setSelectedSquare(safeColSquare(selectedSquare - 3))
             setSelectedNumberIndex(num + 6)
-            setSelectedNumber(
-              unSolved[safeColSquare(selectedSquare - 3)][num + 6].val
-            )
+            setSelectedNumber(value)
+            colorizeHandler(value)
+
             return
           } else {
+            const value = unSolved[selectedSquare][num - 3].val
             setSelectedNumberIndex(num - 3)
-            setSelectedNumber(unSolved[selectedSquare][num - 3].val)
+            setSelectedNumber(value)
+            colorizeHandler(value)
+
             return
           }
+
         case 'ArrowDown':
           if (num / 3 >= 2 && selectedSquare >= 6) {
             return
           }
           if (num + 3 > 8) {
+            const value =
+              unSolved[safeColSquare(selectedSquare + 3)][num - 6].val
             setSelectedSquare(safeColSquare(selectedSquare + 3))
             setSelectedNumberIndex(num - 6)
-            setSelectedNumber(
-              unSolved[safeColSquare(selectedSquare + 3)][num - 6].val
-            )
+            setSelectedNumber(value)
+            colorizeHandler(value)
+
             return
           } else {
+            const value = unSolved[selectedSquare][num + 3].val
             setSelectedNumberIndex(num + 3)
-            setSelectedNumber(unSolved[selectedSquare][num + 3].val)
+            setSelectedNumber(value)
+            colorizeHandler(value)
+
             return
           }
         case 'ArrowLeft':
@@ -265,16 +280,20 @@ export const AppProvider = ({ children }) => {
             return
           }
           if (num === 0 || num === 3 || num === 6) {
+            const value =
+              unSolved[safeRowSquare('left', selectedSquare)][num + 2].val
             setSelectedSquare(safeRowSquare('left', selectedSquare))
             setSelectedNumberIndex(num + 2)
-            setSelectedNumber(
-              unSolved[safeRowSquare('left', selectedSquare)][num + 2].val
-            )
+            setSelectedNumber(value)
+            colorizeHandler(value)
 
             return
           } else {
+            const value = unSolved[selectedSquare][num - 1].val
             setSelectedNumberIndex(num - 1)
-            setSelectedNumber(unSolved[selectedSquare][num - 1].val)
+            setSelectedNumber(value)
+            colorizeHandler(value)
+
             return
           }
         case 'ArrowRight':
@@ -285,15 +304,20 @@ export const AppProvider = ({ children }) => {
             return
           }
           if (num + 1 === 3 || num + 1 === 6 || num + 1 === 9) {
+            const value =
+              unSolved[safeRowSquare('right', selectedSquare)][num - 2].val
             setSelectedSquare(safeRowSquare('right', selectedSquare))
             setSelectedNumberIndex(num - 2)
-            setSelectedNumber(
-              unSolved[safeRowSquare('right', selectedSquare)][num - 2].val
-            )
+            setSelectedNumber(value)
+            colorizeHandler(value)
+
             return
           } else {
+            const value = unSolved[selectedSquare][num + 1].val
             setSelectedNumberIndex(num + 1)
-            setSelectedNumber(unSolved[selectedSquare][num + 1].val)
+            setSelectedNumber(value)
+            colorizeHandler(value)
+
             return
           }
         default:
@@ -310,7 +334,6 @@ export const AppProvider = ({ children }) => {
     (e) => {
       const val = e.key
       const _ = !e.repeat
-
       //movement
       if (val.includes('Arrow') && isActive) {
         const arrow = val
@@ -367,7 +390,7 @@ export const AppProvider = ({ children }) => {
     ]
   )
   useEffect(() => {
-    if (!endModal) {
+    if (!endModal && document.location.href.split('/')[3] !== '') {
       document.addEventListener('keydown', handleKeyPress)
     }
     return () => {
@@ -412,6 +435,8 @@ export const AppProvider = ({ children }) => {
     playAudio,
     setPlayAudio,
     undoHandler,
+    colorizeNumber,
+    colorizeHandler,
   }
   return <AppContext.Provider value={ctxVal}>{children}</AppContext.Provider>
 }

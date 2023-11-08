@@ -16,7 +16,9 @@ const Wrapper = styled('span')(({ isHint, isNoteON, hintRemain }) => ({
   fontWeight: '700',
   textTransform: 'uppercase',
   background:
-    (!isNoteON && !isHint) || (isHint && hintRemain === 0)
+    (!isNoteON && !isHint) ||
+    (isHint && hintRemain === 0) ||
+    (isHint && isNoteON)
       ? 'var(--text-300)'
       : 'var(--bg-p-500)',
   color: 'white',

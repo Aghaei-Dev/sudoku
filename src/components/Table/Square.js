@@ -12,7 +12,8 @@ export default function Square({ children, number }) {
       }}
       style={{
         background: number === selectedSquare && 'var(--bg-p-100)',
-      }}>
+      }}
+    >
       {children}
     </SquareWrapper>
   )

@@ -12,17 +12,17 @@ export default function Cell({
   square,
 }) {
   const {
-    selectedNumber,
     setSelectedNumber,
     selectedNumberIndex,
     selectedSquare,
     setSelectedNumberIndex,
+    colorizeNumber,
+    colorizeHandler,
   } = useGlobalContext()
-
   //what must colored !
   //square coloring and same numbers and now cell
   const condition_1 =
-    (val === selectedNumber && selectedNumber !== 0 && 'var(--bg-p-200)') ||
+    (val === colorizeNumber && colorizeNumber !== 0 && 'var(--bg-p-200)') ||
     (selectedNumberIndex === index &&
       selectedSquare === square &&
       'var(--bg-p-200)')
@@ -30,6 +30,7 @@ export default function Cell({
   return (
     <CellWrapper
       onClick={() => {
+        colorizeHandler(val)
         setSelectedNumber(val)
         setSelectedNumberIndex(index)
       }}
@@ -38,7 +39,8 @@ export default function Cell({
         color:
           (mistake && 'var(--clr-error)') ||
           (mistake === false && editable === true && 'var(--bg-p-600)'),
-      }}>
+      }}
+    >
       {val === 0 ? '' : val}
       {val === 0 && <MicroCell array={note} />}
     </CellWrapper>
