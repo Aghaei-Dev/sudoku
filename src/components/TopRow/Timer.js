@@ -34,7 +34,6 @@ export default function Timer() {
     }
     return () => clearInterval(intervalId)
   }, [isActive, counter])
-
   return (
     <Tooltip placement='left' title='HotKey : space'>
       <Wrapper>

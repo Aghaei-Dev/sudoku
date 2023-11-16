@@ -4,7 +4,7 @@ import { IconButton, SvgIcon } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
 import { useGlobalContext } from '../../context'
-import { Badge, Tooltip } from '..'
+import { Badge, Tooltip, Switch } from '..'
 
 export default function FourButton() {
   const {

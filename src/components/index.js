@@ -1,4 +1,4 @@
-import { TextTitle, Tooltip, Badge } from './Assistance'
+import { TextTitle, Tooltip, Badge, Switch } from './Assistance'
 
 import { Numbers, FourButton } from './BottomRow'
 
@@ -42,4 +42,5 @@ export {
   DifficultyModal,
   CenterRow,
   ORG,
+  Switch,
 }

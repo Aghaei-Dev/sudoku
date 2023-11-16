@@ -82,7 +82,7 @@ export const AppProvider = ({ children }) => {
       //make real number(user answer)
       if (selectedNumber === 0 && !isNoteON) {
         cell.val = number
-
+        colorizeHandler(number)
         if (whatMustBe() === number) {
           cell.mistake = false
           setSelectedNumber(number)

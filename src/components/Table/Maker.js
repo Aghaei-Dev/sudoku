@@ -40,8 +40,9 @@ export default function Maker({ array, modal }) {
         )
       })}
       {Object.values(howManyRemain())[0] === 0 && (
-        <Win time={'5:10'} difficulty={'easy'} />
+        <Win time={'5:10'} difficulty={href} />
       )}
+
       {show && <CenterRow winRate={winRate} />}
       {modal && <StopModal />}
     </TableWrapper>
