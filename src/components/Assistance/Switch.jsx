@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { HomeOutlinedIcon } from '../../assets/icons'
+import { FlashOnOutlinedIcon } from '../../assets/icons'
 import { useGlobalContext } from '../../context'
 export default function Switch() {
   const { togglePen, isFastPenON } = useGlobalContext()
@@ -15,7 +15,8 @@ export default function Switch() {
       />
       <label className='react-switch-label' htmlFor={`react-switch-new`}>
         <span className='react-switch-button'>
-          <HomeOutlinedIcon
+          <FlashOnOutlinedIcon
+            className='center'
             sx={{
               padding: '.3rem',
               color: `${isFastPenON ? 'var(--bg-p-500)' : 'var(--text-500)'}`,
@@ -44,7 +45,6 @@ const Wrapper = styled.div`
     cursor: pointer;
     width: 50px;
     height: 25px;
-    background: var(--bg-p-500);
     background: ${({ isFastPenON }) =>
       isFastPenON ? 'var(--bg-p-500)' : 'var(--text-200)'};
     border-radius: 100px;
@@ -60,15 +60,17 @@ const Wrapper = styled.div`
     width: 22.5px;
     height: 22.5px;
     border-radius: 45px;
-    transition: 0.2s;
+    transition: 0.3s;
     background: #fff;
     box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
-    display: grid;
-    place-items: center;
   }
-
+  .react-switch-button .center {
+    position: absolute;
+    top: -1px;
+    left: -0.5px;
+  }
   .react-switch-checkbox:checked + .react-switch-label .react-switch-button {
-    left: calc(100% - 2px);
+    left: calc(100% - 1px);
     transform: translateX(-100%);
   }
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 import { useGlobalContext } from '../../context'
-import { Loading, Maker } from '../../components'
+import { Loading, Maker } from '..'
 
 export default function Table({ K }) {
   const { stopModal, unSolved, tableGenerator, empty } = useGlobalContext()

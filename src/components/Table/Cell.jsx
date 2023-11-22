@@ -1,7 +1,7 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
-import { MicroCell } from '../'
+import { MicroCell } from '..'
 export default function Cell({
   val,
   conflict,

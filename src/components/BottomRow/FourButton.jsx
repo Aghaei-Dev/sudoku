@@ -18,6 +18,7 @@ export default function FourButton() {
 
   return (
     <Wrapper>
+      <Switch />
       <CatBtn
         btnText='undo'
         tipTitle='HotKey : u'

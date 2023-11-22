@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
-import { Square, Cell, StopModal, CenterRow, Win } from '../../components'
+import { Square, Cell, StopModal, CenterRow, Win } from '..'
 import { useHref } from 'react-router-dom'
 import { gameMode } from '../../assets/constants'
 
