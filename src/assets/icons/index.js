@@ -12,6 +12,7 @@ import TimerOutlinedIcon from '@mui/icons-material/TimerOutlined'
 import SignalCellularAltOutlinedIcon from '@mui/icons-material/SignalCellularAltOutlined'
 import VolumeMuteOutlinedIcon from '@mui/icons-material/VolumeMuteOutlined'
 import VolumeUpOutlinedIcon from '@mui/icons-material/VolumeUpOutlined'
+import FlashOnOutlinedIcon from '@mui/icons-material/FlashOnOutlined';
 export {
   HomeOutlinedIcon,
   PlayArrowIcon,
@@ -27,4 +28,5 @@ export {
   ReplayIcon,
   VolumeUpOutlinedIcon,
   VolumeMuteOutlinedIcon,
+  FlashOnOutlinedIcon
 }

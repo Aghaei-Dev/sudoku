@@ -21,6 +21,11 @@ export const AppProvider = ({ children }) => {
 
   const [isNoteON, setIsNoteON] = useState(false)
   const toggleNote = () => setIsNoteON(!isNoteON)
+  const [isFastPenON, setIsFastPenON] = useState(false)
+  const togglePen = () => {
+    console.log(isFastPenON)
+    setIsFastPenON(!isFastPenON)
+  }
 
   const [unSolved, setUnSolved] = useStorage('localStorage', 'unSolved', [])
   const [Solved, setSolved] = useState([])
@@ -437,6 +442,8 @@ export const AppProvider = ({ children }) => {
     undoHandler,
     colorizeNumber,
     colorizeHandler,
+    isFastPenON,
+    togglePen,
   }
   return <AppContext.Provider value={ctxVal}>{children}</AppContext.Provider>
 }

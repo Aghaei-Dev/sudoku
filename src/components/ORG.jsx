@@ -12,7 +12,7 @@ import {
   DifficultyModal,
   Loading,
   DiffNav,
-} from '../components'
+} from '.'
 import { MainWrapper } from '../global'
 import { useGlobalContext } from '../context'
 export default function ORG({ K, mode }) {
