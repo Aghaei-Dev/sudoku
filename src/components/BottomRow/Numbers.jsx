@@ -2,8 +2,13 @@ import React from 'react'
 import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
 export default function Numbers() {
-  const { writeNumberInTable, howManyRemain, closeModal, stopModal } =
-    useGlobalContext()
+  const {
+    writeNumberInTable,
+    howManyRemain,
+    closeModal,
+    stopModal,
+    isFastPenON,
+  } = useGlobalContext()
   return (
     <Wrapper>
       {Object.values(howManyRemain()).map((usedIn, index) => {
@@ -18,7 +23,9 @@ export default function Numbers() {
                 }
               }}
               style={{ visibility: usedIn >= 9 && 'hidden' }}
-              key={index}>
+              className={isFastPenON ? 'disable' : null}
+              key={index}
+            >
               {index}
               <span>{9 - usedIn}</span>
             </div>
@@ -61,6 +68,11 @@ const Wrapper = styled('div')(() => ({
     ':active': {
       backgroundColor: 'var(--text-100)',
     },
+  },
+  '.disable': {
+    pointerEvents: 'none',
+    cursor: 'default',
+    opacity: '.2',
   },
   '@media (width>= 701px)': {
     display: 'grid',
