@@ -84,6 +84,9 @@ const Wrapper = styled('div')(() => ({
       alignSelf: 'start',
       color: 'var(--bg-p-500)',
       fontWeight: '500',
+      ' @media  (height<=750px)': {
+        display: 'none',
+      },
     },
   },
   '@media (width<= 700px)': {

@@ -65,7 +65,7 @@ const TableWrapper = styled('div')(() => ({
   '.switch': {
     position: 'absolute',
     bottom: '-15px',
-    right: '0',
+    left: '0',
     '@media (width > 700px)': {
       display: 'none',
     },
