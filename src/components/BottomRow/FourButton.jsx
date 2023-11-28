@@ -4,7 +4,7 @@ import { IconButton, SvgIcon } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
 import { useGlobalContext } from '../../context'
-import { Badge, Tooltip, Switch } from '..'
+import { Badge, Tooltip } from '..'
 
 export default function FourButton() {
   const {
@@ -18,7 +18,6 @@ export default function FourButton() {
 
   return (
     <Wrapper>
-      {/* <Switch /> */}
       <CatBtn
         btnText='undo'
         tipTitle='HotKey : u'
@@ -89,6 +88,7 @@ const Wrapper = styled('div')(() => ({
   },
   '@media (width<= 700px)': {
     alignSelf: 'stretch',
+    marginTop: '1.3rem',
   },
   '@media (width<= 350px)': {
     padding: '0',

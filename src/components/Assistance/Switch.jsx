@@ -35,7 +35,7 @@ const Wrapper = styled.div`
   .react-switch-checkbox {
     height: 0;
     width: 0;
-    visibility: hidden;
+    display: none;
   }
 
   .react-switch-label {

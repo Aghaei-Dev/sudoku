@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
-import { Square, Cell, StopModal, CenterRow, Win } from '..'
+import { Square, Cell, StopModal, CenterRow, Win, Switch } from '..'
 import { useHref } from 'react-router-dom'
 import { gameMode } from '../../assets/constants'
 
@@ -45,12 +45,14 @@ export default function Maker({ array, modal }) {
 
       {show && <CenterRow winRate={winRate} />}
       {modal && <StopModal />}
+      <div className='switch'>
+        <Switch />
+      </div>
     </TableWrapper>
   )
 }
 
 const TableWrapper = styled('div')(() => ({
-  overflow: 'hidden',
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
   gridTemplateRows: 'repeat(3, 1fr)',
@@ -60,7 +62,15 @@ const TableWrapper = styled('div')(() => ({
   height: '500px',
   cursor: 'pointer',
   position: 'relative',
-  // color: 'var(--bg-p-100)',
+  '.switch': {
+    position: 'absolute',
+    bottom: '-15px',
+    right: '0',
+    '@media (width > 700px)': {
+      display: 'none',
+    },
+  },
+
   // forgive me for this media query
   //for square shape of table we must do this
   //i haven't any other idea
