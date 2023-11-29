@@ -8,7 +8,7 @@ import React, {
 import useSound from 'use-sound'
 import { Sudoku, safeRowSquare, safeColSquare } from '../functions'
 import { useStorage } from '../hook'
-import { falseSound, trueSound, stop, play } from '../assets/sound'
+import { falseSound, trueSound, stop, play, failedNote } from '../assets/sound'
 
 export const AppContext = createContext()
 
@@ -90,6 +90,7 @@ export const AppProvider = ({ children }) => {
         colorizeHandler(number)
         if (whatMustBe() === number) {
           cell.mistake = false
+          deleteSingleNote(number)
           setSelectedNumber(number)
           playAudio && truePlay()
         } else {
@@ -110,8 +111,10 @@ export const AppProvider = ({ children }) => {
         }
         setUnSolved(unSolved)
       }
+
       //make notes
-      if (selectedNumber === 0 && isNoteON) {
+      if (selectedNumber === 0 && isNoteON && noteCanAdd(number)) {
+        // toggling the amount of note in the micro cell
         if (cell.note[number] === number) {
           cell.note[number] = null
         } else {
@@ -158,6 +161,31 @@ export const AppProvider = ({ children }) => {
     }
   }
 
+  //? logics about notes
+  //deleting same notes in the single square if new number added
+  const deleteSingleNote = (number) => {
+    unSolved[selectedSquare].forEach((cell) => {
+      cell.note.forEach((singleNote, index) => {
+        if (number === singleNote) {
+          cell.note[index] = null
+        }
+      })
+    })
+  }
+
+  const [failedNotePlay] = useSound(failedNote)
+  const noteCanAdd = (number) => {
+    //in square
+    const numberIsAvailableInSquare = unSolved[selectedSquare].find(
+      (cell) => cell.val === number
+    )
+    if (numberIsAvailableInSquare) {
+      failedNotePlay()
+      return false
+    } else {
+      return true
+    }
+  }
   useEffect(() => {
     setMustChange(false)
     localStorage.setItem('unSolved', JSON.stringify(unSolved))

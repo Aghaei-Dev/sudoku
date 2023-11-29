@@ -6,7 +6,7 @@ import stop from './stop.mp3'
 import play from './play.wav'
 import mute from './mute.wav'
 import unmute from './unmute.mp3'
-
+import failedNote from './failedNote.wav'
 export {
   switchLight,
   changeTheme,
@@ -16,4 +16,5 @@ export {
   play,
   mute,
   unmute,
+  failedNote,
 }
