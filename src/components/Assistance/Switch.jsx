@@ -43,8 +43,8 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-    width: 50px;
-    height: 25px;
+    width: 40px;
+    height: 20px;
     background: ${({ isFastPenON }) =>
       isFastPenON ? 'var(--bg-p-500)' : 'var(--text-200)'};
     border-radius: 100px;
@@ -57,17 +57,17 @@ const Wrapper = styled.div`
     position: absolute;
     top: 1px;
     left: 1px;
-    width: 22.5px;
-    height: 22.5px;
-    border-radius: 45px;
+    width: 17.5px;
+    height: 17.5px;
+    border-radius: 40px;
     transition: 0.3s;
     background: #fff;
     box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
   }
   .react-switch-button .center {
     position: absolute;
-    top: -1px;
-    left: -0.5px;
+    top: -2px;
+    left: -2.5px;
   }
   .react-switch-checkbox:checked + .react-switch-label .react-switch-button {
     left: calc(100% - 1px);
@@ -75,6 +75,6 @@ const Wrapper = styled.div`
   }
 
   .react-switch-label:active .react-switch-button {
-    width: 30px;
+    width: 25px;
   }
 `

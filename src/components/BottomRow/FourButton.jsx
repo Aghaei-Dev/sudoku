@@ -72,10 +72,9 @@ export default function FourButton() {
 }
 
 const Wrapper = styled('div')(() => ({
-  alignSelf: 'start',
-  display: 'grid',
-  gridTemplateColumns: 'repeat(4,1fr)',
-  columnGap: '1rem',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
   '.item': {
     display: 'grid',
     placeItems: 'center',
@@ -84,14 +83,14 @@ const Wrapper = styled('div')(() => ({
       alignSelf: 'start',
       color: 'var(--bg-p-500)',
       fontWeight: '500',
-      ' @media  (height<=750px)': {
+      ' @media  (height<=780px)': {
         display: 'none',
       },
     },
   },
+
   '@media (width<= 700px)': {
-    alignSelf: 'stretch',
-    marginTop: '1.3rem',
+    marginTop: '20px',
   },
   '@media (width<= 350px)': {
     padding: '0',
