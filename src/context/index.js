@@ -8,7 +8,14 @@ import React, {
 import useSound from 'use-sound'
 import { Sudoku, safeRowSquare, safeColSquare } from '../functions'
 import { useStorage } from '../hook'
-import { falseSound, trueSound, stop, play, failedNote } from '../assets/sound'
+import {
+  falseSound,
+  trueSound,
+  stop,
+  play,
+  failedNote,
+  lightning,
+} from '../assets/sound'
 
 export const AppContext = createContext()
 
@@ -22,7 +29,11 @@ export const AppProvider = ({ children }) => {
   const [isNoteON, setIsNoteON] = useState(false)
   const toggleNote = () => setIsNoteON(!isNoteON)
   const [isFastPenON, setIsFastPenON] = useState(false)
+  const [lightningPlay] = useSound(lightning)
   const togglePen = () => {
+    if (!isFastPenON && playAudio) {
+      lightningPlay()
+    }
     setIsFastPenON(!isFastPenON)
   }
 
@@ -74,13 +85,13 @@ export const AppProvider = ({ children }) => {
   }
   const writeNumberInTable = (number) => {
     if (cell) {
-      //toggling val
-      if (cell.editable && cell.val === number && !isNoteON) {
+      const { editable, val, mistake } = cell
+      //toggling false values only
+      if (editable && val === number && !isNoteON && mistake) {
         cell.mistake = false
         cell.val = 0
         setMustChange(true)
         setSelectedNumber(0)
-
         return
       }
       //make real number(user answer)

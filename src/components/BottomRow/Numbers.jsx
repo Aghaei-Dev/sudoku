@@ -42,7 +42,6 @@ const Wrapper = styled('div')(() => ({
   justifyContent: 'space-between',
   alignItems: 'center',
   fontSize: '13vw',
-
   div: {
     transition: ' background .3s ',
     width: '10%',
@@ -55,6 +54,7 @@ const Wrapper = styled('div')(() => ({
     cursor: 'pointer',
     borderRadius: 'var(--radius)',
     position: 'relative',
+    backgroundColor: 'var(--text-50)',
     span: {
       lineHeight: '1',
       position: 'absolute',
@@ -64,7 +64,6 @@ const Wrapper = styled('div')(() => ({
       fontSize: '.8rem',
       color: 'var(--text-700)',
     },
-    backgroundColor: 'var(--text-50)',
     ':active': {
       backgroundColor: 'var(--text-100)',
     },

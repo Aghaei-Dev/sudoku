@@ -20,7 +20,6 @@ export default function Cell({
     mistakes,
     falsePlay,
     failedNotePlay,
-    //
     setSelectedNumber,
     selectedNumberIndex,
     selectedSquare,
@@ -60,7 +59,7 @@ export default function Cell({
     const whatMustBe = Solved[square][index]
     //toggling the cell value
 
-    if (cell.editable && cell.val === number && !isNoteON) {
+    if (cell.editable && cell.val === number && !isNoteON && cell.mistake) {
       cell.mistake = false
       cell.val = 0
       return

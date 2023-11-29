@@ -7,6 +7,8 @@ import play from './play.wav'
 import mute from './mute.wav'
 import unmute from './unmute.mp3'
 import failedNote from './failedNote.wav'
+import lightning from './lightning.wav'
+
 export {
   switchLight,
   changeTheme,
@@ -17,4 +19,5 @@ export {
   mute,
   unmute,
   failedNote,
+  lightning
 }
