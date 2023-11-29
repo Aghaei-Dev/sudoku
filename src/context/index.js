@@ -23,7 +23,6 @@ export const AppProvider = ({ children }) => {
   const toggleNote = () => setIsNoteON(!isNoteON)
   const [isFastPenON, setIsFastPenON] = useState(false)
   const togglePen = () => {
-    console.log(isFastPenON)
     setIsFastPenON(!isFastPenON)
   }
 
@@ -137,6 +136,7 @@ export const AppProvider = ({ children }) => {
     setMustChange(true)
   }
   const hintHandler = () => {
+    setIsFastPenON(false)
     if (hintRemain > 0 && selectedNumber === 0 && !isNoteON && cell.val === 0) {
       setHintRemain((prev) => prev - 1)
       cell.val = whatMustBe()
@@ -448,7 +448,6 @@ export const AppProvider = ({ children }) => {
     setSelectedSquare,
     selectedNumberIndex,
     setSelectedNumberIndex,
-    writeNumberInTable,
     mistakes,
     setMistakes,
     setEndModal,
@@ -472,6 +471,11 @@ export const AppProvider = ({ children }) => {
     colorizeHandler,
     isFastPenON,
     togglePen,
+    whatMustBe,
+    truePlay,
+    Solved,
+    falsePlay,
+    failedNotePlay,
   }
   return <AppContext.Provider value={ctxVal}>{children}</AppContext.Provider>
 }
