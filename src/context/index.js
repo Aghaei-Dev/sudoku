@@ -20,11 +20,7 @@ import {
 export const AppContext = createContext()
 
 export const AppProvider = ({ children }) => {
-  const [playAudio, setPlayAudio] = useStorage(
-    'localStorage',
-    'playAudio',
-    true
-  )
+  const [playAudio, setPlayAudio] = useStorage('playAudio', true)
 
   const [isNoteON, setIsNoteON] = useState(false)
   const toggleNote = () => setIsNoteON(!isNoteON)
@@ -37,7 +33,7 @@ export const AppProvider = ({ children }) => {
     setIsFastPenON(!isFastPenON)
   }
 
-  const [unSolved, setUnSolved] = useStorage('localStorage', 'unSolved', [])
+  const [unSolved, setUnSolved] = useStorage('unSolved', [])
   const [Solved, setSolved] = useState([])
   const [empty, setEmpty] = useState([])
 
@@ -55,8 +51,8 @@ export const AppProvider = ({ children }) => {
   const [selectedSquare, setSelectedSquare] = useState('')
   const [colorizeNumber, setColorizeNumber] = useState('')
 
-  const [mistakes, setMistakes] = useStorage('localStorage', 'mistakes', 0)
-  const [hintRemain, setHintRemain] = useStorage('localStorage', 'hintRemain')
+  const [mistakes, setMistakes] = useStorage('mistakes', 0)
+  const [hintRemain, setHintRemain] = useStorage('hintRemain')
 
   //for undo purpose
   const [stack, setStack] = useState([])
@@ -488,6 +484,8 @@ export const AppProvider = ({ children }) => {
     falsePlay,
     failedNotePlay,
     writeNumberInTable,
+    stack,
+    setStack,
   }
   return <AppContext.Provider value={ctxVal}>{children}</AppContext.Provider>
 }

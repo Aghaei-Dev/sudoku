@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react'
 
-export const useStorage = (type, key, defaultValue) => {
+export const useStorage = (key, defaultValue) => {
   const [value, setValue] = useState(() => {
     let currentValue
 
     try {
       currentValue = JSON.parse(
-        type === 'localStorage'
-          ? localStorage.getItem(key) || String(defaultValue)
-          : sessionStorage.getItem(key) || String(defaultValue)
+        localStorage.getItem(key) || String(defaultValue)
       )
     } catch (error) {
       currentValue = defaultValue
@@ -18,10 +16,8 @@ export const useStorage = (type, key, defaultValue) => {
   })
 
   useEffect(() => {
-    type === 'localStorage'
-      ? localStorage.setItem(key, JSON.stringify(value))
-      : sessionStorage.setItem(key, JSON.stringify(value))
-  }, [value, key, type])
+    localStorage.setItem(key, JSON.stringify(value))
+  }, [value, key])
 
   return [value, setValue]
 }

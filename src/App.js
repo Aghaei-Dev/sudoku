@@ -20,7 +20,7 @@ export default function App() {
 }
 
 //with lazy loading we have some cons !
-//so we do'nt (i mean I) implement here
+//so we don't (i mean I) implement here
 
 // import React, { lazy, Suspense } from 'react'
 // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'

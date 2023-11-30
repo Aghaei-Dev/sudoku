@@ -18,21 +18,23 @@ export default function Cell({
     playAudio,
     setMistakes,
     mistakes,
+    selectedSquare,
     falsePlay,
     failedNotePlay,
     setSelectedNumber,
     selectedNumberIndex,
-    selectedSquare,
     setSelectedNumberIndex,
     colorizeNumber,
     colorizeHandler,
     isFastPenON,
     unSolved,
+    stack,
+    setStack,
   } = useGlobalContext()
 
   const deleteSingleNote = (number) => {
     if (number) {
-      unSolved[selectedSquare].forEach((cell) => {
+      unSolved[square].forEach((cell) => {
         cell.note.forEach((singleNote, index) => {
           if (number === singleNote) {
             cell.note[index] = null
@@ -57,8 +59,8 @@ export default function Cell({
   const writeNumberInTableByFastPen = (number) => {
     const cell = unSolved[square][index]
     const whatMustBe = Solved[square][index]
-    //toggling the cell value
 
+    //toggling the cell value
     if (cell.editable && cell.val === number && !isNoteON && cell.mistake) {
       cell.mistake = false
       cell.val = 0
@@ -73,17 +75,16 @@ export default function Cell({
         deleteSingleNote(number)
         playAudio && truePlay()
       } else {
-        //     setStack([
-        //       {
-        //         val: number,
-        //         mistake: cell.mistake,
-        //         selectedSquare: selectedSquare,
-        //         selectedNumberIndex: selectedNumberIndex,
-        //       },
-        //       ...stack,
-        //     ])
+        setStack([
+          {
+            val: number,
+            mistake: cell.mistake,
+            selectedSquare: square,
+            selectedNumberIndex: index,
+          },
+          ...stack,
+        ])
 
-        //   }
         cell.mistake = true
         cell.editable = true
         setMistakes(mistakes + 1)
