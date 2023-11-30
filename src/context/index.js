@@ -191,10 +191,17 @@ export const AppProvider = ({ children }) => {
       (cell) => cell.val === number
     )
     if (numberIsAvailableInSquare) {
-      failedNotePlay()
+      playAudio && failedNotePlay()
       return false
     } else {
       return true
+    }
+  }
+  const colorizeHandler = (value) => {
+    if (value) {
+      setColorizeNumber(value)
+    } else {
+      setColorizeNumber((lastVal) => lastVal)
     }
   }
   useEffect(() => {
@@ -264,13 +271,6 @@ export const AppProvider = ({ children }) => {
     setMistakes(0)
   }
 
-  const colorizeHandler = (value) => {
-    if (value) {
-      setColorizeNumber(value)
-    } else {
-      setColorizeNumber((lastVal) => lastVal)
-    }
-  }
   //handling keyboard movement keys and numbers and btn
   const move = (arrow, num) => {
     if (conditionForSelectingCells) {
@@ -487,6 +487,7 @@ export const AppProvider = ({ children }) => {
     Solved,
     falsePlay,
     failedNotePlay,
+    writeNumberInTable,
   }
   return <AppContext.Provider value={ctxVal}>{children}</AppContext.Provider>
 }

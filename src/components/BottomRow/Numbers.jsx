@@ -8,7 +8,22 @@ export default function Numbers() {
     closeModal,
     stopModal,
     isFastPenON,
+    colorizeHandler,
+    setSelectedNumber,
+    setSelectedNumberIndex,
+    setSelectedSquare,
   } = useGlobalContext()
+
+  const selectNumberForFastPen = (number) => {
+    colorizeHandler(number)
+    setSelectedNumber(number)
+    setSelectedNumberIndex('')
+    setSelectedSquare('')
+    setNumberInFastPen(number)
+  }
+
+  const [numberInFastPen, setNumberInFastPen] = React.useState(0)
+
   return (
     <Wrapper>
       {Object.values(howManyRemain()).map((usedIn, index) => {
@@ -16,14 +31,16 @@ export default function Numbers() {
           index !== 0 && (
             <div
               onClick={() => {
-                if (stopModal) {
-                  closeModal()
-                } else {
-                  writeNumberInTable(index)
-                }
+                stopModal
+                  ? closeModal()
+                  : isFastPenON
+                  ? selectNumberForFastPen(index)
+                  : writeNumberInTable(index)
               }}
               style={{ visibility: usedIn >= 9 && 'hidden' }}
-              className={isFastPenON ? 'disable' : null}
+              className={
+                isFastPenON && index !== numberInFastPen ? 'disable' : null
+              }
               key={index}
             >
               {index}
@@ -69,9 +86,8 @@ const Wrapper = styled('div')(() => ({
     },
   },
   '.disable': {
-    pointerEvents: 'none',
-    cursor: 'default',
     opacity: '.2',
+    cursor: 'default',
   },
   '@media (width>= 701px)': {
     display: 'grid',
