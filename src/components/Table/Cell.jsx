@@ -133,7 +133,7 @@ export default function Cell({
 
 const CellWrapper = styled('div')(() => ({
   border: '.1rem solid var(--table-line-light)',
-  fontSize: ' 1.5rem',
+  fontSize: '1.5rem',
   display: 'grid',
   placeItems: 'center',
   cursor: 'pointer',

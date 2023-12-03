@@ -5,6 +5,8 @@ import App from './App'
 
 import './global/index.css'
 
+import * as serviceWorkerRegistration from './serviceWorkerRegistration'
+
 const root = createRoot(document.getElementById('root'))
 
 root.render(
@@ -14,3 +16,5 @@ root.render(
     </AppProvider>
   </StrictMode>
 )
+
+serviceWorkerRegistration.register()
