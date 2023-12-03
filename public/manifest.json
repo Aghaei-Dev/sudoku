@@ -1,6 +1,6 @@
 {
-  "short_name": "sudoku",
-  "name": "sudoku",
+  "short_name": "Sudoku",
+  "name": "Sudoku",
   "icons": [
     {
       "src": "sudoku.png",
@@ -8,16 +8,14 @@
       "type": "image/x-icon"
     },
     {
-      "src": "sudoku144px.png",
+      "src": "iconx128.png",
       "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any maskable"
+      "sizes": "128x128"
     },
     {
-      "src": "sudoku144px.png",
+      "src": "iconx192.png",
       "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "any maskable"
+      "sizes": "192x192"
     }
   ],
   "start_url": ".",
