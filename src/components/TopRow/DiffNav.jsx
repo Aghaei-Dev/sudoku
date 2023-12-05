@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react'
 import { gameMode } from '../../assets/constants'
-import { Link, useHref } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Button } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import { hrefCapitalizer } from '../../functions'
+import { hrefCapitalizer } from '../../functions/helpers'
+import { href } from '../../functions/helpers'
 
 export default function DiffNav() {
-  const href = useHref().slice(1)
+  const hrefA = href()
 
   useEffect(() => {
-    hrefCapitalizer(href)
-  }, [href])
+    hrefCapitalizer(hrefA)
+  }, [hrefA])
 
   return (
     <Wrapper>
@@ -24,8 +25,9 @@ export default function DiffNav() {
                   <Button
                     size='small'
                     className={`${
-                      href === item.gameMode ? 'link-btn active' : 'link-btn'
-                    }`}>
+                      hrefA === item.gameMode ? 'link-btn active' : 'link-btn'
+                    }`}
+                  >
                     {item.gameMode}
                   </Button>
                 </Link>

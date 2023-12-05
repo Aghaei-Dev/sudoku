@@ -3,16 +3,16 @@ import { styled } from '@mui/material/styles'
 import { ModalWrapper } from '../../global'
 import { ReplayIcon, GridOnOutlinedIcon } from '../../assets/icons'
 import { gameMode } from '../../assets/constants'
-import { Link, useHref } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useGlobalContext } from '../../context'
+import { href } from '../../functions/helpers'
 
 export default function DifficultyModal() {
-  const href = useHref().slice(1)
   const { closeDifficultyModal, closeDifficultyModalRouting, restart } =
     useGlobalContext()
 
   const { id: k } = gameMode.find((item) => {
-    if (item.gameMode === href) {
+    if (item.gameMode === href()) {
       return item.id
     }
     return 0
@@ -31,8 +31,11 @@ export default function DifficultyModal() {
               <Btn
                 key={id}
                 onClick={() => {
-                  gameMode === href ? restart(k) : closeDifficultyModalRouting()
-                }}>
+                  gameMode === href()
+                    ? restart(k)
+                    : closeDifficultyModalRouting()
+                }}
+              >
                 <Link to={`/${gameMode}`}>
                   <GridOnOutlinedIcon />
                   {gameMode}
@@ -41,7 +44,7 @@ export default function DifficultyModal() {
             )
           })}
           <Btn onClick={() => restart(k)}>
-            <Link to={`/${href}`}>
+            <Link to={`/${href()}`}>
               <ReplayIcon />
               restart
             </Link>

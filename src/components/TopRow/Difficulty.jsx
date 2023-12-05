@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react'
 import { styled } from '@mui/material/styles'
-import { useHref, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { gameMode } from '../../assets/constants'
-import { hrefCapitalizer } from '../../functions'
-
+import { hrefCapitalizer } from '../../functions/helpers'
+import { href } from '../../functions/helpers'
 export default function Difficulty({ mode }) {
   let navigate = useNavigate()
-  const href = useHref().slice(1)
-
+  const hrefA = href()
   useEffect(() => {
-    hrefCapitalizer(href)
-  }, [href])
+    hrefCapitalizer(hrefA)
+  }, [hrefA])
 
   return (
     <Wrapper>
@@ -19,7 +18,8 @@ export default function Difficulty({ mode }) {
         defaultValue={mode}
         onChange={(e) => {
           navigate(`/${e.target.value}`)
-        }}>
+        }}
+      >
         {gameMode.map((item) => {
           return (
             <option key={item.id} value={item.gameMode}>

@@ -6,7 +6,9 @@ import React, {
   createContext,
 } from 'react'
 import useSound from 'use-sound'
-import { Sudoku, safeRowSquare, safeColSquare } from '../functions'
+import { Sudoku } from '../functions/Sudoku'
+import { safeRowSquare, safeColSquare } from '../functions/movement'
+
 import { useStorage } from '../hook'
 import {
   falseSound,

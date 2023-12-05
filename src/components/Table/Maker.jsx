@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { styled } from '@mui/material/styles'
 import { useGlobalContext } from '../../context'
 import { Square, Cell, StopModal, CenterRow, Win, Switch } from '..'
-import { useHref } from 'react-router-dom'
+import { href } from '../../functions/helpers'
 import { gameMode } from '../../assets/constants'
 
 export default function Maker({ array, modal }) {
   const { initializerAll, howManyRemain } = useGlobalContext()
-  const href = useHref().slice(1)
 
   const { winRate } = gameMode.find((item) => {
-    if (item.gameMode === href) {
+    if (item.gameMode === href()) {
       return item.id
     }
     return 0
@@ -40,7 +39,7 @@ export default function Maker({ array, modal }) {
         )
       })}
       {Object.values(howManyRemain())[0] === 0 && (
-        <Win time={'5:10'} difficulty={href} />
+        <Win time={'5:10'} difficulty={href()} />
       )}
 
       {show && <CenterRow winRate={winRate} />}

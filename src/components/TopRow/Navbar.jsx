@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { styled } from '@mui/material/styles'
 import { Button, IconButton } from '@mui/material'
-import { Link, useHref } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import {
   Brightness7OutlinedIcon,
   Brightness4OutlinedIcon,
@@ -9,7 +9,7 @@ import {
   VolumeUpOutlinedIcon,
   VolumeMuteOutlinedIcon,
 } from '../../assets/icons'
-import { themeChanger } from '../../functions'
+import { themeChanger, href } from '../../functions/helpers'
 import { colors } from '../../assets/constants'
 import { useStorage } from '../../hook'
 
@@ -18,7 +18,6 @@ import { switchLight, changeTheme, mute, unmute } from '../../assets/sound'
 import { useGlobalContext } from '../../context'
 
 export default function Navbar() {
-  const href = useHref()
   const { playAudio, setPlayAudio } = useGlobalContext()
   const [darkModeSound] = useSound(switchLight)
   const [themeSound] = useSound(changeTheme)
@@ -54,7 +53,7 @@ export default function Navbar() {
 
   return (
     <Wrapper className='flex-between'>
-      {href === '/' ? (
+      {href(true) === '/' ? (
         <Link to='easy'>
           <Btn variant='cont' startIcon={<GridOnOutlinedIcon />}>
             play
