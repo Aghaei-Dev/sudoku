@@ -47,6 +47,7 @@ export const AppProvider = ({ children }) => {
     setEmpty(sudoku.empty)
     setHintRemain(3)
   }
+
   //for coloring table
   const [selectedNumber, setSelectedNumber] = useState('')
   const [selectedNumberIndex, setSelectedNumberIndex] = useState('')
@@ -489,6 +490,7 @@ export const AppProvider = ({ children }) => {
     stack,
     setStack,
   }
+
   return <AppContext.Provider value={ctxVal}>{children}</AppContext.Provider>
 }
 
