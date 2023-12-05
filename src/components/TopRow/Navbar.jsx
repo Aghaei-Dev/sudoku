@@ -24,8 +24,8 @@ export default function Navbar() {
   const [mutePlay] = useSound(mute)
   const [unmutePlay] = useSound(unmute)
 
-  const [darkMode, setDarkMode] = useStorage('localStorage', 'darkMode', false)
-  const [theme, setTheme] = useStorage('localStorage', 'theme', 'blue')
+  const [darkMode, setDarkMode] = useStorage('darkMode', false)
+  const [theme, setTheme] = useStorage('theme', 'blue')
 
   const toggleDarkMode = () => {
     setDarkMode((prevValue) => !prevValue)
