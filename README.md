@@ -122,6 +122,8 @@ Project Link : [https://github.com/A-SED-HASAN/sudoku](https://github.com/A-SED-
 
 <!-- ACKNOWLEDGMENTS -->
 
+we add dehghan for a new badge!
+
 <!-- MARKDOWN LINKS & IMAGES -->
 <!---links -->
 
